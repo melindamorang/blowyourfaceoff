@@ -1,13 +1,7 @@
-
-
-Validation so you can't start a game with no other players
-
 Gameplay:
 In the initial round, where players are writing their first description, the two canvases are confusing. Can we hide the first one?
 
 Gameplay: When typing descriptions into the box, the text is huge.  Make it more reasonably sized.
-
-Gameplay: When players hit Submit after writing or drawing, they need some kind of indication that they should be waiting until the other players finish.
 
 Display stack on end game
 

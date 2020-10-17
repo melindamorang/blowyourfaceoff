@@ -14,7 +14,6 @@ $gameID = json_decode($request_body,true)["gid"];
 
 // Use shared function to get waiting players
 include("get-waiting-players.php");
-//$result = mysqli_query($link,"SELECT name FROM WaitingPlayers WHERE gid=".$gameID);
 
 // Check if the number of players is inappropriate
 // Note: The upper limit is also checked in join-game.php when each player tries to join.
