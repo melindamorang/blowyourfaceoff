@@ -1,0 +1,68 @@
+canvas{
+	border: 3px solid #22F;
+}
+
+textarea{
+	border: 3px solid #22F;
+	font-family: Arial;
+	font-size: 72px;
+	text-align: center;
+}
+
+#displayZone{
+	border:1px solid #333
+}
+
+#inputZone{
+	touch-action: none;
+}
+
+button{
+	color:white;
+	background-color: dodgerblue;
+	font-size: 24px;
+	height: 2em;
+	width: 6em;
+	border: none;
+	border-radius: 1em;
+	margin: 5px;
+}
+
+button:hover{
+	background-color: #1873cc;
+}
+
+@media screen and (min-aspect-ratio: 13/9){
+
+	canvas{
+		width: 45vw;
+		height: 27vw;
+		margin-left: 2vw;
+	}
+
+	textarea{
+		width: 45vw;
+		height: 27vw;
+	}
+
+	#controlSection{
+		margin-left: 49vw;
+	}
+}
+
+@media screen and (max-aspect-ratio: 13/9){
+	canvas,textarea{
+		width: 90vw;
+		height: 54vw;
+		margin-left: 5vw;
+		margin-bottom: 10px;
+	}
+
+	textarea{
+		margin-left:0;
+	}
+
+	#controlSection{
+		margin-left: 5vw;
+	}
+}

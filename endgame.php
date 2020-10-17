@@ -1,0 +1,40 @@
+<?php
+
+include("serverside/database-connection.php");
+$request_body = file_get_contents('php://input');
+
+$gid = $_GET["gid"];
+$name = $_GET["name"];
+
+// Get the full set of text and drawings for this player
+$result = mysqli_query($link, "SELECT ImgRef FROM game_data WHERE GameID = " . $gid . " AND Player = '" . $name . "'");
+
+?>
+
+<html>
+  <head>
+    <title>End game</title>
+		<link rel="stylesheet" href="style.css"/>
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+		<meta name='viewport' content='width=device-width, initial-scale=.86, minimum-scale=.86, maximum-scale=2.0'/>
+  </head>
+  <body>
+    <?php include("snippets/banner.html"); ?>
+    <h1>End game</h1>
+	<p>Time to view the results and laugh a lot.</p>
+	<p><?php echo "Game ID:" . $gid; ?></p>
+	<p><?php echo "Player name: " . $name; ?></p>
+
+  <?php
+
+  while($row = mysqli_fetch_assoc($result)){
+
+    $dataURL = $row["ImgRef"];
+    //echo '<img href="' . $dataURL . '" /><br />';
+    echo $dataURL . "<br />";
+  }
+
+  ?>
+
+  </body>
+</html>

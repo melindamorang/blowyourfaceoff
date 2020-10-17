@@ -1,0 +1,6 @@
+
+.ftpquota
+
+*.sql
+
+serverside/error_log
