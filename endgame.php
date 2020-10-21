@@ -6,8 +6,11 @@ $request_body = file_get_contents('php://input');
 $gid = $_GET["gid"];
 $name = $_GET["name"];
 
+// Get all player names for this game
+$result1 = mysqli_query($link, "SELECT DISTINCT Player FROM game_data WHERE GameID = " . $gid);
+
 // Get the full set of text and drawings for this player
-$result = mysqli_query($link, "SELECT ImgRef FROM game_data WHERE GameID = " . $gid . " AND Player = '" . $name . "'");
+$result2 = mysqli_query($link, "SELECT ImgRef FROM game_data WHERE GameID = " . $gid . " AND Player = '" . $name . "'");
 
 ?>
 
@@ -22,12 +25,22 @@ $result = mysqli_query($link, "SELECT ImgRef FROM game_data WHERE GameID = " . $
     <?php include("snippets/banner.html"); ?>
     <h1>End game</h1>
 	<p>Time to view the results and laugh a lot.</p>
-	<p><?php echo "Game ID:" . $gid; ?></p>
+  <p>View another player's stack:</p>
+  <ul><?php
+  while($row = mysqli_fetch_assoc($result1)){
+    $player = $row["Player"];
+    $url = "./endgame.php?gid=" . $gid . "&name=" . $player;
+    echo '<li><a href="' . $url . '">' . $row["Player"] ."</a></li>";
+  }
+    ?>
+  </ul>
+
+	<p><?php echo "Game ID: " . $gid; ?></p>
 	<p><?php echo "Player name: " . $name; ?></p>
 
   <?php
 
-  while($row = mysqli_fetch_assoc($result)){
+  while($row = mysqli_fetch_assoc($result2)){
 
     $dataURL = $row["ImgRef"];
     //echo '<img href="' . $dataURL . '" /><br />';
