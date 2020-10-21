@@ -326,6 +326,9 @@ function submit() {
 	// Hide the input area and show the wait message
 	document.getElementById("waitMessage").removeAttribute("hidden");
 	document.getElementById("inputArea").setAttribute("hidden", "true");
+	// For the first round, unhide the display zone when the user clicks submit
+	// After this, it remains exposed since we always want to display the previous round's stuff.
+	if (round === 1) destination.removeAttribute("hidden");
 
 	if (mode == "writing") {
 		finalizeText();
