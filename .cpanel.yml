@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/grif92346/public_html/
+    - /bin/cp -R blowyourfaceoff $DEPLOYPATH
