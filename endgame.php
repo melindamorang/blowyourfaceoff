@@ -19,6 +19,7 @@ $result2 = mysqli_query($link, "SELECT ImgRef FROM game_data WHERE GameID = " . 
     <title>End game</title>
 		<link rel="stylesheet" href="style.css"/>
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="endgame.js"></script>
 		<meta name='viewport' content='width=device-width, initial-scale=.86, minimum-scale=.86, maximum-scale=2.0'/>
   </head>
   <body>
@@ -39,15 +40,10 @@ $result2 = mysqli_query($link, "SELECT ImgRef FROM game_data WHERE GameID = " . 
 	<p><?php echo "Player name: " . $name; ?></p>
 
   <?php
-
   while($row = mysqli_fetch_assoc($result2)){
-
     $dataURL = $row["ImgRef"];
-    //echo '<img href="' . $dataURL . '" /><br />';
-    echo $dataURL . "<br />";
+    echo '<img src="' . $dataURL . '" /><br />';
   }
-
   ?>
-
   </body>
 </html>

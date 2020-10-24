@@ -7,6 +7,7 @@ var round = 1;
 var gid = document.getElementById("gid").value;
 
 //Canvas DOM Objects. Canvas is input (right/bottom), Destination is the output (left/top)
+var inputDiv = document.getElementById("inputArea")
 var canvas = document.getElementById("inputZone");
 var canvasContext = canvas.getContext("2d");
 var destination = document.getElementById("displayZone");
@@ -45,7 +46,7 @@ var eraserThicknesses = { "Fine": 6, "Medium Fine": 10, "Medium Thick": 16, "Thi
 //////////////////////////////
 
 //Font Properties
-var fontSize = 72;
+var fontSize = 36;
 var fontFam = 'Arial';
 
 var text = ""; //string copy of what was last printed
@@ -56,14 +57,16 @@ var text = ""; //string copy of what was last printed
 
 var textarea = document.createElement("TEXTAREA");
 
-//Set textarea attributes
-var canvasData = canvas.getBoundingClientRect();
-textarea.id = "textInput";
-textarea.style = "position:absolute;" +
-	"top:" + canvasData.top + ";" +
-	"left:" + canvasData.left + ";" +
-	"width:" + canvasData.width + ";" +
-	"height:" + canvasData.height + ";";
+function setTextAreaAttributes() {
+	//Set textarea attributes
+	var canvasData = canvas.getBoundingClientRect();
+	textarea.id = "textInput";
+	textarea.style = "position:absolute;" +
+		"top:" + canvasData.top + ";" +
+		"left:" + canvasData.left + ";" +
+		"width:" + canvasData.width + ";" +
+		"height:" + canvasData.height + ";";
+}
 
 /////////////////////////
 // Add event listeners //
@@ -235,16 +238,18 @@ function changeTool(color) {
 //////////////////////////////////////////////////////////////////////////////////
 
 function showTextArea() {
-	//Add the textarea to the page
-	document.body.appendChild(textarea);
+	// Reset the text area's attributes (because the input canvas moves after the first round)
+	setTextAreaAttributes();
+	// Add the textarea to the page
+	inputDiv.appendChild(textarea);
 
-	//Add eventListener for when the user clicks away
+	// Add eventListener for when the user clicks away
 	textarea.addEventListener("focusout", finalizeText);
 
-	//If we had text before, add that now
+	// If we had text before, add that now
 	textarea.value = text;
 
-	//Make it start selected
+	// Make it start selected
 	if (textarea != document.activeElement) {
 		textarea.focus();
 	}
@@ -325,7 +330,7 @@ function clearCanvas(ctx = canvasContext) {
 function submit() {
 	// Hide the input area and show the wait message
 	document.getElementById("waitMessage").removeAttribute("hidden");
-	document.getElementById("inputArea").setAttribute("hidden", "true");
+	inputDiv.setAttribute("hidden", "true");
 	// For the first round, unhide the display zone when the user clicks submit
 	// After this, it remains exposed since we always want to display the previous round's stuff.
 	if (round === 1) destination.removeAttribute("hidden");
