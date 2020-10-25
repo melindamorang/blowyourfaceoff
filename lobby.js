@@ -28,7 +28,7 @@ function startGame() {
 				addError("The game has too many or too few players.")
 			}
 			else {
-				window.location.replace("gameplay.php?gid=" + gid);
+				window.location.replace("gameplay.php?gid=" + gid + "&round=0&name=" + window.name);
 			}
 		});
 }
