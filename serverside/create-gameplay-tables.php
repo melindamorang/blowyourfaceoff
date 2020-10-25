@@ -12,7 +12,7 @@ $gameID = json_decode($request_body,true)["gid"];
 // Get all of the players into an array
 ////////////////////////////////////////
 
-// Use shared function to get waiting players
+// Use shared function to get waiting players. Retured as $result.
 include("get-waiting-players.php");
 
 // Check if the number of players is inappropriate
@@ -22,26 +22,32 @@ if ($numPlayers < $minPlayers || $numPlayers > $maxPlayers) {
     echo "Bad number of players";
 } else {
 
-    //Initialize the name list
+    // Get list of player names for this game
     $nameList = array();
-
-    //Push each name onto the list
     while($row = mysqli_fetch_assoc($result)){
         $nameList[] = $row["name"];
     }
+    // Shuffle the ordering of the player names. This will now be the game rotation order.
+    shuffle($nameList);
 
     /////////////////////////////////////////////////////////////
-    // Fill the gameplay table with whose work you're supposed to use
+    // Fill the gameplay table
     /////////////////////////////////////////////////////////////
+    // GameID, Round, Player, StackOwner, ImgRef
     $dataSQL = "INSERT INTO game_data VALUES ";
     $roundCount = count($nameList);
-    $rotatedNames = rotateArray($nameList,1); //Shifts the array over by 1 person, that way it represents "the person next to you", or the one you'll get your next card from
 
-    for($i = 1; $i <= $roundCount; $i++){
-        for($j=0;$j<$roundCount;$j++){
-            // $i is the current round, $j is a temporary index for each name
-            $dataSQL .= "(".$gameID.",".$i.",'".$nameList[$j]."','".$rotatedNames[$j]."')";
-            if(!($j == $roundCount-1 && $i == $roundCount)){
+    for($round = 0; $round < $roundCount; $round++){
+        for($playerIdx = 0; $playerIdx < $roundCount; $playerIdx++) {
+            // The player whose stuff the current player grabs is the previous one in the array order, $playerIdx - 1
+            // We are inserting the player's name temporarily into the ImgRef column and will use it to grab the correct image later
+            // during gameplay.
+            $contributorIdx = getValidIndex($playerIdx - 1, $roundCount);
+            // The stack owner for the current player and current round is a cyclic permutation, incrementing once each round.
+            $stackOwnerIdx = getValidIndex($playerIdx - $round, $roundCount);
+            // Construct the insert statement
+            $dataSQL .= "(".$gameID.",".$round.",'".$nameList[$playerIdx]."','".$nameList[$stackOwnerIdx]."','".$nameList[$contributorIdx]."')";
+            if(!($playerIdx == $roundCount-1 && $round == $roundCount-1)){
                 $dataSQL .= ",";
             }
         }

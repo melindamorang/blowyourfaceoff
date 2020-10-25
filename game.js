@@ -3,7 +3,8 @@
 /////////////////////////////////////////////////////////////
 
 //Round number
-var round = 1;
+var round = 0;
+console.debug(round);
 var gid = document.getElementById("gid").value;
 
 //Canvas DOM Objects. Canvas is input (right/bottom), Destination is the output (left/top)
@@ -333,7 +334,7 @@ function submit() {
 	inputDiv.setAttribute("hidden", "true");
 	// For the first round, unhide the display zone when the user clicks submit
 	// After this, it remains exposed since we always want to display the previous round's stuff.
-	if (round === 1) destination.removeAttribute("hidden");
+	if (round === 0) destination.removeAttribute("hidden");
 
 	if (mode == "writing") {
 		finalizeText();
@@ -345,6 +346,8 @@ function submit() {
 }
 
 function sendData(url) {
+	console.debug(round);
+	console.debug(window.name);
 	const request = new Request("serverside/add-entry.php", { method: "POST", body: '{"gid":"' + gid + '","name":"' + window.name + '","round":"' + round + '","data":"' + url + '"}' });
 
 	//I discovered that there is no time-out by default on the fetch api and it's asynchronous, so I can just leave this request and it'll do all the switching whenever the response eventually comes. The page should still be responsive, I think.
@@ -353,7 +356,7 @@ function sendData(url) {
 		.then(response => {
 			if (response == "Game's over") {
 				//Send the player to the results screen
-				console.debug("Game is finished")
+				console.debug("Game is finished");
 				window.location.replace("endgame.php?gid=" + gid + "&name=" + window.name);
 
 			}

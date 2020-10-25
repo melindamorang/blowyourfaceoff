@@ -10,7 +10,7 @@ $name = $_GET["name"];
 $result1 = mysqli_query($link, "SELECT DISTINCT Player FROM game_data WHERE GameID = " . $gid);
 
 // Get the full set of text and drawings for this player
-$result2 = mysqli_query($link, "SELECT ImgRef FROM game_data WHERE GameID = " . $gid . " AND Player = '" . $name . "'");
+$result2 = mysqli_query($link, "SELECT ImgRef FROM game_data WHERE GameID = " . $gid . " AND StackOwner = '" . $name . "'");
 
 ?>
 
