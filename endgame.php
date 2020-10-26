@@ -10,7 +10,7 @@ $name = $_GET["name"];
 $result1 = mysqli_query($link, "SELECT DISTINCT Player FROM game_data WHERE GameID = " . $gid);
 
 // Get the full set of text and drawings for this player
-$result2 = mysqli_query($link, "SELECT ImgRef FROM game_data WHERE GameID = " . $gid . " AND StackOwner = '" . $name . "'");
+$result2 = mysqli_query($link, "SELECT Round,ImgRef FROM game_data WHERE GameID = " . $gid . " AND StackOwner = '" . $name . "'");
 
 ?>
 
@@ -19,7 +19,6 @@ $result2 = mysqli_query($link, "SELECT ImgRef FROM game_data WHERE GameID = " . 
     <title>End game</title>
 		<link rel="stylesheet" href="style.css"/>
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="endgame.js"></script>
 		<meta name='viewport' content='width=device-width, initial-scale=.86, minimum-scale=.86, maximum-scale=2.0'/>
   </head>
   <body>
@@ -41,8 +40,14 @@ $result2 = mysqli_query($link, "SELECT ImgRef FROM game_data WHERE GameID = " . 
 
   <?php
   while($row = mysqli_fetch_assoc($result2)){
-    $dataURL = $row["ImgRef"];
-    echo '<img src="' . $dataURL . '" /><br />';
+    $data = $row["ImgRef"];
+    $round = $row["Round"];
+    if (intval($round) % 2 == 0){ 
+      echo '<p class="endgameText">' . $data . '</p><br />';
+    } 
+    else{ 
+      echo '<img class="endgameDrawing" src="' . $data . '" /><br />';
+    } 
   }
   ?>
   </body>

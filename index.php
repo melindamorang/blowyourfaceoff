@@ -1,3 +1,6 @@
+<?php
+include("serverside/player-limits.php");
+?>
 <html>
 	<head>
         <script src="pregame.js"></script>
@@ -10,7 +13,7 @@
         </div>
         <div id="startGameForm">
             <label for="playerName">Enter your name: </label>
-            <input type="text" id="playerName"><br>
+            <input type="text" id="playerName" maxlength=<?php echo '"' . $maxNameLength . '"'; ?>><br>
             <div id="forPlayer">
                 <label for="gid">Enter Game ID: </label>
                 <input type="text" id="gid"><br>

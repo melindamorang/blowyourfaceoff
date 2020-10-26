@@ -33,25 +33,19 @@ if ($numPlayers < $minPlayers || $numPlayers > $maxPlayers) {
     /////////////////////////////////////////////////////////////
     // Fill the gameplay table
     /////////////////////////////////////////////////////////////
-    // GameID, Round, Player, StackOwner, ImgRef
-    $dataSQL = "INSERT INTO game_data VALUES ";
+    $dataSQL = "INSERT INTO game_data (GameID,Round,Player,StackOwner) VALUES ";
     $roundCount = count($nameList);
 
     for($round = 0; $round < $roundCount; $round++){
         for($playerIdx = 0; $playerIdx < $roundCount; $playerIdx++) {
-            // The player whose stuff the current player grabs is the previous one in the array order, $playerIdx - 1
-            // We are inserting the player's name temporarily into the ImgRef column and will use it to grab the correct image later
-            // during gameplay.
-            $contributorIdx = getValidIndex($playerIdx - 1, $roundCount);
             // The stack owner for the current player and current round is a cyclic permutation, incrementing once each round.
             $stackOwnerIdx = getValidIndex($playerIdx - $round, $roundCount);
             // Construct the insert statement
-            $dataSQL .= "(".$gameID.",".$round.",'".$nameList[$playerIdx]."','".$nameList[$stackOwnerIdx]."','".$nameList[$contributorIdx]."')";
+            $dataSQL .= "(".$gameID.",".$round.",'".$nameList[$playerIdx]."','".$nameList[$stackOwnerIdx]."')";
             if(!($playerIdx == $roundCount-1 && $round == $roundCount-1)){
                 $dataSQL .= ",";
             }
         }
-        
     }
 
     mysqli_query($link,$dataSQL);

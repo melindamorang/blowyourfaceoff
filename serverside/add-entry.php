@@ -25,13 +25,15 @@ $isDone = false;
 while(!$isDone){
     $isDone = true;
     //Get all data for this round on this game
-	$result = mysqli_query($link,"SELECT ImgRef FROM game_data WHERE Round = ".$round." AND GameID = ".$gameID);
+	$result = mysqli_query($link, "SELECT ImgRef FROM game_data WHERE Round = ".$round." AND GameID = ".$gameID);
 	
 	//go through each player's submission
 	while($row = mysqli_fetch_assoc($result)){
-	    //if any of them don't start with something that indicates an image, that's still a name and therefore their image isn't submitted
-	    if(substr($row["ImgRef"],0,strlen($startsWith))!=$startsWith){
-	        //If their image isn't submitted, we're not done. Break the loop and try again in a bit.
+		// If any of them are still null, the data isn't yet submitted, so we're not done with the round.
+		// Keep trying.
+		$data = $row["ImgRef"];
+		if ($data=== NULL) {
+	        // Not done. Break the loop and try again in a bit.
 	        $isDone = false;
 	        break;
 	    }
@@ -41,9 +43,8 @@ while(!$isDone){
 }
 
 // Continue on to the next round
-//Get the name of the person whose work you're grabbing
-//The target's name will be in your column for the next round
-$result = mysqli_query($link,"SELECT ImgRef FROM game_data WHERE GameID = ".$gameID." AND Player = '".$name."' AND Round = ".strval(intval($round+1)));
+// Grab something from the table for the next round just to see if there is another round
+$result = mysqli_query($link, "SELECT Player FROM game_data WHERE GameID = ".$gameID." AND Round = ".strval(intval($round+1)));
 
 //If we didn't get a result on this SQL, that means that the WHERE round = <next round> failed.
 //Therefore, the next round doesn't exist and the game's over
@@ -51,20 +52,6 @@ if(mysqli_num_rows($result)===0){
     mysqli_query($link,"UPDATE GameStatus SET status = 'finished' WHERE gid = ".$gameID);
     echo "Game's over"; 
 } else {
-	// Otherwise, continue the game and start the next round
-	$row = mysqli_fetch_assoc($result);
-	$targetName = $row["ImgRef"];
-
-	//Use the target name to get the target's work from this round we are leaving
-	$result = mysqli_query($link,"SELECT ImgRef FROM game_data WHERE GameID = ".$gameID." AND Player='".$targetName."' AND Round = ".$round);
-	$row = mysqli_fetch_assoc($result);
-	$dataURL = $row["ImgRef"];
-
-	//////////////////////////////////////////////////////
-	//Grab the file from the server, turn it into an image blob, then send it to the user
-	/////////////////////////////////////////////////////
-	$imgBlob = $dataURL;
-
-	echo $imgBlob;
+	echo "Keep going";
 }
 ?>
