@@ -7,8 +7,10 @@ document.addEventListener('DOMContentLoaded', function () {
     canvas = document.getElementById("drawingCanvas");
     canvasContext = canvas.getContext("2d");
 
-    // Drawing properties for canvas
+    // Size and drawing properties for canvas
     // TODO: Should this be defined in the CSS?
+    canvas.width = 1000;
+    canvas.height = 600;
     canvasContext.strokeStyle = "#000000";
     canvasContext.lineWidth = 3;
     canvasContext.lineCap = "round";

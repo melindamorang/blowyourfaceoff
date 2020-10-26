@@ -35,7 +35,7 @@ include("serverside/player-limits.php");
 					<input type="text" id="textInputBox" maxlength=<?php echo '"' . $maxTextInputLength . '"'; ?>></input>
 				</div>
 				<div id="drawingInput"> <!--Inputs for the drawing phase-->
-					<canvas id="drawingCanvas"></canvas>
+					<canvas id="drawingCanvas"></canvas><br />
 					<div id="controlSection">
 						<input type="radio" name="thickness" id="fine" onclick="changeThickness('Fine')" checked="checked"></input>
 						<label for="fine">Fine</label>
@@ -56,7 +56,7 @@ include("serverside/player-limits.php");
 						<input type="radio" name="tool" id="erase" onclick="changeTool('#FFFFFF')"></input>
 						<label for="erase">Erase</label>
 					</div>
-				</div>
+				</div><br />
 				<div id="submission"> <!--Controls for submitting and clearing data-->
 					<button onclick="clearCanvas()">Clear</button>
 					<button onclick="submit()">Submit</button>
