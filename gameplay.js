@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
     textInputBox = document.getElementById("textInputBox");
     canvas = document.getElementById("drawingCanvas");
     waitMessage = document.getElementById("waitMessage");
+    instructionMsg = document.getElementById("instructions");
 
     // Always hide the waitMessage when the page first loads
     showHideElement(waitMessage, false);
@@ -40,12 +41,15 @@ document.addEventListener('DOMContentLoaded', function () {
     mode = "writing";
     if (isOdd(round)) {
         mode = "drawing";
+        instructionMsg.innerHTML = "Draw this description:";
         showHideElement(textDisplay, true);
         showHideElement(drawingDisplay, false);
         showHideElement(textInput, false);
         showHideElement(drawingInput, true);
     }
     else {
+        if (roundInt==0) instructionMsg.innerHTML = "Write a word, phrase, or sentence.";
+        else instructionMsg.innerHTML = "Describe this drawing:";
         showHideElement(textDisplay, false);
         showHideElement(drawingDisplay, true);
         showHideElement(textInput, true);

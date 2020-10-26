@@ -25,7 +25,7 @@ include("serverside/player-limits.php");
 		<p id="waitMessage" hidden>Please wait until the other players have finished the round.</p>
 		<div id="gameplayArea"> <!--This zone encompasses the entire gameplay area, both display and input.-->
 			<p>Round <?php echo $round; ?></p> 
-			<h2 id="instructions">Write a word, phrase, or sentence.</h2>
+			<h2 id="instructions"></h2> <!--The instructions are dynamically updated in the javascript-->
 			<div id="displayZone"> <!--This section displays the previous round's content.-->
 				<p id="textDisplay"></p> <!--For displaying text-->
 				<img id="drawingDisplay"></img> <!--For displaying drawings-->
