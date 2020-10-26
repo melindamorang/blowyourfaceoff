@@ -1,22 +1,31 @@
 // Contains javascript for controlling canvas drawing
 
-// Get the canvas and its context
-var canvas = document.getElementById("drawingCanvas");
-var canvasContext = canvas.getContext("2d");
+// When the page first loads, show and hide content depending on round
+document.addEventListener('DOMContentLoaded', function () {
+    // Retrieve page elements and store them as global variables
+    // (This is done by not declaring them as var. Javascript is sneaky.)
+    canvas = document.getElementById("drawingCanvas");
+    canvasContext = canvas.getContext("2d");
 
-// Drawing properties for canvas
-canvasContext.strokeStyle = "#000000";
-canvasContext.lineWidth = 3;
-canvasContext.lineCap = "round";
+    // Drawing properties for canvas
+    // TODO: Should this be defined in the CSS?
+    canvasContext.strokeStyle = "#000000";
+    canvasContext.lineWidth = 3;
+    canvasContext.lineCap = "round";
 
-// Drawing States
-var isDrawing = false;
-var draggedOut = false;
-var currentThickness = "Fine";
+    // Drawing States
+    isDrawing = false;
+    draggedOut = false;
+    currentThickness = "Fine";
 
-// Line thickness data
-var lineThicknesses = { "Fine": 3, "Medium Fine": 5, "Medium Thick": 8, "Thick": 12 };
-var eraserThicknesses = { "Fine": 6, "Medium Fine": 10, "Medium Thick": 16, "Thick": 24 };
+    // Line thickness data
+    lineThicknesses = { "Fine": 3, "Medium Fine": 5, "Medium Thick": 8, "Thick": 12 };
+    eraserThicknesses = { "Fine": 6, "Medium Fine": 10, "Medium Thick": 16, "Thick": 24 };
+
+    // Set drawing event listeners so you can interact with the canvas
+    setDrawingEventListeners();
+});
+
 
 function setDrawingEventListeners() {
 	//Desktop

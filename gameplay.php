@@ -11,6 +11,7 @@ include("serverside/player-limits.php");
 		<link rel="stylesheet" href="style.css"/>
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 		<script src = "gameplay.js"></script>
+		<script src="gameplay-canvas.js"></script>
 		<meta name='viewport' content='width=device-width, initial-scale=.86, minimum-scale=.86, maximum-scale=2.0'/>
   	</head>
   	<body>
@@ -61,7 +62,6 @@ include("serverside/player-limits.php");
 					<button onclick="submit()">Submit</button>
 				</div>
 			</div>
-			<script src="gameplay-canvas.js"></script>
 		</div>
   </body>
 </html>
