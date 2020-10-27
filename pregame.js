@@ -49,7 +49,7 @@ function addError(errorText) {
 function getPlayerName() {
 	// Get the player name from the input control
 	var name = document.getElementById("playerName").value;
-	if (name==="") addError("Enter a valid name.");
+	if (name === "") addError("Enter a valid name.");
 	return name;
 }
 
@@ -63,12 +63,12 @@ function tryJoin() {
 	// Attempt to join an existing game. Do some validation to make sure the game is valid
 	// Build a request with the game ID in it
 	var gid = document.getElementById("gid").value;
-	if (gid===""){
+	if (gid === "") {
 		addError("Enter a valid Game ID.");
 		return;
 	}
 	var name = getPlayerName();
-	if (name==="") return;
+	if (name === "") return;
 	const request = new Request("serverside/join-game.php", { method: 'POST', body: '{"gid": "' + gid + '","name":"' + name + '"}' });
 
 	//Send the request
@@ -103,7 +103,7 @@ function tryJoin() {
 
 function startHost() {
 	var name = getPlayerName();
-	if (name==="") return;
+	if (name === "") return;
 	const request = new Request("serverside/create-game.php", { method: 'POST', body: '{"name":"' + name + '"}' });
 	//Pings a serverside script to open a new lobby, and if it works, send the user there
 	fetch(request)

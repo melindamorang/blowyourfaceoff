@@ -17,7 +17,6 @@ if($gameStatus == "playing"){
 
 // Get waiting players using shared code snippet
 include("get-waiting-players.php");
-//$result = mysqli_query($link,"SELECT name FROM WaitingPlayers WHERE gid=".$gameID);
 
 $nameList = "";
 while($row = mysqli_fetch_assoc($result)){

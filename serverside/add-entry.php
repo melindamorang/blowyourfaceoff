@@ -1,6 +1,7 @@
 <?php
 
 include("database-connection.php");
+include("serverside/refresh-rates.php");
 
 $request_body = file_get_contents('php://input');
 
@@ -14,11 +15,6 @@ $data   = json_decode($request_body,true)["data"];
 /////////////////////////////////////////////////
 
 mysqli_query($link,"UPDATE game_data SET ImgRef = '".$data."' WHERE GameID = ".$gameID." AND Round = ".$round." AND Player = '".$name."'");
-
-////////////////////////////////////////////
-/**/ $startsWith = "data:image";
-//   Change this to whatever your filepaths always start with. This is for testing whether the round is done, and to pass on the previous card
-////////////////////////////////////////////
 
 // This part pings the database until it shows that all players are finished for this round
 $isDone = false;
@@ -38,8 +34,8 @@ while(!$isDone){
 	        break;
 	    }
 	}
-	// Wait 5 sec then try again
-	sleep(5);
+	// Wait a bit, then try again
+	sleep($gameplayRefresh);
 }
 
 // Continue on to the next round
@@ -54,4 +50,3 @@ if(mysqli_num_rows($result)===0){
 } else {
 	echo "Keep going";
 }
-?>
