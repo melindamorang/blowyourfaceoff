@@ -69,21 +69,36 @@ function showHideElement(element, shouldShow) {
     else element.setAttribute("hidden", "true");
 }
 
+function addError(errorText) {
+    // Display error text in the error element
+    document.getElementById("ErrorLine").innerHTML = errorText
+}
+
 // When the user hits Submit, send the input to the database
 function submit() {
-    // Hide the gameplay area and show the wait message
-    showHideElement(waitMessage, true);
-    showHideElement(gameplayArea, false)
-
     // Get the data from either the text input box or the drawing canvas
+    // and validate it
     var data = "";
-    if (mode == "writing") data = textInputBox.value;
+    var valid = true;
+    if (mode == "writing") {
+        data = textInputBox.value;
+        if (data === "") {
+            valid = false;
+            addError("You must write something.");
+        }
+    }
     else {
         data = canvas.toDataURL("image/png");
     }
 
-    // Submit the data
-    sendData(data);
+    if (valid) {
+        // Hide the gameplay area and show the wait message
+        showHideElement(waitMessage, true);
+        showHideElement(gameplayArea, false)
+
+        // Submit the data
+        sendData(data);
+    }
 }
 
 // Send the data to the database after hitting submit

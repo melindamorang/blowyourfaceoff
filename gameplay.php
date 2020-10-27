@@ -69,6 +69,7 @@ include("serverside/player-limits.php");
 			</div><br />
 			<div id="submission">
 				<!--Controls for submitting and clearing data-->
+				<p id="ErrorLine"></p>
 				<button onclick="clearCanvas()">Clear</button>
 				<button onclick="submit()">Submit</button>
 			</div>
