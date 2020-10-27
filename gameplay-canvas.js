@@ -2,30 +2,30 @@
 
 // When the page first loads, show and hide content depending on round
 document.addEventListener('DOMContentLoaded', function () {
-    // Retrieve page elements and store them as global variables
-    // (This is done by not declaring them as var. Javascript is sneaky.)
-    canvas = document.getElementById("drawingCanvas");
-    canvasContext = canvas.getContext("2d");
+	// Retrieve page elements and store them as global variables
+	// (This is done by not declaring them as var. Javascript is sneaky.)
+	canvas = document.getElementById("drawingCanvas");
+	canvasContext = canvas.getContext("2d");
 
-    // Size and drawing properties for canvas
-    // TODO: Should this be defined in the CSS?
-    canvas.width = 1000;
-    canvas.height = 600;
-    canvasContext.strokeStyle = "#000000";
-    canvasContext.lineWidth = 3;
-    canvasContext.lineCap = "round";
+	// Size and drawing properties for canvas
+	// TODO: Should this be defined in the CSS?
+	canvas.width = 1000;
+	canvas.height = 600;
+	canvasContext.strokeStyle = "#000000";
+	canvasContext.lineWidth = 3;
+	canvasContext.lineCap = "round";
 
-    // Drawing States
-    isDrawing = false;
-    draggedOut = false;
-    currentThickness = "Fine";
+	// Drawing States
+	isDrawing = false;
+	draggedOut = false;
+	currentThickness = "Fine";
 
-    // Line thickness data
-    lineThicknesses = { "Fine": 3, "Medium Fine": 5, "Medium Thick": 8, "Thick": 12 };
-    eraserThicknesses = { "Fine": 6, "Medium Fine": 10, "Medium Thick": 16, "Thick": 24 };
+	// Line thickness data
+	lineThicknesses = { "Fine": 3, "Medium Fine": 5, "Medium Thick": 8, "Thick": 12 };
+	eraserThicknesses = { "Fine": 6, "Medium Fine": 10, "Medium Thick": 16, "Thick": 24 };
 
-    // Set drawing event listeners so you can interact with the canvas
-    setDrawingEventListeners();
+	// Set drawing event listeners so you can interact with the canvas
+	setDrawingEventListeners();
 });
 
 

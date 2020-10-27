@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	var isHost = document.getElementById("isHost").innerHTML;
 	var hostArea = document.getElementById("hostArea");
 	var playerArea = document.getElementById("playerArea");
-	if (isHost==="true") {
+	if (isHost === "true") {
 		showHideElement(hostArea, true);
 		showHideElement(playerArea, false);
 	}
@@ -24,7 +24,7 @@ function startGame() {
 	fetch(request)
 		.then(response => response.text())
 		.then(response => {
-			if (response == "Bad number of players"){
+			if (response == "Bad number of players") {
 				addError("The game has too many or too few players.")
 			}
 			else {
