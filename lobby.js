@@ -1,6 +1,7 @@
 // Contains basic javascript for showing and hiding elements in the lobby and handling
 // actions for static elements.
 // Code for checking players repeatedly until the host starts is in lobby-pulse.js
+// HTML file must import shared-functions.js for this file to work.
 
 document.addEventListener('DOMContentLoaded', function () {
 	// When the page first loads, show contents for host or player.
@@ -31,15 +32,4 @@ function startGame() {
 				window.location.replace("gameplay.php?gid=" + gid + "&round=0&name=" + window.name);
 			}
 		});
-}
-
-function addError(errorText) {
-	// Display error text in the error element
-	document.getElementById("ErrorLine").innerHTML = errorText
-}
-
-function showHideElement(element, shouldShow) {
-	// Generic function that hides or shows a particular element
-	if (shouldShow) element.style.display = "inline";
-	else element.style.display = "none";
 }

@@ -1,3 +1,5 @@
+// HTML file must import shared-functions.js for this file to work.
+
 document.addEventListener('DOMContentLoaded', function () {
 	// When the page first loads, show the Host Game / Join Game buttons
 	// and hide the input form where the host/player enters their name
@@ -33,17 +35,6 @@ function showNameEntry() {
 	showHideElement(initialButtons, false);
 	var nameEntryForm = document.getElementById("startGameForm");
 	showHideElement(nameEntryForm, true);
-}
-
-function showHideElement(element, shouldShow) {
-	// Generic function that hides or shows a particular element
-	if (shouldShow) element.style.display = "inline";
-	else element.style.display = "none";
-}
-
-function addError(errorText) {
-	// Display error text in the error element
-	document.getElementById("ErrorLine").innerHTML = errorText
 }
 
 function getPlayerName() {

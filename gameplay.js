@@ -2,6 +2,7 @@
 // handling calls to Submit(), and populating the display area with the previous
 // round's data.
 // Canvas-specific control logic is in gameplay-canvas.js.
+// HTML file must import shared-functions.js for this file to work.
 
 // When the page first loads, show and hide content depending on round
 document.addEventListener('DOMContentLoaded', function () {
@@ -59,20 +60,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Fetch the last round's data and display it in the display area
     if (roundInt != 0) fetchLastRoundsData();
 });
-
-// Return 1 if the number is odd or 0 if even
-function isOdd(num) { return num % 2; }
-
-// Generic function that hides or shows a particular element
-function showHideElement(element, shouldShow) {
-    if (shouldShow) element.removeAttribute("hidden");
-    else element.setAttribute("hidden", "true");
-}
-
-function addError(errorText) {
-    // Display error text in the error element
-    document.getElementById("ErrorLine").innerHTML = errorText
-}
 
 // Returns true if every pixel's uint32 representation is 0 (or "blank")
 // Borrowed from https://stackoverflow.com/questions/17386707/how-to-check-if-a-canvas-is-blank
