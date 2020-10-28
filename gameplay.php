@@ -3,6 +3,7 @@ $gid = $_GET["gid"];
 $name = $_GET["name"];
 $round = $_GET["round"];
 include("serverside/player-limits.php");
+include("serverside/get-player-count.php");
 ?>
 
 <html>
@@ -22,6 +23,7 @@ include("serverside/player-limits.php");
 	<input type="number" id="gid" hidden <?php echo "value='" . $gid . "'"; ?>></p>
 	<input type="number" id="round" hidden <?php echo "value='" . $round . "'"; ?>></p>
 	<input type="text" id="name" hidden <?php echo "value='" . $name . "'"; ?>></p>
+	<input type="number" id="numRounds" hidden <?php echo "value='" . $numPlayers . "'"; ?>></p>
 
 	<!--The actual content!-->
 	<?php include("snippets/banner.html"); ?>

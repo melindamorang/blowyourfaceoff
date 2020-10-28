@@ -12,9 +12,11 @@ document.addEventListener('DOMContentLoaded', function () {
     gid = document.getElementById("gid").value;
     round = document.getElementById("round").value;
     roundInt = parseInt(round);
+    numRounds = parseInt(document.getElementById("numRounds").value);
     name = document.getElementById("name").value;
     console.debug(gid);
     console.debug(round);
+    console.debug(numRounds);
     console.debug(name);
     // Retrieve relevant divs
     gameplayArea = document.getElementById("gameplayArea");
@@ -84,7 +86,7 @@ function submit() {
     if (valid) {
         // Hide the gameplay area and show the wait message
         showHideElement(waitMessage, true);
-        showHideElement(gameplayArea, false)
+        showHideElement(gameplayArea, false);
 
         // Submit the data
         sendData(data);
@@ -102,17 +104,28 @@ function sendData(data) {
     fetch(request)
         .then(response => response.text())
         .then(response => {
-            if (response == "Game's over") {
-                //Send the player to the results screen
-                console.debug("Game is finished");
-                window.location.replace("endgame.php?gid=" + gid + "&name=" + name);
+            if (response == "Done") {
+                console.debug("Data submitted successfully.");
+                if (roundInt >= numRounds - 1) {
+                    // This was the last round
+                    // Send the player to the results screen
+                    console.debug("Game is finished");
+                    window.location.replace("endgame.php?gid=" + gid + "&name=" + name);
+                }
+                else {
+                    // Send the user to the next round
+                    console.debug("Moving on to next round");
+                    var nextRound = roundInt + 1;
+                    console.debug(nextRound);
+                    window.location.replace("gameplay.php?gid=" + gid + "&round=" + nextRound.toString() + "&name=" + name);
+                }
             }
             else {
-                // Send the user to the next round
-                console.debug("Moving on to next round");
-                var nextRound = roundInt + 1;
-                console.debug(nextRound);
-                window.location.replace("gameplay.php?gid=" + gid + "&round=" + nextRound.toString() + "&name=" + name);
+                console.debug("Error submitting data.");
+                console.debug(response);
+                addError("Error submitting data.");
+                showHideElement(waitMessage, false);
+                showHideElement(gameplayArea, true);
             }
         });
 }
@@ -135,7 +148,7 @@ function fetchLastRoundsData() {
             .then(response => response.text())
             .then(response => {
                 if (response == "Bad request") {
-                    console.debug("Bad request");
+                    console.debug("Unable to fetch last round's data.");
                 }
                 else {
                     // Display the data in the display area
