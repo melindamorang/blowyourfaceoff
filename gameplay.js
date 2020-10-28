@@ -131,6 +131,12 @@ function sendData(data) {
         });
 }
 
+// Clear the user's input data
+function clearInput() {
+    if (mode == "writing") textInputBox.value = "";
+    else clearCanvas();
+}
+
 // Fetch the last round's data for this player's stack and show it
 // in the display area.
 function fetchLastRoundsData() {

@@ -12,8 +12,8 @@ include("serverside/player-limits.php");
 	<link rel="stylesheet" href="style.css" />
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="modules/shared-functions.js"></script>
-	<script src="gameplay.js"></script>
 	<script src="gameplay-canvas.js"></script>
+	<script src="gameplay.js"></script>
 	<meta name='viewport' content='width=device-width, initial-scale=.86, minimum-scale=.86, maximum-scale=2.0' />
 </head>
 
@@ -71,7 +71,7 @@ include("serverside/player-limits.php");
 			<div id="submission">
 				<!--Controls for submitting and clearing data-->
 				<p id="ErrorLine"></p>
-				<button onclick="clearCanvas()">Clear</button>
+				<button onclick="clearInput()">Clear</button>
 				<button onclick="submit()">Submit</button>
 			</div>
 		</div>
