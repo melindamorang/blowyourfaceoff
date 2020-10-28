@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	canvas = document.getElementById("drawingCanvas");
 	canvasContext = canvas.getContext("2d");
 
+	// Initialize a flag to help us track whether the canvas has been edited
+	canvasEdited = false;
+
 	// Size and drawing properties for canvas
 	// TODO: Should this be defined in the CSS?
 	canvas.width = 1000;
@@ -61,6 +64,8 @@ function drawStart(mouseEvent) {
 
 	//Enter Drawing State
 	isDrawing = true;
+	// The canvas has now been touched
+	canvasEdited = true;
 }
 
 function drawTick(mouseEvent) {
@@ -155,18 +160,16 @@ function changeTool(color) {
 }
 
 function clearCanvas() {
+	// Clear canvas
 	canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+	// Reset canvas editing tracker.
+	canvasEdited = false;
 }
 
-// Returns true if every pixel's uint32 representation is 0 (or "blank")
-// Borrowed from https://stackoverflow.com/questions/17386707/how-to-check-if-a-canvas-is-blank
-// Does not work after the canvas is cleared or erased
+// Returns true if the canvas has not been edited since the page loaded or the canvas was cleared
+// Does not work if the player manually erases everything
+// I tried all the options shown here: https://stackoverflow.com/questions/17386707/how-to-check-if-a-canvas-is-blank
+// None of them worked reliably.  This is better.
 function isCanvasBlank() {
-    const context = canvas.getContext('2d');
-  
-    const pixelBuffer = new Uint32Array(
-      context.getImageData(0, 0, canvas.width, canvas.height).data.buffer
-    );
-  
-    return !pixelBuffer.some(color => color !== 0);
+	return !canvasEdited;
 }
