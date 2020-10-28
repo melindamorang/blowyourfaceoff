@@ -38,15 +38,4 @@ while(!$isDone){
 	sleep($gameplayRefresh);
 }
 
-// Continue on to the next round
-// Grab something from the table for the next round just to see if there is another round
-$result = mysqli_query($link, "SELECT Player FROM game_data WHERE GameID = ".$gameID." AND Round = ".strval(intval($round+1)));
-
-//If we didn't get a result on this SQL, that means that the WHERE round = <next round> failed.
-//Therefore, the next round doesn't exist and the game's over
-if(mysqli_num_rows($result)===0){
-    mysqli_query($link,"UPDATE GameStatus SET status = 'finished' WHERE gid = ".$gameID);
-    echo "Game's over"; 
-} else {
-	echo "Keep going";
-}
+echo "Done";
