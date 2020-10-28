@@ -1,7 +1,7 @@
 <?php
 
 include("database-connection.php");
-include("serverside/refresh-rates.php");
+include("refresh-rates.php");
 
 $request_body = file_get_contents('php://input');
 
