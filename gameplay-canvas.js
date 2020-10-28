@@ -157,3 +157,16 @@ function changeTool(color) {
 function clearCanvas() {
 	canvasContext.clearRect(0, 0, canvas.width, canvas.height);
 }
+
+// Returns true if every pixel's uint32 representation is 0 (or "blank")
+// Borrowed from https://stackoverflow.com/questions/17386707/how-to-check-if-a-canvas-is-blank
+// Does not work after the canvas is cleared or erased
+function isCanvasBlank() {
+    const context = canvas.getContext('2d');
+  
+    const pixelBuffer = new Uint32Array(
+      context.getImageData(0, 0, canvas.width, canvas.height).data.buffer
+    );
+  
+    return !pixelBuffer.some(color => color !== 0);
+}

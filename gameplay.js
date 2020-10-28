@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
     name = document.getElementById("name").value;
     console.debug(gid);
     console.debug(round);
-    console.debug(typeof round);
     console.debug(name);
     // Retrieve relevant divs
     gameplayArea = document.getElementById("gameplayArea");
@@ -60,19 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Fetch the last round's data and display it in the display area
     if (roundInt != 0) fetchLastRoundsData();
 });
-
-// Returns true if every pixel's uint32 representation is 0 (or "blank")
-// Borrowed from https://stackoverflow.com/questions/17386707/how-to-check-if-a-canvas-is-blank
-// Does not work after the canvas is cleared or erased
-function isCanvasBlank() {
-    const context = canvas.getContext('2d');
-  
-    const pixelBuffer = new Uint32Array(
-      context.getImageData(0, 0, canvas.width, canvas.height).data.buffer
-    );
-  
-    return !pixelBuffer.some(color => color !== 0);
-}
 
 // When the user hits Submit, send the input to the database
 function submit() {
@@ -129,6 +115,12 @@ function sendData(data) {
                 window.location.replace("gameplay.php?gid=" + gid + "&round=" + nextRound.toString() + "&name=" + name);
             }
         });
+}
+
+// Clear the user's input data
+function clearInput() {
+    if (mode == "writing") textInputBox.value = "";
+    else clearCanvas();
 }
 
 // Fetch the last round's data for this player's stack and show it
