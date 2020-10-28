@@ -8,6 +8,7 @@ $isHost = $_GET["isHost"];
 <html>
 
 <head>
+	<script src="modules/shared-functions.js"></script>
 	<script src="lobby.js"></script>
 </head>
 

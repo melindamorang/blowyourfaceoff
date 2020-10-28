@@ -4,6 +4,7 @@ include("serverside/player-limits.php");
 <html>
 
 <head>
+    <script src="modules/shared-functions.js"></script>
     <script src="pregame.js"></script>
 </head>
 
