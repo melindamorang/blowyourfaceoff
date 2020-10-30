@@ -6,7 +6,7 @@ include("player-limits.php");
 
 $request_body = file_get_contents('php://input');
 
-$gameID = json_decode($request_body,true)["gid"];
+$gameID = mysqli_real_escape_string($link, json_decode($request_body,true)["gid"]);
 
 ////////////////////////////////////////
 // Get all of the players into an array

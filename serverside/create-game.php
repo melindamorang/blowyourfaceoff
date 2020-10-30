@@ -5,7 +5,7 @@ include("database-connection.php");
 
 $request_body = file_get_contents('php://input');
 
-$name = json_decode($request_body,true)["name"];
+$name = mysqli_real_escape_string($link, json_decode($request_body,true)["name"]);
 
 /*
 Get a list of taken gameIDs from the game status table

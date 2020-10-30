@@ -5,8 +5,8 @@ include("player-limits.php");
 
 $request_body = file_get_contents('php://input');
 
-$gameID = json_decode($request_body,true)["gid"];
-$name   = json_decode($request_body,true)["name"];
+$gameID = mysqli_real_escape_string($link, json_decode($request_body,true)["gid"]);
+$name   = mysqli_real_escape_string($link, json_decode($request_body,true)["name"]);
 
 // Pull the records for this Game ID
 // Do some validation, and if everything is good, enter the player into the waiting players table

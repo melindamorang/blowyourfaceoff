@@ -3,8 +3,8 @@
 include("serverside/database-connection.php");
 $request_body = file_get_contents('php://input');
 
-$gid = $_GET["gid"];
-$name = $_GET["name"];
+$gid = mysqli_real_escape_string($link, $_GET["gid"]);
+$name = mysqli_real_escape_string($link, $_GET["name"]);
 
 // Get all player names for this game
 $result1 = mysqli_query($link, "SELECT DISTINCT Player FROM game_data WHERE GameID = " . $gid);
