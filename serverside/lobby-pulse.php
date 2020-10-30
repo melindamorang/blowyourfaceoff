@@ -4,7 +4,7 @@ include("database-connection.php");
 
 $request_body = file_get_contents('php://input');
 
-$gameID = json_decode($request_body,true)["gid"];
+$gameID = mysqli_real_escape_string($link, json_decode($request_body,true)["gid"]);
 
 $result = mysqli_query($link,"SELECT status FROM GameStatus WHERE gid=".$gameID);
 
@@ -22,7 +22,7 @@ $nameList = "";
 while($row = mysqli_fetch_assoc($result)){
         $nameList .= $row["name"] . ",";
     }
-$nameList = rtrim($nameList, ",");
+$nameList = htmlspecialchars(rtrim($nameList, ","));
 
 echo $nameList;
 

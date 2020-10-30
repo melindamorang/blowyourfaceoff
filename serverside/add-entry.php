@@ -5,10 +5,10 @@ include("refresh-rates.php");
 
 $request_body = file_get_contents('php://input');
 
-$gameID = json_decode($request_body,true)["gid"];
-$name   = json_decode($request_body,true)["name"];
-$round  = json_decode($request_body,true)["round"];
-$data   = json_decode($request_body,true)["data"];
+$gameID = mysqli_real_escape_string($link, json_decode($request_body,true)["gid"]);
+$name = mysqli_real_escape_string($link, json_decode($request_body,true)["name"]);
+$round = mysqli_real_escape_string($link, json_decode($request_body,true)["round"]);
+$data = mysqli_real_escape_string($link, json_decode($request_body,true)["data"]);
 
 /////////////////////////////////////////////////
 // Save file here, then set $data = filepath

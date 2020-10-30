@@ -4,9 +4,9 @@ include("database-connection.php");
 
 $request_body = file_get_contents('php://input');
 
-$gameID = json_decode($request_body,true)["gid"];
-$player = json_decode($request_body,true)["player"];  // current player
-$round = json_decode($request_body,true)["round"];  // current round
+$gameID = mysqli_real_escape_string($link, json_decode($request_body,true)["gid"]);
+$player = mysqli_real_escape_string($link, json_decode($request_body,true)["player"]);  // current player
+$round = mysqli_real_escape_string($link, json_decode($request_body,true)["round"]);  // current round
 
 // First figure out whose stack to draw from
 $result = mysqli_query($link, "SELECT StackOwner FROM game_data WHERE GameID = ".$gameID." AND Round = ".$round." AND Player = '".$player."'");
@@ -28,7 +28,7 @@ if(mysqli_num_rows($result)===0){
         // Otherwise, continue the game and start the next round
         $row = mysqli_fetch_assoc($result);
         $data = $row["ImgRef"];
-        echo $data;
+        echo htmlspecialchars($data);
     }
 }
 ?>

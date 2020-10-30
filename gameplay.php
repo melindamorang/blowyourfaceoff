@@ -1,7 +1,7 @@
 <?php
-$gid = $_GET["gid"];
-$name = $_GET["name"];
-$round = $_GET["round"];
+$gid = htmlspecialchars($_GET["gid"]);
+$name = htmlspecialchars($_GET["name"]);
+$round = htmlspecialchars($_GET["round"]);
 include("serverside/player-limits.php");
 include("serverside/get-player-count.php");
 ?>
