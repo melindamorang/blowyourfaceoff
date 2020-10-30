@@ -28,7 +28,7 @@ if(mysqli_num_rows($result)===0){
         // Otherwise, continue the game and start the next round
         $row = mysqli_fetch_assoc($result);
         $data = $row["ImgRef"];
-        echo $data;
+        echo htmlspecialchars($data);
     }
 }
 ?>

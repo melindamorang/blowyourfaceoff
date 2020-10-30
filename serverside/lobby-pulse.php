@@ -22,7 +22,7 @@ $nameList = "";
 while($row = mysqli_fetch_assoc($result)){
         $nameList .= $row["name"] . ",";
     }
-$nameList = rtrim($nameList, ",");
+$nameList = htmlspecialchars(rtrim($nameList, ","));
 
 echo $nameList;
 

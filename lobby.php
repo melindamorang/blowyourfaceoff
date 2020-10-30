@@ -1,7 +1,7 @@
 <?php
 
-$gid = $_GET["gid"];
-$isHost = $_GET["isHost"];
+$gid = htmlspecialchars($_GET["gid"]);
+$isHost = htmlspecialchars($_GET["isHost"]);
 
 ?>
 
