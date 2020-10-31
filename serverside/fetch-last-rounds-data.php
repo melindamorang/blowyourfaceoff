@@ -16,7 +16,7 @@ if(mysqli_num_rows($result)===0){
 } else {
 	// Otherwise, continue the game and start the next round
 	$row = mysqli_fetch_assoc($result);
-	$stackOwner = $row["StackOwner"];
+	$stackOwner = mysqli_real_escape_string($link, $row["StackOwner"]);
 
     // Now grab the data from the stack owner from the previous round
     $result = mysqli_query($link, "SELECT ImgRef FROM game_data WHERE GameID = ".$gameID." AND Round = ".strval(intval($round-1))." AND StackOwner = '".$stackOwner."'");

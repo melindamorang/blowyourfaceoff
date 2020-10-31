@@ -2,17 +2,20 @@
 include("serverside/database-connection.php");
 $request_body = file_get_contents('php://input');
 
-$gid = mysqli_real_escape_string($link, $_GET["gid"]);
-$name = mysqli_real_escape_string($link, $_GET["name"]);
+$gid = $_GET["gid"];
+$name = $_GET["name"];
+$gidQuery = mysqli_real_escape_string($link, $_GET["gid"]);
+$nameQuery = mysqli_real_escape_string($link, $_GET["name"]);
+$gidDisplay = htmlspecialchars($gid);
+$nameDisplay = htmlspecialchars($name);
 
 // Get all player names for this game
-$result1 = mysqli_query($link, "SELECT DISTINCT Player FROM game_data WHERE GameID = " . $gid);
+$result1 = mysqli_query($link, "SELECT DISTINCT Player FROM game_data WHERE GameID = " . $gidQuery);
 
 // Get the full set of text and drawings for this player
-$result2 = mysqli_query($link, "SELECT Round,ImgRef FROM game_data WHERE GameID = " . $gid . " AND StackOwner = '" . $name . "'");
+$result2 = mysqli_query($link, "SELECT Round,ImgRef FROM game_data WHERE GameID = " . $gidQuery . " AND StackOwner = '" . $nameQuery . "'");
 
-$gid = htmlspecialchars($gid);
-$name = htmlspecialchars($name);
+
 ?>
 
 <html>
@@ -31,14 +34,14 @@ $name = htmlspecialchars($name);
   <p>View another player's stack:</p>
   <ul><?php
       while ($row = mysqli_fetch_assoc($result1)) {
-        $url = "./endgame.php?gid=" . $gid . "&name=" . $row["Player"];
+        $url = "./endgame.php?gid=" . $gidQuery . "&name=" . $row["Player"];
         echo '<li><a href="' . $url . '">' . htmlspecialchars($row["Player"]) . "</a></li>";
       }
       ?>
   </ul>
 
-  <p><?php echo "Game ID: " . $gid; ?></p>
-  <p><?php echo "Player name: " . $name; ?></p>
+  <p><?php echo "Game ID: " . $gidDisplay; ?></p>
+  <p><?php echo "Player name: " . $nameDisplay; ?></p>
 
   <?php
   while ($row = mysqli_fetch_assoc($result2)) {
