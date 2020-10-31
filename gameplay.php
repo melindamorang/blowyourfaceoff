@@ -3,7 +3,7 @@ $gid = htmlspecialchars($_GET["gid"]);
 $name = htmlspecialchars($_GET["name"]);
 $round = htmlspecialchars($_GET["round"]);
 include("serverside/player-limits.php");
-include("serverside/get-player-count.php");
+include("serverside/get-player-lineup.php");
 ?>
 
 <html>
@@ -35,6 +35,7 @@ include("serverside/get-player-count.php");
 		<!--The instructions are dynamically updated in the javascript-->
 		<div id="displayZone">
 			<!--This section displays the previous round's content.-->
+			<p>(Content from <?php echo $previousPlayer; ?>)</p>
 			<p id="textDisplay"></p>
 			<!--For displaying text-->
 			<img id="drawingDisplay"></img>
@@ -42,6 +43,7 @@ include("serverside/get-player-count.php");
 		</div><br />
 		<div id="inputZone">
 			<!--This section is for the text/drawing input area and associated controls.-->
+			<p>(Your submission will go to <?php echo $nextPlayer; ?>)</p>
 			<div id="textInput">
 				<!--Inputs for the writing phase-->
 				<input type="text" id="textInputBox" maxlength=<?php echo '"' . $maxTextInputLength . '"'; ?>></input>
