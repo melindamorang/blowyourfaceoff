@@ -7,7 +7,13 @@ var pingInterval = setInterval(isGameStarted, 5000);
 
 // Check if the game is started. If it isn't, get the current list of players waiting
 function isGameStarted() {
-	var request = new Request("serverside/lobby-pulse.php", { method: "POST", body: '{"gid":"' + gid + '"}' });
+	var jsonBody = {};
+	jsonBody["gid"] = gid;
+	var jsonCall = {};
+	jsonCall["method"] = "POST";
+	jsonCall["body"] = JSON.stringify(jsonBody);
+	console.log(jsonCall);
+	var request = new Request("serverside/lobby-pulse.php", jsonCall);
 
 	fetch(request)
 		.then(response => response.text())

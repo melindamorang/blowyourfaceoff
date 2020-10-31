@@ -3,7 +3,7 @@
 // Display error text in the error element
 // Assumes the element's ID is "ErrorLine"
 function addError(errorText) {
-	document.getElementById("ErrorLine").innerHTML = errorText
+    document.getElementById("ErrorLine").innerHTML = errorText
 }
 
 // Generic function that hides or shows a particular element

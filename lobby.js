@@ -20,7 +20,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function startGame() {
 	var gid = document.getElementById("gid").innerHTML;
-	var request = new Request("serverside/create-gameplay-tables.php", { method: "POST", body: '{"gid":"' + gid + '"}' });
+	var jsonBody = {};
+	jsonBody["gid"] = gid;
+	var jsonCall = {};
+	jsonCall["method"] = "POST";
+	jsonCall["body"] = JSON.stringify(jsonBody);
+	console.log(jsonCall);
+	var request = new Request("serverside/create-gameplay-tables.php", jsonCall);
 
 	fetch(request)
 		.then(response => response.text())
