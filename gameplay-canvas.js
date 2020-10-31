@@ -11,9 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	canvasEdited = false;
 
 	// Size and drawing properties for canvas
-	// TODO: Should this be defined in the CSS?
-	canvas.width = 1000;
-	canvas.height = 600;
 	canvasContext.strokeStyle = "#000000";
 	canvasContext.lineWidth = 3;
 	canvasContext.lineCap = "round";
@@ -99,7 +96,7 @@ function drawEnd(mouseEvent) {
 	}
 
 	//Finish the current line
-	canvasContext.stroke();
+	//canvasContext.stroke();
 
 	//Completely stop all drawing states
 	draggedOut = false;
@@ -111,7 +108,7 @@ function drawLeave(mouseEvent) {
 	draggedOut = isDrawing;
 
 	//Finish our current line, then stop the drawing state
-	canvasContext.stroke();
+	//canvasContext.stroke();
 	isDrawing = false;
 }
 
@@ -138,6 +135,8 @@ function yPos(mouseEvent) {
 }
 
 function changeThickness(thickness) {
+	isDrawing = false;
+	draggedOut = false;
 	currentThickness = thickness;
 	if (canvasContext.strokeStyle == "#000000") {
 		canvasContext.lineWidth = lineThicknesses[thickness];
@@ -150,6 +149,8 @@ function changeThickness(thickness) {
 function changeTool(color) {
 	//Drawing tool is black, Eraser is white
 	//Set the canvas line color appropriately
+	isDrawing = false;
+	draggedOut = false;
 	canvasContext.strokeStyle = color;
 	if (color == "#000000") {
 		canvasContext.lineWidth = lineThicknesses[currentThickness];
