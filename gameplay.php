@@ -48,7 +48,9 @@ include("serverside/get-player-count.php");
 			</div>
 			<div id="drawingInput">
 				<!--Inputs for the drawing phase-->
-				<canvas id="drawingCanvas"></canvas><br />
+				<!--The internet says you should explicitly define the canvas height and width here
+				to avoid drawing offsets and strange behavior with scaling-->
+				<canvas id="drawingCanvas" width="500" height="300"></canvas><br />
 				<div id="controlSection">
 					<input type="radio" name="thickness" id="fine" onclick="changeThickness('Fine')" checked="checked"></input>
 					<label for="fine">Fine</label>

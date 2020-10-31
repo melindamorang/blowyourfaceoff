@@ -21,7 +21,7 @@ button:hover{
 	background-color: #1873cc;
 }
 
-@media screen and (min-aspect-ratio: 13/9){
+/* @media screen and (min-aspect-ratio: 13/9){
 
 	canvas{
 		width: 45vw;
@@ -45,4 +45,4 @@ button:hover{
 	#controlSection{
 		margin-left: 5vw;
 	}
-}
+} */

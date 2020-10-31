@@ -11,9 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	canvasEdited = false;
 
 	// Size and drawing properties for canvas
-	// TODO: Should this be defined in the CSS?
-	canvas.width = 1000;
-	canvas.height = 600;
 	canvasContext.strokeStyle = "#000000";
 	canvasContext.lineWidth = 3;
 	canvasContext.lineCap = "round";
@@ -99,7 +96,7 @@ function drawEnd(mouseEvent) {
 	}
 
 	//Finish the current line
-	canvasContext.stroke();
+	//canvasContext.stroke();
 
 	//Completely stop all drawing states
 	draggedOut = false;
@@ -111,33 +108,23 @@ function drawLeave(mouseEvent) {
 	draggedOut = isDrawing;
 
 	//Finish our current line, then stop the drawing state
-	canvasContext.stroke();
+	//canvasContext.stroke();
 	isDrawing = false;
 }
 
+// Find the mouse's X position with respect to the canvas
 function xPos(mouseEvent) {
-	//Determine if the window is portrait or landscape, and scale canvas coordinates appropriately
-
-	//Landscape
-	if (window.innerWidth > window.innerHeight) {
-		return (mouseEvent.pageX - $('#inputZone').offset().left) * (canvas.width / (.45 * window.innerWidth));
-	}         //Real Mouse Position                                //Scale factor (canvas internal width vs real width)
-	//Portrait / Default
-	return (mouseEvent.pageX - $('#inputZone').offset().left) * (canvas.width / (.9 * window.innerWidth));
+	return mouseEvent.clientX - canvas.offsetLeft;
 }
 
+// Find the mouse's Y position with respect to the canvas
 function yPos(mouseEvent) {
-	//Determine if the window is portrait or landscape, and scale canvas coordinates appropriately
-
-	//Landscape
-	if (window.innerWidth > window.innerHeight) {
-		return (mouseEvent.pageY - $('#inputZone').offset().top) * (canvas.height / (.27 * window.innerWidth));
-	}         //Real Mouse Position                               //Scale factor (canvas internal width vs real width)
-	//Portrait / Default
-	return (mouseEvent.pageY - $('#inputZone').offset().top) * (canvas.height / (.54 * window.innerWidth));
+	return mouseEvent.clientY - canvas.offsetTop;
 }
 
 function changeThickness(thickness) {
+	isDrawing = false;
+	draggedOut = false;
 	currentThickness = thickness;
 	if (canvasContext.strokeStyle == "#000000") {
 		canvasContext.lineWidth = lineThicknesses[thickness];
@@ -150,6 +137,8 @@ function changeThickness(thickness) {
 function changeTool(color) {
 	//Drawing tool is black, Eraser is white
 	//Set the canvas line color appropriately
+	isDrawing = false;
+	draggedOut = false;
 	canvasContext.strokeStyle = color;
 	if (color == "#000000") {
 		canvasContext.lineWidth = lineThicknesses[currentThickness];
