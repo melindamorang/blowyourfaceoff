@@ -14,14 +14,14 @@ $data = mysqli_real_escape_string($link, json_decode($request_body,true)["data"]
 // Save file here, then set $data = filepath
 /////////////////////////////////////////////////
 
-mysqli_query($link,"UPDATE game_data SET ImgRef = '".$data."' WHERE GameID = ".$gameID." AND Round = ".$round." AND Player = '".$name."'");
+mysqli_query($link,"UPDATE game_data SET ImgRef = '".$data."' WHERE GameID = '".$gameID."' AND Round = ".$round." AND Player = '".$name."'");
 
 // This part pings the database until it shows that all players are finished for this round
 $isDone = false;
 while(!$isDone){
     $isDone = true;
     //Get all data for this round on this game
-	$result = mysqli_query($link, "SELECT ImgRef FROM game_data WHERE Round = ".$round." AND GameID = ".$gameID);
+	$result = mysqli_query($link, "SELECT ImgRef FROM game_data WHERE Round = ".$round." AND GameID = '".$gameID . "'");
 	
 	//go through each player's submission
 	while($row = mysqli_fetch_assoc($result)){
