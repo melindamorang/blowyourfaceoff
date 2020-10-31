@@ -97,7 +97,16 @@ function submit() {
 // If the round is finished, move on to the next round.
 function sendData(data) {
     // Construct a request to add the data to the database
-    const request = new Request("serverside/add-entry.php", { method: "POST", body: '{"gid":"' + gid + '","name":"' + name + '","round":"' + round + '","data":"' + data + '"}' });
+    var jsonBody = {};
+    jsonBody["gid"] = gid;
+    jsonBody["name"] = name;
+    jsonBody["round"] = round;
+    jsonBody["data"] = data;
+    var jsonCall = {};
+    jsonCall["method"] = "POST";
+    jsonCall["body"] = JSON.stringify(jsonBody);
+    console.log(jsonCall);
+    const request = new Request("serverside/add-entry.php", jsonCall);
 
     //I discovered that there is no time-out by default on the fetch api and it's asynchronous, so I can just leave this request and it'll do all the switching
     // whenever the response eventually comes. The page should still be responsive, I think.
@@ -141,7 +150,15 @@ function clearInput() {
 function fetchLastRoundsData() {
     if (roundInt != 0) {
         // Construct a request to add the data to the database
-        const request = new Request("serverside/fetch-last-rounds-data.php", { method: "POST", body: '{"gid":"' + gid + '","player":"' + name + '","round":"' + round + '"}' });
+        var jsonBody = {};
+        jsonBody["gid"] = gid;
+        jsonBody["player"] = name;
+        jsonBody["round"] = round;
+        var jsonCall = {};
+        jsonCall["method"] = "POST";
+        jsonCall["body"] = JSON.stringify(jsonBody);
+        console.log(jsonCall);
+        const request = new Request("serverside/fetch-last-rounds-data.php", jsonCall);
 
         //I discovered that there is no time-out by default on the fetch api and it's asynchronous, so I can just leave this request and it'll do all the switching whenever the response eventually comes. The page should still be responsive, I think.
         fetch(request)

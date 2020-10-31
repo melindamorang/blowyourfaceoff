@@ -25,7 +25,7 @@ if ($numPlayers < $minPlayers || $numPlayers > $maxPlayers) {
     // Get list of player names for this game
     $nameList = array();
     while($row = mysqli_fetch_assoc($result)){
-        $nameList[] = $row["name"];
+        $nameList[] = mysqli_real_escape_string($link, $row["name"]);
     }
     // Shuffle the ordering of the player names. This will now be the game rotation order.
     shuffle($nameList);
