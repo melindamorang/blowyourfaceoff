@@ -26,6 +26,7 @@ include("serverside/player-limits.php");
             <button onclick="startHost()">Create Game</button><br>
         </div>
         <p id="ErrorLine"></p>
+        <button onclick="setInitialState()">Cancel</button>
     </div>
 </body>
 

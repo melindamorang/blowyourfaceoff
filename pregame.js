@@ -1,59 +1,63 @@
 // HTML file must import shared-functions.js for this file to work.
 
 document.addEventListener('DOMContentLoaded', function () {
-	// When the page first loads, show the Host Game / Join Game buttons
-	// and hide the input form where the host/player enters their name
-	// and joins the game
-	var initialButtons = document.getElementById("initialEntry");
-	showHideElement(initialButtons, true);
-	var nameEntryForm = document.getElementById("startGameForm");
-	showHideElement(nameEntryForm, false);
-	var hostEntry = document.getElementById("forHost");
-	showHideElement(hostEntry, false);
-	var hostEntry = document.getElementById("forPlayer");
-	showHideElement(hostEntry, false);
+	initialButtons = document.getElementById("initialEntry");
+	nameEntryForm = document.getElementById("startGameForm");
+	hostEntry = document.getElementById("forHost");
+	playerEntry = document.getElementById("forPlayer");
+	nameEdit = document.getElementById("playerName");
+	gidEdit = document.getElementById("gid");
+	setInitialState();
 });
 
+// Set the page to its initial state.
+// Show the Host Game / Join Game buttons and hide the input form where
+// the host/player enters their name and joins the game
+function setInitialState() {
+	showHideElement(initialButtons, true);
+	showHideElement(nameEntryForm, false);
+	showHideElement(hostEntry, false);
+	showHideElement(playerEntry, false);
+	nameEdit.value = "";
+	gidEdit.value = "";
+}
+
+// Show the elements appropriate for the Host for entering game start info
 function showHostEntry() {
-	// Show the elements appropriate for the Host for entering game start info
-	showNameEntry()
-	var hostEntry = document.getElementById("forHost");
+	showNameEntry();
 	showHideElement(hostEntry, true);
 }
 
+// Show the elements appropriate for the Player for entering game start info
 function showPlayerEntry() {
-	// Show the elements appropriate for the Player for entering game start info
 	showNameEntry()
-	var hostEntry = document.getElementById("forPlayer");
-	showHideElement(hostEntry, true);
+	showHideElement(playerEntry, true);
 }
 
+// Show the name entry form shared by both Host and Player to collect info before starting/joining game
+// Also hide the initial Join Game / Host Game buttons since those have already been used.
 function showNameEntry() {
-	// Show the name entry form shared by both Host and Player to collect info before starting/joining game
-	// Also hide the initial Join Game / Host Game buttons since those have already been used.
-	var initialButtons = document.getElementById("initialEntry");
 	showHideElement(initialButtons, false);
-	var nameEntryForm = document.getElementById("startGameForm");
 	showHideElement(nameEntryForm, true);
 }
 
+// Get the player name from the input control
 function getPlayerName() {
-	// Get the player name from the input control
-	var name = document.getElementById("playerName").value;
+	var name = nameEdit.value;
 	if (name === "") addError("Enter a valid name.");
 	return name;
 }
 
+// Go to the lobby page for this game ID and set the player name
 function goToLobby(gid, name, isHost) {
-	// Go to the lobby page for this game ID and set the player name
 	window.name = name;
 	window.location.replace("lobby.php?gid=" + gid + "&isHost=" + isHost.toString());
 }
 
+// Attempt to join an existing game. Do some validation to make sure the game is valid
 function tryJoin() {
-	// Attempt to join an existing game. Do some validation to make sure the game is valid
 	// Build a request with the game ID in it
-	var gid = document.getElementById("gid").value;
+	var gid = gidEdit.value;
 	if (gid === "") {
 		addError("Enter a valid Game ID.");
 		return;
