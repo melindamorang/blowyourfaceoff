@@ -6,7 +6,7 @@ $request_body = file_get_contents('php://input');
 
 $gameID = mysqli_real_escape_string($link, json_decode($request_body,true)["gid"]);
 
-$result = mysqli_query($link,"SELECT status FROM GameStatus WHERE gid=".$gameID);
+$result = mysqli_query($link,"SELECT status FROM GameStatus WHERE gid='".$gameID . "'");
 
 $row = mysqli_fetch_assoc($result);
 $gameStatus = $row["status"];

@@ -10,10 +10,10 @@ $gidDisplay = htmlspecialchars($gid);
 $nameDisplay = htmlspecialchars($name);
 
 // Get all player names for this game
-$result1 = mysqli_query($link, "SELECT DISTINCT Player FROM game_data WHERE GameID = " . $gidQuery);
+$result1 = mysqli_query($link, "SELECT DISTINCT Player FROM game_data WHERE GameID = '" . $gidQuery . "'");
 
 // Get the full set of text and drawings for this player
-$result2 = mysqli_query($link, "SELECT Round,ImgRef FROM game_data WHERE GameID = " . $gidQuery . " AND StackOwner = '" . $nameQuery . "'");
+$result2 = mysqli_query($link, "SELECT Round,ImgRef FROM game_data WHERE GameID = '" . $gidQuery . "' AND StackOwner = '" . $nameQuery . "'");
 
 
 ?>

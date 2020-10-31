@@ -20,7 +20,7 @@ include("serverside/get-player-count.php");
 
 <body>
 	<!--Hidden controls to hold variables that need to be passed around-->
-	<input type="number" id="gid" hidden <?php echo "value='" . $gid . "'"; ?>></p>
+	<input type="text" id="gid" hidden <?php echo "value='" . $gid . "'"; ?>></p>
 	<input type="number" id="round" hidden <?php echo "value='" . $round . "'"; ?>></p>
 	<input type="text" id="name" hidden <?php echo "value='" . $name . "'"; ?>></p>
 	<input type="number" id="numRounds" hidden <?php echo "value='" . $numPlayers . "'"; ?>></p>

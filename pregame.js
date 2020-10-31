@@ -116,9 +116,11 @@ function startHost() {
 	fetch(request)
 		.then(response => response.text())
 		.then(response => {
+			console.log(response);
 			goToLobby(response, name, true);
 		})
 		.catch(error => {
+			console.log("Error creating game.");
 			console.error(error);
 		});
 }
