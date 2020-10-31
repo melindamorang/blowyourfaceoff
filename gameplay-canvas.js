@@ -112,26 +112,14 @@ function drawLeave(mouseEvent) {
 	isDrawing = false;
 }
 
+// Find the mouse's X position with respect to the canvas
 function xPos(mouseEvent) {
-	//Determine if the window is portrait or landscape, and scale canvas coordinates appropriately
-
-	//Landscape
-	if (window.innerWidth > window.innerHeight) {
-		return (mouseEvent.pageX - $('#inputZone').offset().left) * (canvas.width / (.45 * window.innerWidth));
-	}         //Real Mouse Position                                //Scale factor (canvas internal width vs real width)
-	//Portrait / Default
-	return (mouseEvent.pageX - $('#inputZone').offset().left) * (canvas.width / (.9 * window.innerWidth));
+	return mouseEvent.clientX - canvas.offsetLeft;
 }
 
+// Find the mouse's Y position with respect to the canvas
 function yPos(mouseEvent) {
-	//Determine if the window is portrait or landscape, and scale canvas coordinates appropriately
-
-	//Landscape
-	if (window.innerWidth > window.innerHeight) {
-		return (mouseEvent.pageY - $('#inputZone').offset().top) * (canvas.height / (.27 * window.innerWidth));
-	}         //Real Mouse Position                               //Scale factor (canvas internal width vs real width)
-	//Portrait / Default
-	return (mouseEvent.pageY - $('#inputZone').offset().top) * (canvas.height / (.54 * window.innerWidth));
+	return mouseEvent.clientY - canvas.offsetTop;
 }
 
 function changeThickness(thickness) {
