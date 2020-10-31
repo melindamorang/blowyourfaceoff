@@ -13,9 +13,7 @@ $nameDisplay = htmlspecialchars($name);
 $result1 = mysqli_query($link, "SELECT DISTINCT Player FROM game_data WHERE GameID = '" . $gidQuery . "'");
 
 // Get the full set of text and drawings for this player
-$result2 = mysqli_query($link, "SELECT Round,ImgRef FROM game_data WHERE GameID = '" . $gidQuery . "' AND StackOwner = '" . $nameQuery . "'");
-
-
+$result2 = mysqli_query($link, "SELECT Round,ImgRef,Player FROM game_data WHERE GameID = '" . $gidQuery . "' AND StackOwner = '" . $nameQuery . "'");
 ?>
 
 <html>
@@ -31,6 +29,8 @@ $result2 = mysqli_query($link, "SELECT Round,ImgRef FROM game_data WHERE GameID 
   <?php include("snippets/banner.html"); ?>
   <h1>End game</h1>
   <p>Time to view the results and laugh a lot.</p>
+
+  <!--Links to view another player's stack-->
   <p>View another player's stack:</p>
   <ul><?php
       while ($row = mysqli_fetch_assoc($result1)) {
@@ -43,14 +43,17 @@ $result2 = mysqli_query($link, "SELECT Round,ImgRef FROM game_data WHERE GameID 
   <p><?php echo "Game ID: " . $gidDisplay; ?></p>
   <p><?php echo "Player name: " . $nameDisplay; ?></p>
 
+  <!-- Display your stack -->
   <?php
   while ($row = mysqli_fetch_assoc($result2)) {
     $data = htmlspecialchars($row["ImgRef"]);
-    $round = $row["Round"];
+    $round = htmlspecialchars($row["Round"]);
+    $player = htmlspecialchars($row["Player"]);
+    echo '<p class="endgamePlayer">From ' . $player . ':</p>';
     if (intval($round) % 2 == 0) {
-      echo '<p class="endgameText">' . $data . '</p><br />';
+      echo '<p class="endgameText">' . $data . '</p>';
     } else {
-      echo '<img class="endgameDrawing" src="' . $data . '" /><br />';
+      echo '<img class="endgameDrawing" src="' . $data . '" />';
     }
   }
   ?>

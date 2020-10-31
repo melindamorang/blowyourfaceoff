@@ -33,7 +33,7 @@ if ($numPlayers < $minPlayers || $numPlayers > $maxPlayers) {
     /////////////////////////////////////////////////////////////
     // Fill the gameplay table
     /////////////////////////////////////////////////////////////
-    $dataSQL = "INSERT INTO game_data (GameID,Round,Player,StackOwner) VALUES ";
+    $dataSQL = "INSERT INTO game_data (GameID,Round,Player,StackOwner,PlayerOrder) VALUES ";
     $roundCount = count($nameList);
 
     for($round = 0; $round < $roundCount; $round++){
@@ -41,7 +41,7 @@ if ($numPlayers < $minPlayers || $numPlayers > $maxPlayers) {
             // The stack owner for the current player and current round is a cyclic permutation, incrementing once each round.
             $stackOwnerIdx = getValidIndex($playerIdx - $round, $roundCount);
             // Construct the insert statement
-            $dataSQL .= "('".$gameID."',".$round.",'".$nameList[$playerIdx]."','".$nameList[$stackOwnerIdx]."')";
+            $dataSQL .= "('".$gameID."',".$round.",'".$nameList[$playerIdx]."','".$nameList[$stackOwnerIdx]."'," . $playerIdx .")";
             if(!($playerIdx == $roundCount-1 && $round == $roundCount-1)){
                 $dataSQL .= ",";
             }
