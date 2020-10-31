@@ -60,7 +60,15 @@ function tryJoin() {
 	}
 	var name = getPlayerName();
 	if (name === "") return;
-	const request = new Request("serverside/join-game.php", { method: 'POST', body: '{"gid": "' + gid + '","name":"' + name + '"}' });
+
+	var jsonBody = {};
+	jsonBody["gid"] = gid;
+	jsonBody["name"] = name;
+	var jsonCall = {};
+	jsonCall["method"] = "POST";
+	jsonCall["body"] = JSON.stringify(jsonBody);
+	console.log(jsonCall);
+	const request = new Request("serverside/join-game.php", jsonCall);
 
 	//Send the request
 	fetch(request)
@@ -95,14 +103,24 @@ function tryJoin() {
 function startHost() {
 	var name = getPlayerName();
 	if (name === "") return;
-	const request = new Request("serverside/create-game.php", { method: 'POST', body: '{"name":"' + name + '"}' });
+
+	// Construct JSON request call and make request
+	var jsonBody = {};
+	jsonBody["name"] = name;
+	var jsonCall = {};
+	jsonCall["method"] = "POST";
+	jsonCall["body"] = JSON.stringify(jsonBody);
+	console.log(jsonCall);
+	const request = new Request("serverside/create-game.php", jsonCall);
 	//Pings a serverside script to open a new lobby, and if it works, send the user there
 	fetch(request)
 		.then(response => response.text())
 		.then(response => {
+			console.log(response);
 			goToLobby(response, name, true);
 		})
 		.catch(error => {
+			console.log("Error creating game.");
 			console.error(error);
 		});
 }

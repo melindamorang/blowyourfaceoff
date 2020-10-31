@@ -7,38 +7,23 @@ $request_body = file_get_contents('php://input');
 
 $name = mysqli_real_escape_string($link, json_decode($request_body,true)["name"]);
 
-/*
-Get a list of taken gameIDs from the game status table
-Generate a random gameID
-Iterate the gameID until you get a gameID that doesn't exist yet
-Add game to gamestatus table with status "waiting"
-Add the host and gameID to the waiting players table, this time with TRUE for isHost
-Respond with the gid or an error
-*/
+// Generate a 13-character-long unique ID
+$gid = uniqid();
 
-$takenIDResult = mysqli_query($link,"SELECT * FROM GameStatus");
-$takenIDs = [];
-
-//Turn each "result row" into an array, and add the first column of each to takenIDs (the "gid" column)
-while($row = mysqli_fetch_assoc($takenIDResult)){
-	$takenIDs[] = $row["gid"];
-}
-
-
-$gid = rand(100000,999999);
-
-while(in_array($gid,$takenIDs)){
-	$gid += 1;
-	if($gid>999999){
-		$gid = 100000;
-	}
+// Be sure this ID isn't taken by searching the GameStatus table for it
+$gidTaken = true;
+while ($gidTaken) {
+	$takenIDResult = mysqli_query($link, "SELECT * FROM GameStatus WHERE gid='" . $gid . "'");
+	if (mysqli_num_rows($takenIDResult) == 0) $gidTaken = false;
+	// In the unlikely even that it was already taken, try again
+	else $gid = uniqid();
 }
 
 //Add the new game to the gamestatus table
-mysqli_query($link,"INSERT INTO GameStatus VALUES(".$gid.",'waiting')");
+mysqli_query($link,"INSERT INTO GameStatus VALUES('".$gid."','waiting')");
 
 //Add the host to the waiting players table
-mysqli_query($link,"INSERT INTO WaitingPlayers VALUES(".$gid.",'".$name."','TRUE')");
+mysqli_query($link,"INSERT INTO WaitingPlayers VALUES('".$gid."','".$name."','TRUE')");
 
 echo $gid;
 ?>

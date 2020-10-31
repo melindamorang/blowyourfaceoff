@@ -25,7 +25,7 @@ if ($numPlayers < $minPlayers || $numPlayers > $maxPlayers) {
     // Get list of player names for this game
     $nameList = array();
     while($row = mysqli_fetch_assoc($result)){
-        $nameList[] = $row["name"];
+        $nameList[] = mysqli_real_escape_string($link, $row["name"]);
     }
     // Shuffle the ordering of the player names. This will now be the game rotation order.
     shuffle($nameList);
@@ -41,7 +41,7 @@ if ($numPlayers < $minPlayers || $numPlayers > $maxPlayers) {
             // The stack owner for the current player and current round is a cyclic permutation, incrementing once each round.
             $stackOwnerIdx = getValidIndex($playerIdx - $round, $roundCount);
             // Construct the insert statement
-            $dataSQL .= "(".$gameID.",".$round.",'".$nameList[$playerIdx]."','".$nameList[$stackOwnerIdx]."')";
+            $dataSQL .= "('".$gameID."',".$round.",'".$nameList[$playerIdx]."','".$nameList[$stackOwnerIdx]."')";
             if(!($playerIdx == $roundCount-1 && $round == $roundCount-1)){
                 $dataSQL .= ",";
             }
@@ -54,9 +54,9 @@ if ($numPlayers < $minPlayers || $numPlayers > $maxPlayers) {
     // Go change the game status and remove the players from "waitingPlayers"
     ////////////////////////////////////////////////////////////////////////////
 
-    mysqli_query($link,"UPDATE GameStatus SET status = 'playing' WHERE gid = ".$gameID);
+    mysqli_query($link,"UPDATE GameStatus SET status = 'playing' WHERE gid = '".$gameID . "'");
 
-    mysqli_query($link,"DELETE FROM WaitingPlayers WHERE gid = ".$gameID);
+    mysqli_query($link,"DELETE FROM WaitingPlayers WHERE gid = '".$gameID . "'");
 
     echo "Game Started";
 }
