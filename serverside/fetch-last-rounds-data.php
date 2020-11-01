@@ -2,11 +2,9 @@
 
 include("database-connection.php");
 
-$request_body = file_get_contents('php://input');
-
-$gameID = mysqli_real_escape_string($link, json_decode($request_body,true)["gid"]);
-$player = mysqli_real_escape_string($link, json_decode($request_body,true)["player"]);  // current player
-$round = mysqli_real_escape_string($link, json_decode($request_body,true)["round"]);  // current round
+$gameID = mysqli_real_escape_string($link, $_GET["gid"]);
+$player = mysqli_real_escape_string($link, $_GET["name"]);  // current player
+$round = mysqli_real_escape_string($link, $_GET["round"]);  // current round
 
 // First figure out whose stack to draw from
 $result = mysqli_query($link, "SELECT StackOwner FROM game_data WHERE GameID = '".$gameID."' AND Round = ".$round." AND Player = '".$player."'");

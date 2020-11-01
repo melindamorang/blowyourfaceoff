@@ -96,24 +96,11 @@ function submit() {
 // Send the data to the database after hitting submit
 // If the round is finished, move on to the next round.
 function sendData(data) {
-    // Construct a request to add the data to the database
-    var jsonBody = {};
-    jsonBody["gid"] = gid;
-    jsonBody["name"] = name;
-    jsonBody["round"] = round;
-    jsonBody["data"] = data;
-    var jsonCall = {};
-    jsonCall["method"] = "POST";
-    jsonCall["body"] = JSON.stringify(jsonBody);
-    console.log(jsonCall);
-    const request = new Request("serverside/add-entry.php", jsonCall);
-
-    //I discovered that there is no time-out by default on the fetch api and it's asynchronous, so I can just leave this request and it'll do all the switching
-    // whenever the response eventually comes. The page should still be responsive, I think.
-    fetch(request)
-        .then(response => response.text())
-        .then(response => {
-            if (response == "Done") {
+    var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			console.debug(xhttp.responseText);
+			if (xhttp.responseText == "Done") {
                 console.debug("Data submitted successfully.");
                 if (roundInt >= numRounds - 1) {
                     // This was the last round
@@ -131,12 +118,22 @@ function sendData(data) {
             }
             else {
                 console.debug("Error submitting data.");
-                console.debug(response);
-                addError("Error submitting data.");
+                console.debug(xhttp.responseText);
+                addError("Error submitting data." + xhttp.responseText);
                 showHideElement(waitMessage, false);
                 showHideElement(gameplayArea, true);
             }
-        });
+		}
+	};
+	xhttp.open("POST", "serverside/add-entry.php", true);
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	
+	var jsonBody = {};
+    jsonBody["gid"] = gid;
+    jsonBody["name"] = name;
+    jsonBody["round"] = round;
+    jsonBody["data"] = data;
+	xhttp.send(JSON.stringify(jsonBody));
 }
 
 // Clear the user's input data
@@ -149,29 +146,21 @@ function clearInput() {
 // in the display area.
 function fetchLastRoundsData() {
     if (roundInt != 0) {
-        // Construct a request to add the data to the database
-        var jsonBody = {};
-        jsonBody["gid"] = gid;
-        jsonBody["player"] = name;
-        jsonBody["round"] = round;
-        var jsonCall = {};
-        jsonCall["method"] = "POST";
-        jsonCall["body"] = JSON.stringify(jsonBody);
-        console.log(jsonCall);
-        const request = new Request("serverside/fetch-last-rounds-data.php", jsonCall);
-
-        //I discovered that there is no time-out by default on the fetch api and it's asynchronous, so I can just leave this request and it'll do all the switching whenever the response eventually comes. The page should still be responsive, I think.
-        fetch(request)
-            .then(response => response.text())
-            .then(response => {
-                if (response == "Bad request") {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                if (xhttp.responseText == "Bad request") {
                     console.debug("Unable to fetch last round's data.");
                 }
                 else {
                     // Display the data in the display area
-                    displayLast(response);
+                    displayLast(xhttp.responseText);
                 }
-            });
+            }
+        };
+        xhttp.open("GET", "serverside/fetch-last-rounds-data.php?gid=" + gid + "&round=" + round + "&name=" + name, true);
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send();
     }
 }
 

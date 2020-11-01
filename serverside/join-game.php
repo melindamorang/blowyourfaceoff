@@ -31,7 +31,7 @@ if(mysqli_num_rows($result)==0){
 		else {
 			// Check if game is full
 			include("get-waiting-players.php");
-			if (mysqli_num_rows($result) > $maxPlayers) {
+			if (mysqli_num_rows($result) >= $maxPlayers) {
 				echo "Game Full";
 			}
 			else {

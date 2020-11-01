@@ -1,6 +1,4 @@
 <?php
-// Simplified database connection function with prewritten ip, username, password, etc.
-// Use dbQuery("SQL query as a string");
 include("database-connection.php");
 
 $request_body = file_get_contents('php://input');
