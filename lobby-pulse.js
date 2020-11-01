@@ -7,12 +7,6 @@ var pingInterval = setInterval(isGameStarted, 5000);
 
 // Check if the game is started. If it isn't, get the current list of players waiting
 function isGameStarted() {
-	// var jsonBody = {};
-	// jsonBody["gid"] = gid;
-	// var jsonCall = {};
-	// jsonCall["method"] = "POST";
-	// jsonCall["body"] = JSON.stringify(jsonBody);
-
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
@@ -33,31 +27,6 @@ function isGameStarted() {
 	xhttp.open("GET", "serverside/lobby-pulse.php?gid=" + gid, true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhttp.send();
-
-
-
-	// var jsonBody = {};
-	// jsonBody["gid"] = gid;
-	// var jsonCall = {};
-	// jsonCall["method"] = "POST";
-	// jsonCall["body"] = JSON.stringify(jsonBody);
-	// console.log(jsonCall);
-	// var request = new Request("serverside/lobby-pulse.php", jsonCall);
-
-	// fetch(request)
-	// 	.then(response => response.text())
-	// 	.then(response => {
-	// 		console.debug(response);
-	// 		if (response === null) {
-	// 			addError("Error getting game status from server.");
-	// 		}
-	// 		else if (response == "playing") {
-	// 			window.location.replace("gameplay.php?gid=" + gid + "&round=0&name=" + window.name);
-	// 		}
-	// 		else {
-	// 			printNameList(response.split(","));
-	// 		}
-	// 	});
 }
 
 // Print the list of currently-waiting players
