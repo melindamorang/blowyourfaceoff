@@ -1,5 +1,4 @@
 <?php
-include("serverside/database-connection.php");
 include("serverside/player-limits.php");
 ?>
 <html>
@@ -33,6 +32,3 @@ include("serverside/player-limits.php");
 </body>
 
 </html>
-<?php
-include("serverside/close-database-connection.php");
-?>

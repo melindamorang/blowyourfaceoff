@@ -4,6 +4,7 @@ include("player-limits.php");
 
 $request_body = file_get_contents('php://input');
 
+include("open-database-connection.php");
 $gameID = mysqli_real_escape_string($link, json_decode($request_body,true)["gid"]);
 $name   = mysqli_real_escape_string($link, json_decode($request_body,true)["name"]);
 
@@ -42,4 +43,5 @@ if(mysqli_num_rows($result)==0){
 		}
 	}
 }
+include("close-database-connection.php");
 ?>
