@@ -19,4 +19,5 @@ $nextPlayerIdx = getValidIndex($currentPlayerIdx + 1, $numPlayers);
 $previousPlayerIdx = getValidIndex($currentPlayerIdx - 1, $numPlayers);
 $nextPlayer = htmlspecialchars($nameList[$nextPlayerIdx]);
 $previousPlayer = htmlspecialchars($nameList[$previousPlayerIdx]);
+mysqli_close($link);
 ?>

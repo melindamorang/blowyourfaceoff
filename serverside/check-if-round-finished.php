@@ -23,5 +23,7 @@ while($row = mysqli_fetch_assoc($result)){
 	}
 }
 
+mysqli_close($link);
+
 if ($isDone) echo "Done";
 else echo "Not done";

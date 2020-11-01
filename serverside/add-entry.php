@@ -11,5 +11,7 @@ $data = mysqli_real_escape_string($link, json_decode($request_body,true)["data"]
 
 mysqli_query($link,"UPDATE game_data SET ImgRef = '".$data."' WHERE GameID = '".$gameID."' AND Round = ".$round." AND Player = '".$name."'");
 
+mysqli_close($link);
+
 echo "Done";
 ?>

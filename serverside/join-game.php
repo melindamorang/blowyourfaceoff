@@ -14,30 +14,35 @@ $name   = mysqli_real_escape_string($link, json_decode($request_body,true)["name
 $result = mysqli_query($link, "SELECT status FROM GameStatus WHERE gid='" . $gameID . "'");
 // Check if the Game ID even exists
 if(mysqli_num_rows($result)==0){
+	mysqli_close($link);
 	echo "Bad Game ID";
 } else {
 	// Check if the status is "waiting" 
 	$row = mysqli_fetch_assoc($result);
 	$gameStatus = $row["status"];
 	if($gameStatus != "waiting"){
+		mysqli_close($link);
 		echo "Bad Game Status";
 	} else {
 		// Check if game already has a waiting player with the same name
 		$result = mysqli_query($link,"SELECT name FROM WaitingPlayers WHERE gid='".$gameID."' AND name='".$name."'");
 		// If we got a result, then another player with the same name already exists in that game
 		if (mysqli_num_rows($result)!=0) {
+			mysqli_close($link);
 			echo "Name Taken";
 		}
 		else {
 			// Check if game is full
 			include("get-waiting-players.php");
 			if (mysqli_num_rows($result) >= $maxPlayers) {
+				mysqli_close($link);
 				echo "Game Full";
 			}
 			else {
 				// Finally everything worked out and we can start the game.
 				// Add them to the waiting players list
 				mysqli_query($link,"INSERT INTO WaitingPlayers VALUES ('".$gameID."','".$name."','FALSE')");
+				mysqli_close($link);
 				echo "Success";
 			}
 		}

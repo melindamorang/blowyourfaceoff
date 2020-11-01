@@ -22,6 +22,8 @@ while($row = mysqli_fetch_assoc($result)){
     }
 $nameList = htmlspecialchars(rtrim($nameList, ","));
 
+mysqli_close($link);
+
 echo $nameList;
 
 ?>
