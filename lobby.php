@@ -1,8 +1,7 @@
 <?php
-
 $gid = htmlspecialchars($_GET["gid"]);
 $isHost = htmlspecialchars($_GET["isHost"]);
-
+include("serverside/database-connection.php");
 ?>
 
 <html>
@@ -32,3 +31,6 @@ $isHost = htmlspecialchars($_GET["isHost"]);
 </body>
 
 </html>
+<?php
+include("serverside/close-database-connection.php");
+?>

@@ -68,3 +68,7 @@ $result2 = mysqli_query($link, "SELECT Round,ImgRef,Player FROM game_data WHERE 
 </body>
 
 </html>
+
+<?php
+include("serverside/close-database-connection.php");
+?>

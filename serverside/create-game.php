@@ -1,5 +1,4 @@
 <?php
-include("database-connection.php");
 
 $request_body = file_get_contents('php://input');
 
@@ -22,8 +21,6 @@ mysqli_query($link,"INSERT INTO GameStatus VALUES('".$gid."','waiting')");
 
 //Add the host to the waiting players table
 mysqli_query($link,"INSERT INTO WaitingPlayers VALUES('".$gid."','".$name."','TRUE')");
-
-mysqli_close($link);
 
 echo $gid;
 ?>

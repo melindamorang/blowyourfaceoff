@@ -2,6 +2,7 @@
 $gid = htmlspecialchars($_GET["gid"]);
 $name = htmlspecialchars($_GET["name"]);
 $round = htmlspecialchars($_GET["round"]);
+include("serverside/database-connection.php");
 include("serverside/player-limits.php");
 include("serverside/get-player-lineup.php");
 ?>
@@ -100,3 +101,6 @@ include("serverside/get-player-lineup.php");
 </body>
 
 </html>
+<?php
+include("serverside/close-database-connection.php");
+?>

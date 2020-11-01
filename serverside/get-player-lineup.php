@@ -1,5 +1,4 @@
 <?php
-include("database-connection.php");
 include("array-edit-functions.php");
 $request_body = file_get_contents('php://input');
 
@@ -19,5 +18,4 @@ $nextPlayerIdx = getValidIndex($currentPlayerIdx + 1, $numPlayers);
 $previousPlayerIdx = getValidIndex($currentPlayerIdx - 1, $numPlayers);
 $nextPlayer = htmlspecialchars($nameList[$nextPlayerIdx]);
 $previousPlayer = htmlspecialchars($nameList[$previousPlayerIdx]);
-mysqli_close($link);
 ?>

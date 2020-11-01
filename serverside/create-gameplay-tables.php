@@ -1,6 +1,5 @@
 <?php
 
-include("database-connection.php");
 include("array-edit-functions.php");
 include("player-limits.php");
 
@@ -19,7 +18,6 @@ include("get-waiting-players.php");
 // Note: The upper limit is also checked in join-game.php when each player tries to join.
 $numPlayers = mysqli_num_rows($result);
 if ($numPlayers < $minPlayers || $numPlayers > $maxPlayers) {
-    mysqli_close($link);
     echo "Bad number of players";
 } else {
 
@@ -58,8 +56,6 @@ if ($numPlayers < $minPlayers || $numPlayers > $maxPlayers) {
     mysqli_query($link,"UPDATE GameStatus SET status = 'playing' WHERE gid = '".$gameID . "'");
 
     mysqli_query($link,"DELETE FROM WaitingPlayers WHERE gid = '".$gameID . "'");
-
-    mysqli_close($link);
 
     echo "Game Started";
 }

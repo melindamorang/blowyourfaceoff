@@ -1,7 +1,5 @@
 <?php
 
-include("database-connection.php");
-
 $gameID = mysqli_real_escape_string($link, $_GET["gid"]);
 
 $result = mysqli_query($link,"SELECT status FROM GameStatus WHERE gid='".$gameID . "'");
@@ -21,8 +19,6 @@ while($row = mysqli_fetch_assoc($result)){
         $nameList .= $row["name"] . ",";
     }
 $nameList = htmlspecialchars(rtrim($nameList, ","));
-
-mysqli_close($link);
 
 echo $nameList;
 
