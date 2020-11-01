@@ -10,6 +10,7 @@ $isHost = htmlspecialchars($_GET["isHost"]);
 <head>
 	<script src="modules/shared-functions.js"></script>
 	<script src="lobby.js"></script>
+	<link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
