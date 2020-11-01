@@ -16,10 +16,10 @@ include("serverside/player-limits.php");
         <button onclick="showHostEntry()">Host a Game</button>
     </div>
     <div id="startGameForm">
-        <label for="playerName">Enter your name: </label>
+        <label for="playerName">Enter your name: </label><br />
         <input type="text" id="playerName" maxlength=<?php echo '"' . $maxNameLength . '"'; ?>><br>
         <div id="forPlayer">
-            <label for="gid">Enter Game ID: </label>
+            <label for="gid">Enter Game ID: </label><br />
             <input type="text" id="gid"><br>
             <button onclick="tryJoin()">Join Game</button><br><br>
         </div>
@@ -27,7 +27,7 @@ include("serverside/player-limits.php");
             <button onclick="startHost()">Create Game</button><br>
         </div>
         <p id="ErrorLine"></p>
-        <button onclick="setInitialState()">Cancel</button>
+        <a onclick="setInitialState()">Cancel</a>
     </div>
 </body>
 
