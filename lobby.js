@@ -20,22 +20,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function startGame() {
 	var gid = document.getElementById("gid").innerHTML;
-	var jsonBody = {};
-	jsonBody["gid"] = gid;
-	var jsonCall = {};
-	jsonCall["method"] = "POST";
-	jsonCall["body"] = JSON.stringify(jsonBody);
-	console.log(jsonCall);
-	var request = new Request("serverside/create-gameplay-tables.php", jsonCall);
 
-	fetch(request)
-		.then(response => response.text())
-		.then(response => {
-			if (response == "Bad number of players") {
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			console.debug(xhttp.responseText);
+			if (xhttp.responseText == "Bad number of players") {
 				addError("The game has too many or too few players.")
 			}
 			else {
 				window.location.replace("gameplay.php?gid=" + gid + "&round=0&name=" + window.name);
 			}
-		});
+		}
+	};
+	xhttp.open("POST", "serverside/create-gameplay-tables.php", true);
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	
+	var jsonBody = {};
+	jsonBody["gid"] = gid;
+	xhttp.send(JSON.stringify(jsonBody));
 }
