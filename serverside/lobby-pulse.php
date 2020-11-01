@@ -2,9 +2,10 @@
 
 include("database-connection.php");
 
-$request_body = file_get_contents('php://input');
+// $request_body = file_get_contents('php://input');
 
-$gameID = mysqli_real_escape_string($link, json_decode($request_body,true)["gid"]);
+// $gameID = mysqli_real_escape_string($link, json_decode($request_body,true)["gid"]);
+$gameID = mysqli_real_escape_string($link, $_GET["gid"]);
 
 $result = mysqli_query($link,"SELECT status FROM GameStatus WHERE gid='".$gameID . "'");
 
