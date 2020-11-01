@@ -57,7 +57,8 @@ function drawStart(mouseEvent) {
 
 	//Move the "brush" to where the mouse was clicked
 	canvasContext.beginPath();
-	canvasContext.moveTo(xPos(mouseEvent), yPos(mouseEvent));
+	pos = getXYPos(mouseEvent);
+	canvasContext.moveTo(pos.x, pos.y);
 
 	//Enter Drawing State
 	isDrawing = true;
@@ -74,13 +75,15 @@ function drawTick(mouseEvent) {
 			mouseEvent = mouseEvent.touches[0];
 		}
 
+		pos = getXYPos(mouseEvent);
+
 		//Draw a line leading to the current mouse position
-		canvasContext.lineTo(xPos(mouseEvent), yPos(mouseEvent));
+		canvasContext.lineTo(pos.x, pos.y);
 		canvasContext.stroke();
 
 		//Start a new line, and put the "brush" at the mouse position
 		canvasContext.beginPath();
-		canvasContext.moveTo(xPos(mouseEvent), yPos(mouseEvent));
+		canvasContext.moveTo(pos.x, pos.y);
 	}
 }
 
@@ -91,8 +94,9 @@ function drawEnd(mouseEvent) {
 	}
 
 	//If the mouse is still on the canvas, make one last line
-	if (xPos(mouseEvent) > 0 && xPos(mouseEvent) < canvas.width && yPos(mouseEvent) > 0 && yPos(mouseEvent) < canvas.height) {
-		canvasContext.lineTo(xPos(mouseEvent), yPos(mouseEvent));
+	pos = getXYPos(mouseEvent);
+	if (pos.x > 0 && pos.x < canvas.width && pos.y > 0 && pos.y < canvas.height) {
+		canvasContext.lineTo(pos.x, pos.y);
 	}
 
 	//Finish the current line
@@ -118,16 +122,13 @@ function getCanvasLocation() {
 	return rect;
 }
 
-// Find the mouse's X position with respect to the canvas
-function xPos(mouseEvent) {
+// Find the mouse's XY position with respect to the canvas
+function getXYPos(mouseEvent) {
 	var rect = getCanvasLocation();
-	return mouseEvent.clientX - rect.left;
-}
-
-// Find the mouse's Y position with respect to the canvas
-function yPos(mouseEvent) {
-	var rect = getCanvasLocation();
-	return mouseEvent.clientY - rect.top;
+	return {
+		x: mouseEvent.clientX - rect.left,
+		y: mouseEvent.clientY - rect.top
+	}
 }
 
 function changeThickness(thickness) {
