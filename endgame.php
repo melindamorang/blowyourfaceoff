@@ -19,7 +19,7 @@ $result2 = mysqli_query($link, "SELECT Round,ImgRef,Player FROM game_data WHERE 
 <html>
 
 <head>
-  <title>End game</title>
+  <title>Results</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <meta name='viewport' content='width=device-width, initial-scale=.86, minimum-scale=.86, maximum-scale=2.0' />
@@ -27,7 +27,7 @@ $result2 = mysqli_query($link, "SELECT Round,ImgRef,Player FROM game_data WHERE 
 
 <body>
   <?php include("snippets/banner.html"); ?>
-  <h1>End game</h1>
+  <h1>Results</h1>
   <p>Time to view the results and laugh a lot.</p>
 
   <!--Links to view another player's stack-->
@@ -41,15 +41,21 @@ $result2 = mysqli_query($link, "SELECT Round,ImgRef,Player FROM game_data WHERE 
   </ul>
 
   <p><?php echo "Game ID: " . $gidDisplay; ?></p>
-  <p><?php echo "Player name: " . $nameDisplay; ?></p>
-
+	
+  <div class="endgameStacks">
+  <p class="playerNameEnd"><?php echo $nameDisplay . "'s Stack"; ?></p>
+  
   <!-- Display your stack -->
   <?php
   while ($row = mysqli_fetch_assoc($result2)) {
     $data = htmlspecialchars($row["ImgRef"]);
     $round = htmlspecialchars($row["Round"]);
     $player = htmlspecialchars($row["Player"]);
-    echo '<p class="endgamePlayer">From ' . $player . ':</p>';
+	if(intval($round) != 0){
+	  echo '<p class="endgamePlayer">From ' . $player . ':</p>';
+	} else {
+	  echo '<p class="endgamePlayer">Start:</p>';
+	}
     if (intval($round) % 2 == 0) {
       echo '<p class="endgameText">' . $data . '</p>';
     } else {
@@ -57,6 +63,8 @@ $result2 = mysqli_query($link, "SELECT Round,ImgRef,Player FROM game_data WHERE 
     }
   }
   ?>
+  </div><!-- end .endgameStacks -->
+	<p><a href="index.php">New Game</a></p>
 </body>
 
 </html>
