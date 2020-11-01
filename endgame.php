@@ -64,7 +64,7 @@ $result2 = mysqli_query($link, "SELECT Round,ImgRef,Player FROM game_data WHERE 
   }
   ?>
   </div><!-- end .endgameStacks -->
-	<p><a href="index.php">New Game</a></p>
+	<p><a class="button" href="index.php">New Game</a></p>
 </body>
 
 </html>
