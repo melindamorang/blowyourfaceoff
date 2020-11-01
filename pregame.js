@@ -65,66 +65,58 @@ function tryJoin() {
 	var name = getPlayerName();
 	if (name === "") return;
 
-	var jsonBody = {};
-	jsonBody["gid"] = gid;
-	jsonBody["name"] = name;
-	var jsonCall = {};
-	jsonCall["method"] = "POST";
-	jsonCall["body"] = JSON.stringify(jsonBody);
-	console.log(jsonCall);
-	const request = new Request("serverside/join-game.php", jsonCall);
-
-	//Send the request
-	fetch(request)
-		.then(response => response.text())
-		.then(response => {
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			console.debug(xhttp.responseText);
 			//If the game exists and is not started, responds with "Success". Go to the lobby page
-			if (response == "Success") {
+			if (xhttp.responseText == "Success") {
 				goToLobby(gid, name, false);
 			}
 			//Otherwise, tell the user that they're is something wrong
-			else if (response == "Bad Game ID") {
+			else if (xhttp.responseText == "Bad Game ID") {
 				addError("That game does not exist. Double check that the Game ID is correct.");
 			}
-			else if (response == "Bad Game Status") {
+			else if (xhttp.responseText == "Bad Game Status") {
 				addError("The game with this ID is already in progress or has finished.");
 			}
-			else if (response == "Name Taken") {
+			else if (xhttp.responseText == "Name Taken") {
 				addError("That name is already taken for this game. Try another name.");
 			}
-			else if (response == "Game Full") {
+			else if (xhttp.responseText == "Game Full") {
 				addError("This game is full and cannot accommodate any more players.");
 			}
 			else {
-				addError("Server Error. " + response);
+				addError("Server Error. " + xhttp.responseText);
 			}
-		})
-		.catch(error => {
-			console.error(error);
-		});
+		}
+	};
+	xhttp.open("POST", "serverside/join-game.php", true);
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	
+	var jsonBody = {};
+	jsonBody["gid"] = gid;
+	jsonBody["name"] = name;
+	xhttp.send(jsonBody);
 }
 
 function startHost() {
 	var name = getPlayerName();
 	if (name === "") return;
 
-	// Construct JSON request call and make request
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			console.debug(xhttp.responseText);
+			console.debug(name);
+			goToLobby(xhttp.responseText, name, true);
+		}
+	};
+	xhttp.open("POST", "serverside/create-game.php", true);
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	
 	var jsonBody = {};
 	jsonBody["name"] = name;
-	var jsonCall = {};
-	jsonCall["method"] = "POST";
-	jsonCall["body"] = JSON.stringify(jsonBody);
-	console.log(jsonCall);
-	const request = new Request("serverside/create-game.php", jsonCall);
-	//Pings a serverside script to open a new lobby, and if it works, send the user there
-	fetch(request)
-		.then(response => response.text())
-		.then(response => {
-			console.log(response);
-			goToLobby(response, name, true);
-		})
-		.catch(error => {
-			console.log("Error creating game.");
-			console.error(error);
-		});
+	console.debug(jsonBody);
+	xhttp.send(jsonBody);
 }
