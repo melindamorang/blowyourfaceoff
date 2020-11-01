@@ -97,7 +97,7 @@ function tryJoin() {
 	var jsonBody = {};
 	jsonBody["gid"] = gid;
 	jsonBody["name"] = name;
-	xhttp.send(jsonBody);
+	xhttp.send(JSON.stringify(jsonBody));
 }
 
 function startHost() {
@@ -118,5 +118,5 @@ function startHost() {
 	var jsonBody = {};
 	jsonBody["name"] = name;
 	console.debug(jsonBody);
-	xhttp.send(jsonBody);
+	xhttp.send(JSON.stringify(jsonBody));
 }
