@@ -54,24 +54,39 @@ include("serverside/get-player-lineup.php");
 				to avoid drawing offsets and strange behavior with scaling-->
 				<canvas id="drawingCanvas" width="500" height="300"></canvas><br />
 				<div id="controlSection">
-					<input type="radio" name="thickness" id="fine" onclick="changeThickness('Fine')" checked="checked"></input>
-					<label for="fine">Fine</label>
+					<div class="thicknesses">
+						<div class="controlSet">
+						<input type="radio" name="thickness" id="fine" onclick="changeThickness('Fine')" checked="checked"></input>
+						<label for="fine">Fine</label>
+						</div>
 
-					<input type="radio" name="thickness" id="mfine" onclick="changeThickness('Medium Fine')"></input>
-					<label for="mfine">Medium Fine</label>
+						<div class="controlSet">
+						<input type="radio" name="thickness" id="mfine" onclick="changeThickness('Medium Fine')"></input>
+						<label for="mfine">Medium Fine</label>
+						</div>
 
-					<input type="radio" name="thickness" id="mthick" onclick="changeThickness('Medium Thick')"></input>
-					<label for="mthick">Medium Thick</label>
+						<div class="controlSet">
+						<input type="radio" name="thickness" id="mthick" onclick="changeThickness('Medium Thick')"></input>
+						<label for="mthick">Medium Thick</label>
+						</div>
 
-					<input type="radio" name="thickness" id="thick" onclick="changeThickness('Thick')"></input>
-					<label for="thick">Thick</label>
+						<div class="controlSet">
+						<input type="radio" name="thickness" id="thick" onclick="changeThickness('Thick')"></input>
+						<label for="thick">Thick</label>
+						</div>
+					</div>
 
-					<br>
-					<input type="radio" name="tool" id="draw" onclick="changeTool('#000000')" checked="checked"></input>
-					<label for="draw">Draw</label>
+					<div id="drawtools">
+						<div class="controlSet">
+						<input type="radio" name="tool" id="draw" onclick="changeTool('#000000')" checked="checked"></input>
+						<label for="draw">Draw</label>
+						</div>
 
-					<input type="radio" name="tool" id="erase" onclick="changeTool('#FFFFFF')"></input>
-					<label for="erase">Erase</label>
+						<div class="controlSet">
+						<input type="radio" name="tool" id="erase" onclick="changeTool('#FFFFFF')"></input>
+						<label for="erase">Erase</label>
+						</div>
+					</div>
 				</div>
 			</div><br />
 			<div id="submission">

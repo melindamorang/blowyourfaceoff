@@ -5,7 +5,6 @@ Description: A socially-distanced version of the party game telephone pictionary
 Authors: Jacob Griffin, Melinda Morang, Sarah Griffin
 */  
 
-/* --------------- Theme customization starts here ----------------- */
 
 /* COLOR THEME FROM COOKING CITY PALETTE AT COLOR.ADOBE.COM 2020-10-31 */
 /* Color Theme Swatches in Hex */
@@ -43,11 +42,31 @@ html {
 body {
 	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
 	text-align: center;
+	margin: 0;
+	padding: 0;
 }
 a {
 	text-decoration: none;
 }
-
+ul {
+	list-style: none;
+	margin: 2em auto;
+	padding: 0;
+	max-width: 500px;
+}
+li {
+	display: inline-block;
+}
+li a{
+	margin: 2em .5em;
+	color: white;
+	background-color: #2C33BF;
+	font-size: 1em;
+	min-height: 2em;
+	border: none;
+	border-radius: 1em;
+	padding: 1em;
+}
 
 #logo {
 	background-color: #2c33bf;
@@ -60,13 +79,16 @@ a {
 	color: #ffffff;
 }
 
-canvas{
-	border: 3px solid #22F;
+canvas, img{
+	border: none;
+	border-radius: 1em;
+	background-color: #fff;
 }
-
 #drawingCanvas{
 	touch-action: none;
 }
+
+
 
 
 button{
@@ -79,6 +101,9 @@ button{
 	border-radius: 1em;
 	margin: 5px;
 	padding: 2em;
+}
+#submission button:nth-child(2){
+	background-color: #F28705;
 }
 #initialEntry button:nth-child(1){
 	background-color: #F28705;
@@ -93,20 +118,58 @@ button:active {
 	background-color: #c0d904;
 }
 
-input{
+
+#startGameForm input, #inputZone #textInputBox{
 	width: 100%;
-	padding: 1em .5em;
+	padding: 50px 25px;
 	border: none;
 	border-radius: 1em;
 	margin: 1em 0 2em 0;
 	font-weight: bold;
 	font-size: 2em;
 	text-align: center;
+	max-width: 450px;
 }
-label{
+#startGameForm label{
 	font-size: 1.2em;
 }
 
+#displayZone #textDisplay, .playerNameEnd {
+	display: block;
+	max-width: 400px;
+	padding: 50px;
+	font-size: 2em;
+	background-color: #ADDCEE;
+	border-radius: 1em;
+	margin: 1em auto;
+}
+
+#controlSection {
+	margin: 2em auto 0 auto;
+	background-color: #ADDCEE;
+	max-width: 500px;
+	border-radius: 1em;
+}
+#controlSection .controlSet{
+	margin: 1em .5em;
+	display: inline-block;
+}
+#drawtools {
+	border-top: 1px solid #6DCCF2;
+}
+
+
+.endgameText {
+	font-size: 2em;
+	margin: 0;
+}
+.endgamePlayer {
+	margin-top: 5em;
+}
+.endgameStacks {
+	margin: 5em auto;
+	max-width: 500px;
+}
 
 /* @media screen and (min-aspect-ratio: 13/9){
 
