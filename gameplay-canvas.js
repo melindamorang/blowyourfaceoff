@@ -103,7 +103,7 @@ function drawEnd(mouseEvent) {
 	isDrawing = false;
 }
 
-function drawLeave(mouseEvent) {
+function drawLeave() {
 	//If we were drawing when we dragged out, we want that to continue when we drag back in
 	draggedOut = isDrawing;
 
@@ -112,14 +112,22 @@ function drawLeave(mouseEvent) {
 	isDrawing = false;
 }
 
+// Get the coordinates of the canvas's bounding rectangle
+function getCanvasLocation() {
+	var rect = canvas.getBoundingClientRect();
+	return rect;
+}
+
 // Find the mouse's X position with respect to the canvas
 function xPos(mouseEvent) {
-	return mouseEvent.clientX - canvas.offsetLeft;
+	var rect = getCanvasLocation();
+	return mouseEvent.clientX - rect.left;
 }
 
 // Find the mouse's Y position with respect to the canvas
 function yPos(mouseEvent) {
-	return mouseEvent.clientY - canvas.offsetTop;
+	var rect = getCanvasLocation();
+	return mouseEvent.clientY - rect.top;
 }
 
 function changeThickness(thickness) {

@@ -21,7 +21,7 @@ $isDone = false;
 while(!$isDone){
     $isDone = true;
     //Get all data for this round on this game
-	$result = mysqli_query($link, "SELECT ImgRef FROM game_data WHERE Round = ".$round." AND GameID = '".$gameID . "'");
+	$result = mysqli_query($link, "SELECT ImgRef FROM game_data WHERE GameID = '".$gameID . "' AND Round = ".$round);
 	
 	//go through each player's submission
 	while($row = mysqli_fetch_assoc($result)){

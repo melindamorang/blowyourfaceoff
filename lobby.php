@@ -25,6 +25,7 @@ $isHost = htmlspecialchars($_GET["isHost"]);
 	<div id="playerArea">
 		<p>Wait for the other players to join and the host to start the game.</p>
 	</div>
+	<p id="ErrorLine"></p>
 	<h3>Current players:</h3>
 	<div id="nameList"></div>
 	<script src="lobby-pulse.js"></script>

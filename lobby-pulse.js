@@ -19,7 +19,10 @@ function isGameStarted() {
 		.then(response => response.text())
 		.then(response => {
 			console.debug(response);
-			if (response == "playing") {
+			if (response === null) {
+				addError("Error getting game status from server.");
+			}
+			else if (response == "playing") {
 				window.location.replace("gameplay.php?gid=" + gid + "&round=0&name=" + window.name);
 			}
 			else {
