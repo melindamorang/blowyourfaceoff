@@ -1,16 +1,12 @@
 <?php
 
-include("database-connection.php");
 include("array-edit-functions.php");
 include("player-limits.php");
 
 $request_body = file_get_contents('php://input');
 
+include("open-database-connection.php");
 $gameID = mysqli_real_escape_string($link, json_decode($request_body,true)["gid"]);
-
-////////////////////////////////////////
-// Get all of the players into an array
-////////////////////////////////////////
 
 // Use shared function to get waiting players. Retured as $result.
 include("get-waiting-players.php");
@@ -49,14 +45,10 @@ if ($numPlayers < $minPlayers || $numPlayers > $maxPlayers) {
     }
 
     mysqli_query($link,$dataSQL);
-
-    ////////////////////////////////////////////////////////////////////////////
     // Go change the game status and remove the players from "waitingPlayers"
-    ////////////////////////////////////////////////////////////////////////////
-
     mysqli_query($link,"UPDATE GameStatus SET status = 'playing' WHERE gid = '".$gameID . "'");
-
     mysqli_query($link,"DELETE FROM WaitingPlayers WHERE gid = '".$gameID . "'");
+    include("close-database-connection.php");
 
     echo "Game Started";
 }

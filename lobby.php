@@ -1,8 +1,6 @@
 <?php
-
 $gid = htmlspecialchars($_GET["gid"]);
 $isHost = htmlspecialchars($_GET["isHost"]);
-
 ?>
 
 <html>

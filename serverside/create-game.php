@@ -1,13 +1,12 @@
 <?php
-include("database-connection.php");
 
 $request_body = file_get_contents('php://input');
-
-$name = mysqli_real_escape_string($link, json_decode($request_body,true)["name"]);
+$name = json_decode($request_body,true)["name"];
 
 // Generate a 13-character-long unique ID
 $gid = uniqid();
 
+include("open-database-connection.php");
 // Be sure this ID isn't taken by searching the GameStatus table for it
 $gidTaken = true;
 while ($gidTaken) {
@@ -21,7 +20,10 @@ while ($gidTaken) {
 mysqli_query($link,"INSERT INTO GameStatus VALUES('".$gid."','waiting')");
 
 //Add the host to the waiting players table
+$name = mysqli_real_escape_string($link, $name);
 mysqli_query($link,"INSERT INTO WaitingPlayers VALUES('".$gid."','".$name."','TRUE')");
+
+include("close-database-connection.php");
 
 echo $gid;
 ?>

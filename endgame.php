@@ -1,19 +1,20 @@
 <?php
-include("serverside/database-connection.php");
 $request_body = file_get_contents('php://input');
 
 $gid = $_GET["gid"];
 $name = $_GET["name"];
-$gidQuery = mysqli_real_escape_string($link, $_GET["gid"]);
-$nameQuery = mysqli_real_escape_string($link, $_GET["name"]);
 $gidDisplay = htmlspecialchars($gid);
 $nameDisplay = htmlspecialchars($name);
 
+include("serverside/open-database-connection.php");
+$gidQuery = mysqli_real_escape_string($link, $gid);
+$nameQuery = mysqli_real_escape_string($link, $name);
 // Get all player names for this game
 $result1 = mysqli_query($link, "SELECT DISTINCT Player FROM game_data WHERE GameID = '" . $gidQuery . "'");
 
 // Get the full set of text and drawings for this player
 $result2 = mysqli_query($link, "SELECT Round,ImgRef,Player FROM game_data WHERE GameID = '" . $gidQuery . "' AND StackOwner = '" . $nameQuery . "'");
+include("serverside/close-database-connection.php");
 ?>
 
 <html>
