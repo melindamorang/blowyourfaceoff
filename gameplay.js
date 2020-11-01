@@ -96,25 +96,13 @@ function submit() {
 // Send the data to the database after hitting submit
 // If the round is finished, move on to the next round.
 function sendData(data) {
+    // First send the data
     var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			console.debug(xhttp.responseText);
 			if (xhttp.responseText == "Done") {
                 console.debug("Data submitted successfully.");
-                if (roundInt >= numRounds - 1) {
-                    // This was the last round
-                    // Send the player to the results screen
-                    console.debug("Game is finished");
-                    window.location.replace("endgame.php?gid=" + gid + "&name=" + name);
-                }
-                else {
-                    // Send the user to the next round
-                    console.debug("Moving on to next round");
-                    var nextRound = roundInt + 1;
-                    console.debug(nextRound);
-                    window.location.replace("gameplay.php?gid=" + gid + "&round=" + nextRound.toString() + "&name=" + name);
-                }
             }
             else {
                 console.debug("Error submitting data.");
@@ -133,6 +121,52 @@ function sendData(data) {
     jsonBody["name"] = name;
     jsonBody["round"] = round;
     jsonBody["data"] = data;
+    xhttp.send(JSON.stringify(jsonBody));
+    
+    // Next, check whether we're done with the round
+    var pingInterval = setInterval(isRoundFinished, 5000);
+}
+
+// Ping the server and database to see if all players have submitted their data for the round
+function isRoundFinished() {
+    var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			console.debug(xhttp.responseText);
+			if (xhttp.responseText == "Done") {
+                console.debug("Round complete.");
+                if (roundInt >= numRounds - 1) {
+                    // This was the last round
+                    // Send the player to the results screen
+                    console.debug("Game is finished");
+                    window.location.replace("endgame.php?gid=" + gid + "&name=" + name);
+                }
+                else {
+                    // Send the user to the next round
+                    console.debug("Moving on to next round");
+                    var nextRound = roundInt + 1;
+                    console.debug(nextRound);
+                    window.location.replace("gameplay.php?gid=" + gid + "&round=" + nextRound.toString() + "&name=" + name);
+                }
+            }
+            else if (xhttp.responseText == "Done") {
+                console.debug("Round not done yet.");
+            }
+            else {
+                console.debug("Error checking round status.");
+                console.debug(xhttp.responseText);
+                addError("Error checking round status." + xhttp.responseText);
+                showHideElement(waitMessage, false);
+                showHideElement(gameplayArea, true);
+            }
+		}
+	};
+	xhttp.open("POST", "serverside/check-if-round-finished.php", true);
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	
+	var jsonBody = {};
+    jsonBody["gid"] = gid;
+    jsonBody["round"] = round;
 	xhttp.send(JSON.stringify(jsonBody));
 }
 
