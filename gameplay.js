@@ -124,7 +124,7 @@ function sendData(data) {
     xhttp.send(JSON.stringify(jsonBody));
     
     // Next, check whether we're done with the round
-    var pingInterval = setInterval(isRoundFinished, 5000);
+    setInterval(isRoundFinished, 5000);
 }
 
 // Ping the server and database to see if all players have submitted their data for the round
@@ -149,7 +149,7 @@ function isRoundFinished() {
                     window.location.replace("gameplay.php?gid=" + gid + "&round=" + nextRound.toString() + "&name=" + name);
                 }
             }
-            else if (xhttp.responseText == "Done") {
+            else if (xhttp.responseText == "Not done") {
                 console.debug("Round not done yet.");
             }
             else {
