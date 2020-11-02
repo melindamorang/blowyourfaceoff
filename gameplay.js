@@ -124,7 +124,7 @@ function sendData(data) {
     xhttp.send(JSON.stringify(jsonBody));
     
     // Next, check whether we're done with the round
-    setInterval(isRoundFinished, 5000);
+    isRoundFinished();
 }
 
 // Ping the server and database to see if all players have submitted their data for the round
@@ -167,7 +167,11 @@ function isRoundFinished() {
 	var jsonBody = {};
     jsonBody["gid"] = gid;
     jsonBody["round"] = round;
-	xhttp.send(JSON.stringify(jsonBody));
+    xhttp.send(JSON.stringify(jsonBody));
+    
+    // If we got this far without redirecting, then either the round wasn't done or there was an error
+    // Sleep for 5 seconds and then try again.
+    setTimeout(isRoundFinished, 5000);
 }
 
 // Clear the user's input data
