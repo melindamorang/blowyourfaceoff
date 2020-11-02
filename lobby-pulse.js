@@ -2,8 +2,8 @@
 
 var gid = document.getElementById("gid").innerHTML;
 
-// Call the function "isGameStarted" every 5000ms or 5s
-var pingInterval = setInterval(isGameStarted, 5000);
+// Check if the game has started
+isGameStarted();
 
 // Check if the game is started. If it isn't, get the current list of players waiting
 function isGameStarted() {
@@ -25,6 +25,10 @@ function isGameStarted() {
 	xhttp.open("GET", "serverside/lobby-pulse.php?gid=" + gid, true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhttp.send();
+
+	// If we got this far without redirecting, then either the game hasn't started or there was an error
+    // Sleep for 5 seconds and then try again.
+    setTimeout(isGameStarted, 5000);
 }
 
 // Print the list of currently-waiting players
