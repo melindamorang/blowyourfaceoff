@@ -4,15 +4,15 @@ include("open-database-connection.php");
 
 $gameID = mysqli_real_escape_string($link, $_GET["gid"]);
 
-$result = mysqli_query($link,"SELECT status FROM GameStatus WHERE gid='".$gameID . "'");
+$result = mysqli_query($link,"SELECT status FROM gamestatus WHERE GameID='".$gameID . "'");
 include("close-database-connection.php");
 
 $row = mysqli_fetch_assoc($result);
 $gameStatus = $row["status"];
 
-if($gameStatus == "playing"){
+if($gameStatus == 1){
     echo "playing";
-} elseif ($gameStatus == "waiting") {
+} elseif ($gameStatus == 0) {
 
     // Get waiting players using shared code snippet
     include("open-database-connection.php");

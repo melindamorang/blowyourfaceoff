@@ -11,19 +11,19 @@ $name   = mysqli_real_escape_string($link, json_decode($request_body,true)["name
 // Pull the records for this Game ID
 // Do some validation, and if everything is good, enter the player into the waiting players table
 // Try to grab the game status
-$result = mysqli_query($link, "SELECT status FROM GameStatus WHERE gid='" . $gameID . "'");
+$result = mysqli_query($link, "SELECT status FROM gamestatus WHERE GameID='" . $gameID . "'");
 // Check if the Game ID even exists
 if(mysqli_num_rows($result)==0){
 	echo "Bad Game ID";
 } else {
-	// Check if the status is "waiting" 
+	// Check if the status is 0 (not yet started) 
 	$row = mysqli_fetch_assoc($result);
 	$gameStatus = $row["status"];
-	if($gameStatus != "waiting"){
+	if($gameStatus != 0){
 		echo "Bad Game Status";
 	} else {
 		// Check if game already has a waiting player with the same name
-		$result = mysqli_query($link,"SELECT name FROM WaitingPlayers WHERE gid='".$gameID."' AND name='".$name."'");
+		$result = mysqli_query($link,"SELECT name FROM waitingplayers WHERE GameID='".$gameID."' AND name='".$name."'");
 		// If we got a result, then another player with the same name already exists in that game
 		if (mysqli_num_rows($result)!=0) {
 			echo "Name Taken";
@@ -37,7 +37,7 @@ if(mysqli_num_rows($result)==0){
 			else {
 				// Finally everything worked out and we can start the game.
 				// Add them to the waiting players list
-				mysqli_query($link,"INSERT INTO WaitingPlayers VALUES ('".$gameID."','".$name."','FALSE')");
+				mysqli_query($link,"INSERT INTO waitingplayers VALUES ('".$gameID."','".$name."','FALSE')");
 				echo "Success";
 			}
 		}
