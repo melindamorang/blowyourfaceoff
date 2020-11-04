@@ -44,9 +44,6 @@ if ($numPlayers < $minPlayers || $numPlayers > $maxPlayers) {
     }
     mysqli_query($link,$dataSQL);
 
-    // Remove everybody from WaitingPlayers
-    mysqli_query($link,"DELETE FROM WaitingPlayers WHERE GameID = '".$gameID . "'");
-
     // Populate a table with a flag for the round status for each round of the game
     $roundSQL = "INSERT INTO roundstatus (GameID,Round,Status) VALUES ";
     for($round = 0; $round < $roundCount; $round++) {
