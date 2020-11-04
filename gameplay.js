@@ -133,7 +133,7 @@ function isRoundFinished() {
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			console.debug(xhttp.responseText);
-			if (xhttp.responseText == "Done") {
+			if (xhttp.responseText == "2") {
                 console.debug("Round complete.");
                 if (roundInt >= numRounds - 1) {
                     // This was the last round
@@ -149,7 +149,7 @@ function isRoundFinished() {
                     window.location.replace("gameplay.php?gid=" + gid + "&round=" + nextRound.toString() + "&name=" + name);
                 }
             }
-            else if (xhttp.responseText == "Not done") {
+            else if (xhttp.responseText == "1") {
                 console.debug("Round not done yet.");
             }
             else {

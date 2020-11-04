@@ -31,7 +31,6 @@ if ($numPlayers < $minPlayers || $numPlayers > $maxPlayers) {
     /////////////////////////////////////////////////////////////
     $dataSQL = "INSERT INTO game_data (GameID,Round,Player,StackOwner,PlayerOrder) VALUES ";
     $roundCount = count($nameList);
-
     for($round = 0; $round < $roundCount; $round++){
         for($playerIdx = 0; $playerIdx < $roundCount; $playerIdx++) {
             // The stack owner for the current player and current round is a cyclic permutation, incrementing once each round.
@@ -43,11 +42,21 @@ if ($numPlayers < $minPlayers || $numPlayers > $maxPlayers) {
             }
         }
     }
-
     mysqli_query($link,$dataSQL);
-    // Go change the game status and remove the players from "waitingPlayers"
-    mysqli_query($link,"UPDATE GameStatus SET status = 'playing' WHERE gid = '".$gameID . "'");
-    mysqli_query($link,"DELETE FROM WaitingPlayers WHERE gid = '".$gameID . "'");
+
+    // Remove everybody from WaitingPlayers
+    mysqli_query($link,"DELETE FROM WaitingPlayers WHERE GameID = '".$gameID . "'");
+
+    // Populate a table with a flag for the round status for each round of the game
+    $roundSQL = "INSERT INTO roundstatus (GameID,Round,Status) VALUES ";
+    for($round = 0; $round < $roundCount; $round++) {
+        if ($round == 0) $status = 1;
+        else $status = 0;
+        $roundSQL .= "('" . $gameID . "'," . $round . "," . $status . ")";
+        if ($round != $roundCount-1) $roundSQL .= ",";
+    }
+    mysqli_query($link,$roundSQL);
+
     include("close-database-connection.php");
 
     echo "Game Started";
