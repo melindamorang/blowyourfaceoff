@@ -1,3 +1,3 @@
 <?php
-$result = mysqli_query($link, "SELECT name FROM WaitingPlayers WHERE gid='" . $gameID . "' ORDER BY name");
+$result = mysqli_query($link, "SELECT name FROM WaitingPlayers WHERE GameID='" . $gameID . "' ORDER BY name");
 ?>
