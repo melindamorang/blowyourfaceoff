@@ -37,7 +37,7 @@ if(mysqli_num_rows($result)==0){
 			else {
 				// Finally everything worked out and we can start the game.
 				// Add them to the waiting players list
-				mysqli_query($link,"INSERT INTO WaitingPlayers VALUES ('".$gameID."','".$name."','FALSE')");
+				mysqli_query($link,"INSERT INTO waitingplayers VALUES ('".$gameID."','".$name."','FALSE')");
 				echo "Success";
 			}
 		}

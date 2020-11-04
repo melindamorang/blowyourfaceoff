@@ -4,7 +4,7 @@ include("open-database-connection.php");
 
 $gameID = mysqli_real_escape_string($link, $_GET["gid"]);
 
-$result = mysqli_query($link,"SELECT status FROM GameStatus WHERE GameID='".$gameID . "'");
+$result = mysqli_query($link,"SELECT status FROM gamestatus WHERE GameID='".$gameID . "'");
 include("close-database-connection.php");
 
 $row = mysqli_fetch_assoc($result);

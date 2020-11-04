@@ -21,7 +21,7 @@ mysqli_query($link,"INSERT INTO gamestatus VALUES('".$gid."',0)");
 
 //Add the host to the waiting players table
 $name = mysqli_real_escape_string($link, $name);
-mysqli_query($link,"INSERT INTO WaitingPlayers VALUES('".$gid."','".$name."','TRUE')");
+mysqli_query($link,"INSERT INTO waitingplayers VALUES('".$gid."','".$name."','TRUE')");
 
 include("close-database-connection.php");
 
