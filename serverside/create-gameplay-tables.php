@@ -28,6 +28,7 @@ if ($numPlayers < $minPlayers || $numPlayers > $maxPlayers) {
 
     /////////////////////////////////////////////////////////////
     // Fill the gameplay table
+    // Note: Database triggers take care of updating everything else
     /////////////////////////////////////////////////////////////
     $dataSQL = "INSERT INTO game_data (GameID,Round,Player,StackOwner,PlayerOrder) VALUES ";
     $roundCount = count($nameList);
@@ -43,16 +44,6 @@ if ($numPlayers < $minPlayers || $numPlayers > $maxPlayers) {
         }
     }
     mysqli_query($link,$dataSQL);
-
-    // Populate a table with a flag for the round status for each round of the game
-    $roundSQL = "INSERT INTO roundstatus (GameID,Round,Status) VALUES ";
-    for($round = 0; $round < $roundCount; $round++) {
-        if ($round == 0) $status = 1;
-        else $status = 0;
-        $roundSQL .= "('" . $gameID . "'," . $round . "," . $status . ")";
-        if ($round != $roundCount-1) $roundSQL .= ",";
-    }
-    mysqli_query($link,$roundSQL);
 
     include("close-database-connection.php");
 
