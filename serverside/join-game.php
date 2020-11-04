@@ -11,7 +11,7 @@ $name   = mysqli_real_escape_string($link, json_decode($request_body,true)["name
 // Pull the records for this Game ID
 // Do some validation, and if everything is good, enter the player into the waiting players table
 // Try to grab the game status
-$result = mysqli_query($link, "SELECT status FROM GameStatus WHERE GameID='" . $gameID . "'");
+$result = mysqli_query($link, "SELECT status FROM gamestatus WHERE GameID='" . $gameID . "'");
 // Check if the Game ID even exists
 if(mysqli_num_rows($result)==0){
 	echo "Bad Game ID";
@@ -23,7 +23,7 @@ if(mysqli_num_rows($result)==0){
 		echo "Bad Game Status";
 	} else {
 		// Check if game already has a waiting player with the same name
-		$result = mysqli_query($link,"SELECT name FROM WaitingPlayers WHERE GameID='".$gameID."' AND name='".$name."'");
+		$result = mysqli_query($link,"SELECT name FROM waitingplayers WHERE GameID='".$gameID."' AND name='".$name."'");
 		// If we got a result, then another player with the same name already exists in that game
 		if (mysqli_num_rows($result)!=0) {
 			echo "Name Taken";
