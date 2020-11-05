@@ -161,13 +161,14 @@ function isRoundFinished() {
             }
 		}
 	};
-	xhttp.open("POST", "serverside/check-if-round-finished.php", true);
+    xhttp.open("GET", "serverside/check-if-round-finished.php?gid=" + gid + "&round=" + round, true);
+    //xhttp.open("GET", "serverside/lobby-pulse.php?gid=" + gid, true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	
-	var jsonBody = {};
-    jsonBody["gid"] = gid;
-    jsonBody["round"] = round;
-    xhttp.send(JSON.stringify(jsonBody));
+	xhttp.send()
+	// var jsonBody = {};
+    // jsonBody["gid"] = gid;
+    // jsonBody["round"] = round;
+    // xhttp.send(JSON.stringify(jsonBody));
     
     // If we got this far without redirecting, then either the round wasn't done or there was an error
     // Sleep for 5 seconds and then try again.
