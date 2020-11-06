@@ -163,6 +163,7 @@ function isRoundFinished() {
 	};
     xhttp.open("GET", "serverside/check-if-round-finished.php?gid=" + gid + "&round=" + round, true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhttp.send();
 
     // If we got this far without redirecting, then either the round wasn't done or there was an error
     // Sleep for 5 seconds and then try again.
