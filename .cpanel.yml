@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/grif92346/public_html/blowyourfaceoff
+    - export DEPLOYPATH=/home3/dphlqsmy/repositories/blowyourfaceoff
     - /bin/cp -R . $DEPLOYPATH
