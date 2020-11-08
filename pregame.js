@@ -2,11 +2,14 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 	initialButtons = document.getElementById("initialEntry");
+	newGameArea = document.getElementById("newGameEntry");
+	priorGameArea = document.getElementById("priorGameEntry");
 	nameEntryForm = document.getElementById("startGameForm");
 	hostEntry = document.getElementById("forHost");
 	playerEntry = document.getElementById("forPlayer");
 	nameEdit = document.getElementById("playerName");
 	gidEdit = document.getElementById("gid");
+	priorGameEdit = document.getElementById("gid2");
 	setInitialState();
 });
 
@@ -14,23 +17,28 @@ document.addEventListener('DOMContentLoaded', function () {
 // Show the Host Game / Join Game buttons and hide the input form where
 // the host/player enters their name and joins the game
 function setInitialState() {
+	showHideElement(newGameArea, false);
+	showHideElement(priorGameArea, false);
 	showHideElement(initialButtons, true);
 	showHideElement(nameEntryForm, false);
 	showHideElement(hostEntry, false);
 	showHideElement(playerEntry, false);
 	nameEdit.value = "";
 	gidEdit.value = "";
+	priorGameEdit.value = "";
 }
 
 // Show the elements appropriate for the Host for entering game start info
 function showHostEntry() {
 	showNameEntry();
+	showHideElement(newGameArea, true);
 	showHideElement(hostEntry, true);
 }
 
 // Show the elements appropriate for the Player for entering game start info
 function showPlayerEntry() {
-	showNameEntry()
+	showNameEntry();
+	showHideElement(newGameArea, true);
 	showHideElement(playerEntry, true);
 }
 
@@ -39,6 +47,12 @@ function showPlayerEntry() {
 function showNameEntry() {
 	showHideElement(initialButtons, false);
 	showHideElement(nameEntryForm, true);
+}
+
+// Show the prior game entry form
+function showPriorGameEntry() {
+	showNameEntry();
+	showHideElement(priorGameArea, true);
 }
 
 // Get the player name from the input control
@@ -119,4 +133,34 @@ function startHost() {
 	jsonBody["name"] = name;
 	console.debug(jsonBody);
 	xhttp.send(JSON.stringify(jsonBody));
+}
+
+function tryPriorGame() {
+	var gid = priorGameEdit.value;
+	if (gid === "") {
+		addError("Enter a valid Game ID.");
+		return;
+	}
+
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			console.debug(xhttp.responseText);
+			if (xhttp.responseText == "Bad Game ID") {
+				addError("That game does not exist. Double check that the Game ID is correct.");
+			}
+			else if (xhttp.responseText == "0" || xhttp.responseText == "1") {
+				addError("The game with this ID has not yet finished.");
+			}
+			else if (xhttp.responseText == "2") {
+				window.location.replace("endgame.php?gid=" + gid);
+			}
+			else {
+				addError("Server Error. " + xhttp.responseText);
+			}
+		}
+	};
+	xhttp.open("POST", "serverside/get-game-status.php?gid=" + gid, true);
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xhttp.send();
 }

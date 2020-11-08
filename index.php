@@ -13,18 +13,26 @@ include("serverside/player-limits.php");
     <?php include("snippets/banner.html"); ?>
     <div id="initialEntry">
         <button onclick="showPlayerEntry()">Join a Game</button>
-        <button onclick="showHostEntry()">Host a Game</button>
+        <button onclick="showHostEntry()">Host a Game</button><br>
+        <button onclick="showPriorGameEntry()">See results of a completed game</button>
     </div>
     <div id="startGameForm">
-        <label for="playerName">Enter your name: </label><br />
-        <input type="text" id="playerName" maxlength=<?php echo '"' . $maxNameLength . '"'; ?>><br>
-        <div id="forPlayer">
-            <label for="gid">Enter Game ID: </label><br />
-            <input type="text" id="gid"><br>
-            <button onclick="tryJoin()">Join Game</button><br><br>
+        <div id="newGameEntry">
+            <label for="playerName">Enter your name:</label><br />
+            <input type="text" id="playerName" maxlength=<?php echo '"' . $maxNameLength . '"'; ?>><br>
+            <div id="forPlayer">
+                <label for="gid">Enter Game ID:</label><br />
+                <input type="text" id="gid"><br>
+                <button onclick="tryJoin()">Join Game</button><br><br>
+            </div>
+            <div id="forHost">
+                <button onclick="startHost()">Create Game</button><br>
+            </div>
         </div>
-        <div id="forHost">
-            <button onclick="startHost()">Create Game</button><br>
+        <div id="priorGameEntry">
+            <label for="gid2">Enter ID of completed game:</label><br />
+            <input type="text" id="gid2"><br>
+            <button onclick="tryPriorGame()">Submit</button><br><br>
         </div>
         <p id="ErrorLine"></p>
         <a onclick="setInitialState()">Cancel</a>
