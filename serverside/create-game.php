@@ -4,7 +4,10 @@ $request_body = file_get_contents('php://input');
 $name = json_decode($request_body,true)["name"];
 
 // Generate a 13-character-long unique ID
-$gid = uniqid();
+//$gid = uniqid();
+// ^Don't do that anymore because everyone hated it.
+// Generate a random number with no more than 6 digits
+$gid = rand(0, 999999);
 
 include("open-database-connection.php");
 // Be sure this ID isn't taken by searching the gamestatus table for it
