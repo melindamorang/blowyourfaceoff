@@ -2,7 +2,8 @@
 $request_body = file_get_contents('php://input');
 
 $gid = $_GET["gid"];
-$name = $_GET["name"];
+if (isset($_GET["name"])) $name = $_GET["name"];
+else $name = "";
 $gidDisplay = htmlspecialchars($gid);
 $nameDisplay = htmlspecialchars($name);
 
@@ -11,9 +12,6 @@ $gidQuery = mysqli_real_escape_string($link, $gid);
 $nameQuery = mysqli_real_escape_string($link, $name);
 // Get all player names for this game
 $result1 = mysqli_query($link, "SELECT DISTINCT Player FROM game_data WHERE GameID = '" . $gidQuery . "'");
-
-// Get the full set of text and drawings for this player
-$result2 = mysqli_query($link, "SELECT Round,ImgRef,Player FROM game_data WHERE GameID = '" . $gidQuery . "' AND StackOwner = '" . $nameQuery . "'");
 include("serverside/close-database-connection.php");
 ?>
 
@@ -44,26 +42,8 @@ include("serverside/close-database-connection.php");
   <p><?php echo "Game ID: " . $gidDisplay; ?></p>
 	
   <div class="endgameStacks">
-  <p class="playerNameEnd"><?php echo $nameDisplay . "'s Stack"; ?></p>
-  
-  <!-- Display your stack -->
-  <?php
-  while ($row = mysqli_fetch_assoc($result2)) {
-    $data = htmlspecialchars($row["ImgRef"]);
-    $round = htmlspecialchars($row["Round"]);
-    $player = htmlspecialchars($row["Player"]);
-	if(intval($round) != 0){
-	  echo '<p class="endgamePlayer">From ' . $player . ':</p>';
-	} else {
-	  echo '<p class="endgamePlayer">Start:</p>';
-	}
-    if (intval($round) % 2 == 0) {
-      echo '<p class="endgameText">' . $data . '</p>';
-    } else {
-      echo '<img class="endgameDrawing" src="' . $data . '" />';
-    }
-  }
-  ?>
+    <!-- Display your stack -->
+    <?php include("serverside/retrieve-stack.php"); ?>
   </div><!-- end .endgameStacks -->
 	<p><a class="button" href="index.php">New Game</a></p>
 </body>
