@@ -20,10 +20,10 @@ include("serverside/get-player-lineup.php");
 
 <body>
 	<!--Hidden controls to hold variables that need to be passed around-->
-	<input type="text" id="gid" hidden <?php echo "value='" . $gid . "'"; ?>></p>
-	<input type="number" id="round" hidden <?php echo "value='" . $round . "'"; ?>></p>
-	<input type="text" id="name" hidden <?php echo "value='" . $name . "'"; ?>></p>
-	<input type="number" id="numRounds" hidden <?php echo "value='" . $numPlayers . "'"; ?>></p>
+	<input type="text" id="gid" hidden value="<?php echo $gid; ?>"></p>
+	<input type="number" id="round" hidden value="<?php echo $round; ?>"></p>
+	<input type="text" id="name" hidden value="<?php echo $name; ?>"></p>
+	<input type="number" id="numRounds" hidden value="<?php echo $numPlayers; ?>"></p>
 
 	<!--The actual content!-->
 	<?php include("snippets/banner.html"); ?>
