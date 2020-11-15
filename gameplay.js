@@ -64,8 +64,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // Fetch the last round's data and display it in the display area
     if (roundInt != 0) fetchLastRoundsData();
 
-    // Start the timer
-    runTimer()
+    if (isNaN(timeLimitSeconds)) {
+        // No timer for this game
+        showHideElement(timer);
+    }
+    else {
+        // Start the timer
+        runTimer();
+    }
 });
 
 // When the user hits Submit, send the input to the database
