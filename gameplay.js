@@ -14,11 +14,13 @@ document.addEventListener('DOMContentLoaded', function () {
     roundInt = parseInt(round);
     numRounds = parseInt(document.getElementById("numRounds").value);
     name = document.getElementById("name").value;
+    timeLimitSeconds = parseInt(document.getElementById("timeoutSeconds").value);
     console.debug(gid);
     console.debug(round);
     console.debug(numRounds);
     console.debug(name);
-    // Retrieve relevant divs
+    console.debug(timeLimitSeconds);
+    // Retrieve relevant elements
     gameplayArea = document.getElementById("gameplayArea");
     displayZone = document.getElementById("displayZone");
     textDisplay = document.getElementById("textDisplay");
@@ -29,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
     canvas = document.getElementById("drawingCanvas");
     waitMessage = document.getElementById("waitMessage");
     instructionMsg = document.getElementById("instructions");
+    timer = document.getElementById("timer");
 
     // Always hide the waitMessage when the page first loads
     showHideElement(waitMessage, false);
@@ -60,6 +63,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Fetch the last round's data and display it in the display area
     if (roundInt != 0) fetchLastRoundsData();
+
+    // Start the timer
+    runTimer()
 });
 
 // When the user hits Submit, send the input to the database
@@ -209,4 +215,48 @@ function displayLast(data) {
         textDisplay.innerHTML = data;
     }
 
+}
+
+function runTimer() {
+    var endTime = new Date().getTime() + (1000 * timeLimitSeconds);
+    console.debug(timeLimitSeconds);
+    console.debug(endTime);
+    // Update the countdown every 1 second
+    var x = setInterval(function() {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+    
+        // Find the distance between now and the count down date
+        var timeRemaining = endTime - now;
+    
+        // Time calculations for days, hours, minutes and seconds
+        var minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+    
+        // Display the result in the timer element
+        timer.innerHTML = minutes + "m " + seconds + "s ";
+    
+        // If the countdown is finished, submit whatever they have
+        // Fill in dummy values if their submission is blank.
+        if (timeRemaining < 0) {
+            clearInterval(x);
+            timer.innerHTML = "Time's up! Moving on.";
+
+            // Fill in dummy values if needed.
+            if (mode == "writing") {
+                if (textInputBox.value === "") {
+                    textInputBox.value = "Oh dear, I'm really slow.";
+                }
+            }
+            else {
+                if (isCanvasBlank()) {
+                    drawHappyFace();
+                }
+            }
+
+            // Submit whatever they have
+            submit();
+        }
+    }, 1000);
 }
