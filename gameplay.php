@@ -4,7 +4,7 @@ $name = htmlspecialchars($_GET["name"]);
 $round = htmlspecialchars($_GET["round"]);
 include("serverside/player-limits.php");
 include("serverside/get-player-lineup.php");
-//include("serverside/get-time-limit.php");
+include("serverside/get-time-limit.php");
 ?>
 
 <html>
@@ -25,8 +25,7 @@ include("serverside/get-player-lineup.php");
 	<input type="number" id="round" hidden value="<?php echo $round; ?>"></p>
 	<input type="text" id="name" hidden value="<?php echo $name; ?>"></p>
 	<input type="number" id="numRounds" hidden value="<?php echo $numPlayers; ?>"></p>
-	<!-- <input type="number" id="timeoutSeconds" hidden value="<?php echo $timeLimit; ?>"></p> -->
-	<input type="number" id="timeoutSeconds" hidden value="15"></p>
+	<input type="number" id="timeoutSeconds" hidden value="<?php echo $timeLimit; ?>"></p>
 
 	<!--The actual content!-->
 	<?php include("snippets/banner.html"); ?>
