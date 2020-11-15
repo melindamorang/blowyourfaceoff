@@ -26,6 +26,8 @@ include("serverside/player-limits.php");
                 <button onclick="tryJoin()">Join Game</button><br><br>
             </div>
             <div id="forHost">
+                <label for="timeLimit">Time limit for rounds in minutes (leave blank for none):</label><br />
+                <input type="number" id="timeLimit" min=0.25 max=30><br>
                 <button onclick="startHost()">Create Game</button><br>
             </div>
         </div>

@@ -2,6 +2,7 @@
 
 $request_body = file_get_contents('php://input');
 $name = json_decode($request_body,true)["name"];
+$timeLimit = json_decode($request_body,true)["timeLimit"];
 
 // Generate a 13-character-long unique ID
 //$gid = uniqid();
@@ -20,7 +21,13 @@ while ($gidTaken) {
 }
 
 //Add the new game to the gamestatus table
-mysqli_query($link,"INSERT INTO gamestatus VALUES('".$gid."',0)");
+if ($timeLimit == NULL) {
+	mysqli_query($link,"INSERT INTO gamestatus (GameID,Status) VALUES('" . $gid . "',0)");
+}
+else {
+	$timeLimit = floatval($timeLimit);
+	mysqli_query($link,"INSERT INTO gamestatus (GameID,Status,TimeLimitSeconds) VALUES('" . $gid . "',0," . $timeLimit .")");
+}
 
 //Add the host to the waiting players table
 $name = mysqli_real_escape_string($link, $name);
