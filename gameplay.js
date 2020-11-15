@@ -219,8 +219,6 @@ function displayLast(data) {
 
 function runTimer() {
     var endTime = new Date().getTime() + (1000 * timeLimitSeconds);
-    console.debug(timeLimitSeconds);
-    console.debug(endTime);
     // Update the countdown every 1 second
     var x = setInterval(function() {
 
