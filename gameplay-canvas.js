@@ -157,6 +157,22 @@ function changeTool(color) {
 	}
 }
 
+// Draw an automatically-generated happy face
+// Used to fill the canvas if the user lets the time run out without drawing anything.
+// Borrowed from https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes
+function drawHappyFace() {
+	canvasContext.beginPath();
+    canvasContext.arc(75, 75, 50, 0, Math.PI * 2, true); // Outer circle
+    canvasContext.moveTo(110, 75);
+    canvasContext.arc(75, 75, 35, 0, Math.PI, false);  // Mouth (clockwise)
+    canvasContext.moveTo(65, 65);
+    canvasContext.arc(60, 65, 5, 0, Math.PI * 2, true);  // Left eye
+    canvasContext.moveTo(95, 65);
+    canvasContext.arc(90, 65, 5, 0, Math.PI * 2, true);  // Right eye
+	canvasContext.stroke();
+	canvasEdited = true;
+}
+
 function clearCanvas() {
 	// Clear canvas
 	canvasContext.clearRect(0, 0, canvas.width, canvas.height);

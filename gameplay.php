@@ -4,6 +4,7 @@ $name = htmlspecialchars($_GET["name"]);
 $round = htmlspecialchars($_GET["round"]);
 include("serverside/player-limits.php");
 include("serverside/get-player-lineup.php");
+include("serverside/get-time-limit.php");
 ?>
 
 <html>
@@ -24,6 +25,7 @@ include("serverside/get-player-lineup.php");
 	<input type="number" id="round" hidden value="<?php echo $round; ?>"></p>
 	<input type="text" id="name" hidden value="<?php echo $name; ?>"></p>
 	<input type="number" id="numRounds" hidden value="<?php echo $numPlayers; ?>"></p>
+	<input type="number" id="timeoutSeconds" hidden value="<?php echo $timeLimit; ?>"></p>
 
 	<!--The actual content!-->
 	<?php include("snippets/banner.html"); ?>
@@ -44,6 +46,7 @@ include("serverside/get-player-lineup.php");
 		<div id="inputZone">
 			<!--This section is for the text/drawing input area and associated controls.-->
 			<p>(Your submission will go to <?php echo $nextPlayer; ?>)</p>
+			<p id="timer"></p>
 			<div id="textInput">
 				<!--Inputs for the writing phase-->
 				<input type="text" id="textInputBox" maxlength=<?php echo '"' . $maxTextInputLength . '"'; ?>></input>

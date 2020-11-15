@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	playerEntry = document.getElementById("forPlayer");
 	nameEdit = document.getElementById("playerName");
 	gidEdit = document.getElementById("gid");
+	timeLimitEdit = document.getElementById("timeLimit");
 	priorGameEdit = document.getElementById("gid2");
 	setInitialState();
 });
@@ -25,6 +26,7 @@ function setInitialState() {
 	showHideElement(playerEntry, false);
 	nameEdit.value = "";
 	gidEdit.value = "";
+	timeLimitEdit.value = 3; // Default to a 3-minute time limit for each round.
 	priorGameEdit.value = "";
 }
 
@@ -60,6 +62,17 @@ function getPlayerName() {
 	var name = nameEdit.value;
 	if (name === "") addError("Enter a valid name.");
 	return name;
+}
+
+// Get the time limit from the input control and return the value in seconds
+function getTimeLimit() {
+	var timeLimitMinutes = parseFloat(timeLimitEdit.value);
+	if (isNaN(timeLimitMinutes) || timeLimitMinutes === null) return null;
+	if (timeLimitMinutes < 0.25 || timeLimitMinutes > 30) {
+		addError("Time limit must be greater than 15 seconds and less than 30 minutes.");
+		return "invalid";
+	}
+	return timeLimitMinutes * 60.0;
 }
 
 // Go to the lobby page for this game ID and set the player name
@@ -118,6 +131,9 @@ function startHost() {
 	var name = getPlayerName();
 	if (name === "") return;
 
+	var timeLimitSeconds = getTimeLimit();
+	if (timeLimitSeconds == "invalid") return;
+
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
@@ -131,6 +147,7 @@ function startHost() {
 	
 	var jsonBody = {};
 	jsonBody["name"] = name;
+	jsonBody["timeLimit"] = timeLimitSeconds;
 	console.debug(jsonBody);
 	xhttp.send(JSON.stringify(jsonBody));
 }
