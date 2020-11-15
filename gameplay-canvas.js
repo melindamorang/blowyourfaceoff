@@ -159,6 +159,7 @@ function changeTool(color) {
 
 // Draw an automatically-generated happy face
 // Used to fill the canvas if the user lets the time run out without drawing anything.
+// Borrowed from https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes
 function drawHappyFace() {
 	canvasContext.beginPath();
     canvasContext.arc(75, 75, 50, 0, Math.PI * 2, true); // Outer circle
