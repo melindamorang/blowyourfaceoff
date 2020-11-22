@@ -97,10 +97,8 @@ function drawEnd(mouseEvent) {
 	pos = getXYPos(mouseEvent);
 	if (pos.x > 0 && pos.x < canvas.width && pos.y > 0 && pos.y < canvas.height) {
 		canvasContext.lineTo(pos.x, pos.y);
+		canvasContext.stroke();
 	}
-
-	//Finish the current line
-	//canvasContext.stroke();
 
 	//Completely stop all drawing states
 	draggedOut = false;
