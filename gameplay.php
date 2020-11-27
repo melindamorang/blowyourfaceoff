@@ -49,7 +49,7 @@ include("serverside/get-time-limit.php");
 			<p id="timer"></p>
 			<div id="textInput">
 				<!--Inputs for the writing phase-->
-				<input type="text" id="textInputBox" maxlength=<?php echo '"' . $maxTextInputLength . '"'; ?>></input>
+				<input type="text" autocomplete="off" id="textInputBox" maxlength=<?php echo '"' . $maxTextInputLength . '"'; ?>></input>
 			</div>
 			<div id="drawingInput">
 				<!--Inputs for the drawing phase-->
