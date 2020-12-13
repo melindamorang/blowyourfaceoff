@@ -247,20 +247,55 @@ function runTimer() {
             clearInterval(x);
             timer.innerHTML = "Time's up! Moving on.";
 
-            // Fill in dummy values if needed.
             if (mode == "writing") {
-                if (textInputBox.value === "") {
-                    textInputBox.value = "Oh dear, I'm really slow.";
-                }
+                if (textInputBox.value === "") checkForPriorSubmission()
+                else submit();
+            } else {
+                if (isCanvasBlank())  checkForPriorSubmission()
+                else submit();
             }
-            else {
-                if (isCanvasBlank()) {
-                    drawHappyFace();
-                }
-            }
-
-            // Submit whatever they have
-            submit();
         }
     }, 1000);
+}
+
+function checkForPriorSubmission() {
+    // In the rare case when the timer runs out and the input is empty,
+    // check to make sure data wasn't already submitted in some other way.
+    // This shouldn't happen, but it could if a player switched devices mid-game and
+    // left it open on another device or otherwise did something weird.
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            if (xhttp.responseText == "Bad request") {
+                // Something bad happened.  Just fill in dummy values and proceed.
+                console.debug("Unable to check if data already submitted.");
+                fillInDummyValues();
+                submit();
+            }
+            else {
+                // Only fill in dummy values if the database had nothing in it already.
+                var numNulls = int(xhttp.responseText);
+                if (numNulls == 0) {
+                    // Somehow values were already in the database. Don't submit anything, just
+                    // use what was already there and proceed.
+                    isRoundFinished();
+                } else {
+                    fillInDummyValues();
+                    submit();
+                }
+            }
+        }
+    };
+    xhttp.open("GET", "serverside/is-round-data-submitted.php?gid=" + gid + "&round=" + round + "&name=" + name, true);
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhttp.send();
+}
+
+function fillInDummyValues() {
+    // Fill in dummy values if needed.
+    if (mode == "writing") {
+        textInputBox.value = "Oh dear, I'm really slow.";
+    } else {
+        drawHappyFace();
+    }
 }
