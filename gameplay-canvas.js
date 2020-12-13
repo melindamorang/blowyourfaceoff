@@ -31,23 +31,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function setDrawingEventListeners() {
 
+	var touchAvailable = ('createTouch' in document) || ('onstarttouch' in window);
 
-	//Mobile
-	canvas.addEventListener("touchstart", drawStart);
-	canvas.addEventListener("touchcancel", drawEnd);
-	canvas.addEventListener("touchmove", drawTick);
-	document.addEventListener("touchend", drawEnd);
-	// document.body.addEventListener('touchmove', function (event) {
-	// 	event.preventDefault();
-	// }, false);
-
-	//Desktop
-	canvas.addEventListener("mousedown", drawStart);
-	canvas.addEventListener("mouseout", drawLeave);
-	canvas.addEventListener("mouseover", drawStart);
-	canvas.addEventListener("mousemove", drawTick);
-	document.addEventListener("mouseup", drawEnd);
-
+	if (touchAvailable) {
+		//Mobile
+		canvas.addEventListener("touchstart", drawStart);
+		canvas.addEventListener("touchcancel", drawEnd);
+		canvas.addEventListener("touchmove", drawTick);
+		document.addEventListener("touchend", drawEnd);
+		// document.body.addEventListener('touchmove', function (event) {
+		// 	event.preventDefault();
+		// }, false);
+	} else {
+		//Desktop
+		canvas.addEventListener("mousedown", drawStart);
+		canvas.addEventListener("mouseout", drawLeave);
+		canvas.addEventListener("mouseover", drawStart);
+		canvas.addEventListener("mousemove", drawTick);
+		document.addEventListener("mouseup", drawEnd);
+	}
 }
 
 // Functions taken from
