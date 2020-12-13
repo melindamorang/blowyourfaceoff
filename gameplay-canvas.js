@@ -30,18 +30,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 function setDrawingEventListeners() {
-	//Desktop
-	canvas.addEventListener("mousedown", drawStart);
-	canvas.addEventListener("mouseout", drawLeave);
-	canvas.addEventListener("mouseover", drawStart);
-	canvas.addEventListener("mousemove", drawTick);
-	document.addEventListener("mouseup", drawEnd);
 
-	//Mobile
-	canvas.addEventListener("touchstart", drawStart);
-	canvas.addEventListener("touchcancel", drawEnd);
-	canvas.addEventListener("touchmove", drawTick);
-	document.addEventListener("touchend", drawEnd);
+	var touchAvailable = ('createTouch' in document) || ('onstarttouch' in window);
+
+	if (touchAvailable) {
+		//Mobile
+		canvas.addEventListener("touchstart", drawStart);
+		canvas.addEventListener("touchcancel", drawEnd);
+		canvas.addEventListener("touchmove", drawTick);
+		document.addEventListener("touchend", drawEnd);
+		document.body.addEventListener('touchmove', function (event) {
+			event.preventDefault();
+		}, false);
+	} else {
+		//Desktop
+		canvas.addEventListener("mousedown", drawStart);
+		canvas.addEventListener("mouseout", drawLeave);
+		canvas.addEventListener("mouseover", drawStart);
+		canvas.addEventListener("mousemove", drawTick);
+		document.addEventListener("mouseup", drawEnd);
+	}
+}
+
+// Functions taken from
+// https://stackoverflow.com/questions/9975352/javascript-html5-canvas-drawing-instead-of-dragging-scrolling-on-mobile-devic
+// To prevent awkward scrolling on ios.
+function preventDefault(e) {
+    e.preventDefault();
+}
+function disableScroll() {
+    document.body.addEventListener('touchmove', preventDefault, { passive: false });
+}
+function enableScroll() {
+    document.body.removeEventListener('touchmove', preventDefault);
 }
 
 function drawStart(mouseEvent) {
@@ -53,6 +74,7 @@ function drawStart(mouseEvent) {
 
 	if (mouseEvent.type == "touchstart") {
 		mouseEvent = mouseEvent.touches[0];
+		disableScroll()
 	}
 
 	//Move the "brush" to where the mouse was clicked
@@ -91,6 +113,7 @@ function drawEnd(mouseEvent) {
 	//If this is a touchscreen event, look at the primary touch
 	if (mouseEvent.type == "touchend" || mouseEvent.type == "touchcancel") {
 		mouseEvent = mouseEvent.touches[0];
+		enableScroll()
 	}
 
 	//If the mouse is still on the canvas, make one last line
