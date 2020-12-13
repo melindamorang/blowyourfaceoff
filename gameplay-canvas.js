@@ -39,9 +39,6 @@ function setDrawingEventListeners() {
 		canvas.addEventListener("touchcancel", drawEnd);
 		canvas.addEventListener("touchmove", drawTick);
 		document.addEventListener("touchend", drawEnd);
-		document.body.addEventListener('touchmove', function (event) {
-			event.preventDefault();
-		}, false);
 	} else {
 		//Desktop
 		canvas.addEventListener("mousedown", drawStart);
