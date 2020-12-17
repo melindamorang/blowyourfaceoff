@@ -24,12 +24,16 @@ document.addEventListener('DOMContentLoaded', function () {
 	lineThicknesses = { "Fine": 3, "Medium Fine": 5, "Medium Thick": 8, "Thick": 12 };
 	eraserThicknesses = { "Fine": 6, "Medium Fine": 10, "Medium Thick": 16, "Thick": 24 };
 
+	// Determine if the user's device is running ios
+	// See https://racase.com.np/javascript-how-to-detect-if-device-is-ios/
+	isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
 	// Set drawing event listeners so you can interact with the canvas
 	setDrawingEventListeners();
 });
 
-
 function setDrawingEventListeners() {
+
 	//Desktop
 	canvas.addEventListener("mousedown", drawStart);
 	canvas.addEventListener("mouseout", drawLeave);
@@ -44,6 +48,19 @@ function setDrawingEventListeners() {
 	document.addEventListener("touchend", drawEnd);
 }
 
+// Functions taken from
+// https://stackoverflow.com/questions/9975352/javascript-html5-canvas-drawing-instead-of-dragging-scrolling-on-mobile-devic
+// To prevent awkward scrolling on ios.
+function preventDefault(e) {
+    e.preventDefault();
+}
+function disableScroll() {
+    document.body.addEventListener('touchmove', preventDefault, { passive: false });
+}
+function enableScroll() {
+    document.body.removeEventListener('touchmove', preventDefault);
+}
+
 function drawStart(mouseEvent) {
 	//If we dragged the mouse out of the canvas, I want the drawing to resume when dragging back in.
 	//This if statement catches non-drags, and the case where mouse up happened out of frame 
@@ -53,6 +70,7 @@ function drawStart(mouseEvent) {
 
 	if (mouseEvent.type == "touchstart") {
 		mouseEvent = mouseEvent.touches[0];
+		if (isIOS) disableScroll();
 	}
 
 	//Move the "brush" to where the mouse was clicked
@@ -91,6 +109,7 @@ function drawEnd(mouseEvent) {
 	//If this is a touchscreen event, look at the primary touch
 	if (mouseEvent.type == "touchend" || mouseEvent.type == "touchcancel") {
 		mouseEvent = mouseEvent.touches[0];
+		if (isIOS) enableScroll();
 	}
 
 	//If the mouse is still on the canvas, make one last line
