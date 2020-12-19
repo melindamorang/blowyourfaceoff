@@ -18,7 +18,7 @@ function isGameStarted() {
 				window.location.replace("gameplay.php?gid=" + gid + "&round=0&name=" + window.name);
 			}
 			else {
-				printNameList(xhttp.responseText.split(","));
+				printNameList(JSON.parse(xhttp.responseText));
 			}
 		}
 	};
@@ -35,7 +35,7 @@ function isGameStarted() {
 function printNameList(names) {
 	var list = "";
 	for (let i = 0; i < names.length; i++) {
-		list += names[i] + "<br>";
+		list += names[i].name + "<br>";
 	}
 	document.getElementById("nameList").innerHTML = list;
 }

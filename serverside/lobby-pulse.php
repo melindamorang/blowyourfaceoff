@@ -19,13 +19,13 @@ if($gameStatus == 1){
     include("get-waiting-players.php");
     include("close-database-connection.php");
 
-    $nameList = "";
-    while($row = mysqli_fetch_assoc($result)){
-            $nameList .= $row["name"] . ",";
-        }
-    $nameList = htmlspecialchars(rtrim($nameList, ","));
+    // fetch all results into an array and convert to json
+    $nameList = array();
+    while($row = mysqli_fetch_assoc($result)) $nameList[] = $row;
+    $jsonData = json_encode($nameList); 
 
-    echo $nameList;
+    echo $jsonData;
+
 } else echo "Bad game status: " . $gameStatus;
 
 ?>
