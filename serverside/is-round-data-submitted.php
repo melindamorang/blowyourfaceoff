@@ -8,12 +8,9 @@ $gameID = mysqli_real_escape_string($link, $_GET["gid"]);
 $player = mysqli_real_escape_string($link, $_GET["name"]);  // current player
 $round = mysqli_real_escape_string($link, $_GET["round"]);  // current round
 
-$result = mysqli_query($link, "SELECT COUNT(IFNULL(ImgRef)) ImgRef AS num FROM game_data WHERE GameID = '".$gameID."' AND Round = ".strval(intval($round))." AND StackOwner = '".$player."' AND ImgRef IS NULL");
+$num = null;
+$result = mysqli_query($link, "SELECT COUNT(IFNULL(ImgRef)) ImgRef AS num FROM game_data WHERE GameID = '".$gameID."' AND `Round` = ".strval(intval($round))." AND StackOwner = '".$player."' AND ImgRef IS NULL");
 include("close-database-connection.php");
-
-// Otherwise, continue the game and start the next round
-$row = mysqli_fetch_assoc($result);
-$numNulls = $row[0];
-echo $numNulls;
+echo $result
 
 ?>

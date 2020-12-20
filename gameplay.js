@@ -266,6 +266,7 @@ function checkForPriorSubmission() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+            console.debug(xhttp.responseText);
             if (xhttp.responseText == "Bad request") {
                 // Something bad happened.  Just fill in dummy values and proceed.
                 console.debug("Unable to check if data already submitted.");
@@ -274,7 +275,7 @@ function checkForPriorSubmission() {
             }
             else {
                 // Only fill in dummy values if the database had nothing in it already.
-                var numNulls = int(xhttp.responseText);
+                var numNulls = parseInt(xhttp.responseText);
                 if (numNulls == 0) {
                     // Somehow values were already in the database. Don't submit anything, just
                     // use what was already there and proceed.
