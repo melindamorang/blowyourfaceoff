@@ -100,6 +100,8 @@ include("serverside/get-time-limit.php");
 			</div>
 		</div>
 	</div>
+
+	<?php include("snippets/footer.html"); ?>
 </body>
 
 </html>

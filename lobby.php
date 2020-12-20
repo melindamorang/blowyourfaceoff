@@ -27,6 +27,8 @@ $isHost = htmlspecialchars($_GET["isHost"]);
 	<h3>Current players:</h3>
 	<div id="nameList"></div>
 	<script src="lobby-pulse.js"></script>
+
+	<?php include("snippets/footer.html"); ?>
 </body>
 
 </html>
