@@ -39,6 +39,8 @@ include("serverside/player-limits.php");
         <p id="ErrorLine"></p>
         <a onclick="setInitialState()">Cancel</a>
     </div>
+
+    <?php include("snippets/footer.html"); ?>
 </body>
 
 </html>
