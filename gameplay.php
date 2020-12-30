@@ -49,7 +49,8 @@ include("serverside/get-time-limit.php");
 			<p id="timer"></p>
 			<div id="textInput">
 				<!--Inputs for the writing phase-->
-				<input type="text" autocomplete="off" id="textInputBox" maxlength=<?php echo '"' . $maxTextInputLength . '"'; ?>></input>
+				<!--Changed from input text to textarea 2020-12-29 SCG-->
+				<textarea spellcheck="true" autocomplete="off" id="textInputBox" maxlength=<?php echo '"' . $maxTextInputLength . '"'; ?>></textarea>
 			</div>
 			<div id="drawingInput">
 				<!--Inputs for the drawing phase-->
