@@ -3,7 +3,7 @@ $gid = htmlspecialchars($_GET["gid"]);
 $isHost = htmlspecialchars($_GET["isHost"]);
 ?>
 
-<html>
+<html class="theme-basic">
 
 <head>
 	<script src="modules/shared-functions.js"></script>

@@ -15,7 +15,7 @@ $result1 = mysqli_query($link, "SELECT DISTINCT Player FROM game_data WHERE Game
 include("serverside/close-database-connection.php");
 ?>
 
-<html>
+<html class="theme-basic">
 
 <head>
   <title>Results</title>
