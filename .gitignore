@@ -4,4 +4,3 @@
 *.sql
 
 serverside/error_log
-serverside/open-database-connection.php
