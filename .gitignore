@@ -6,3 +6,5 @@
 serverside/error_log
 
 serverside/open-database-connection.php
+
+.DS_Store
