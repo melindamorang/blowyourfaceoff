@@ -184,8 +184,10 @@ function isRoundFinished() {
 
 // Clear the user's input data
 function clearInput() {
-    if (mode == "writing") textInputBox.value = "";
-    else clearCanvas();
+	if (confirm("Do you want to erase your entire drawing?")) {
+    	if (mode == "writing") textInputBox.value = "";
+    	else clearCanvas();
+	}
 }
 
 // Fetch the last round's data for this player's stack and show it

@@ -7,7 +7,7 @@ include("serverside/get-player-lineup.php");
 include("serverside/get-time-limit.php");
 ?>
 
-<html>
+<html class="theme-basic">
 
 <head>
 	<title>Blow your face off!</title>
@@ -49,7 +49,7 @@ include("serverside/get-time-limit.php");
 			<p id="timer"></p>
 			<div id="textInput">
 				<!--Inputs for the writing phase-->
-				<input type="text" autocomplete="off" id="textInputBox" maxlength=<?php echo '"' . $maxTextInputLength . '"'; ?>></input>
+				<textarea autocomplete="off" spellcheck="true" id="textInputBox" maxlength=<?php echo '"' . $maxTextInputLength . '"'; ?>></textarea>
 			</div>
 			<div id="drawingInput">
 				<!--Inputs for the drawing phase-->
@@ -85,17 +85,22 @@ include("serverside/get-time-limit.php");
 						<label for="draw">Draw</label>
 						</div>
 
-						<div class="controlSet">
+						<div class="controlSet eraser">
 						<input type="radio" name="tool" id="erase" onclick="changeTool('#FFFFFF')"></input>
 						<label for="erase">Erase</label>
 						</div>
+
+						<div class="controlSet">
+						<button onclick="clearInput()">Clear drawing</button>
+						</div>
 					</div>
+
+					
 				</div>
 			</div><br />
 			<div id="submission">
 				<!--Controls for submitting and clearing data-->
 				<p id="ErrorLine"></p>
-				<button onclick="clearInput()">Clear</button>
 				<button onclick="submit()">Submit</button>
 			</div>
 		</div>
