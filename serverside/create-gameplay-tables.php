@@ -44,9 +44,8 @@ if ($numPlayers < $minPlayers || $numPlayers > $maxPlayers) {
         }
     }
     mysqli_query($link,$dataSQL);
-
-    include("close-database-connection.php");
-
     echo "Game Started";
 }
+
+include("close-database-connection.php");
 ?>
