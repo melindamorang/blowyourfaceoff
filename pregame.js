@@ -57,11 +57,26 @@ function showPriorGameEntry() {
 	showHideElement(priorGameArea, true);
 }
 
+function validateName(name) {
+	badChars = ["&", "=", "?", "/", "%", "#"];
+	if (name === "") {
+		addError("Enter a valid name.");
+		return false;
+	}
+	for (i = 0; i < badChars.length; i++) {
+		if (name.includes(badChars[i])) {
+			addError(`Do not use '${badChars[i]}' in your name.`);
+			return false;
+		}
+	}
+	return true;
+}
+
 // Get the player name from the input control
 function getPlayerName() {
 	var name = nameEdit.value;
-	if (name === "") addError("Enter a valid name.");
-	return name;
+	if (validateName(name)) return name;
+	else return false;
 }
 
 // Get the time limit from the input control and return the value in seconds
@@ -90,7 +105,7 @@ function tryJoin() {
 		return;
 	}
 	var name = getPlayerName();
-	if (name === "") return;
+	if (name === false) return;
 
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -129,7 +144,7 @@ function tryJoin() {
 
 function startHost() {
 	var name = getPlayerName();
-	if (name === "") return;
+	if (name === false) return;
 
 	var timeLimitSeconds = getTimeLimit();
 	if (timeLimitSeconds == "invalid") return;
