@@ -11,13 +11,13 @@ include("close-database-connection.php");
 
 $nameList = array();
 while($row = mysqli_fetch_assoc($result)){
-    $nameList[] = $row["Player"];
+    $nameList[] = htmlspecialchars($row["Player"]);
 }
 $numPlayers = count($nameList);
 // Figure out the previous player and next player based on player array indexing
 $currentPlayerIdx = array_search($name, $nameList);
 $nextPlayerIdx = getValidIndex($currentPlayerIdx + 1, $numPlayers);
 $previousPlayerIdx = getValidIndex($currentPlayerIdx - 1, $numPlayers);
-$nextPlayer = htmlspecialchars($nameList[$nextPlayerIdx]);
-$previousPlayer = htmlspecialchars($nameList[$previousPlayerIdx]);
+$nextPlayer = $nameList[$nextPlayerIdx];
+$previousPlayer = $nameList[$previousPlayerIdx];
 ?>
