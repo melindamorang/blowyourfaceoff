@@ -30,11 +30,13 @@ document.addEventListener('DOMContentLoaded', function () {
     textInputBox = document.getElementById("textInputBox");
     canvas = document.getElementById("drawingCanvas");
     waitMessage = document.getElementById("waitMessage");
+    timeoutAlert = document.getElementById("timeoutAlert");
     instructionMsg = document.getElementById("instructions");
     timer = document.getElementById("timer");
 
-    // Always hide the waitMessage when the page first loads
+    // Always hide the waitMessage and timeoutAlert when the page first loads
     showHideElement(waitMessage, false);
+    showHideElement(timeoutAlert, false);
 
     // For the first round only, hide the display zone because there is
     // no prior content to display.
@@ -250,19 +252,32 @@ function runTimer() {
             timer.innerHTML = "Time's up! Moving on.";
 
             if (mode == "writing") {
-                if (textInputBox.value === "") checkForPriorSubmission()
+                if (textInputBox.value === "") {
+                    showHideElement(timeoutAlert, true);
+                    showHideElement(gameplayArea, false);
+                }
                 else submit();
             } else {
-                if (isCanvasBlank())  checkForPriorSubmission()
+                if (isCanvasBlank()) {
+                    showHideElement(timeoutAlert, true);
+                    showHideElement(gameplayArea, false);
+                }
                 else submit();
             }
         }
     }, 1000);
 }
 
-function checkForPriorSubmission() {
-    // In the rare case when the timer runs out and the input is empty,
-    // check to make sure data wasn't already submitted in some other way.
+function imStillHere() {
+    // This function gets called when the round times out and the user has entered nothing, they see the message
+    // asking if they're still playing, and they click the "I'm stil here!" button to confirm they are still playing in this tab.
+
+    // Hide the timeout alert and show the wait message temporarily
+    showHideElement(timeoutAlert, false);
+    showHideElement(waitMessage, true);
+
+    // Fill in dummy values so the game can proceed.
+    // First, check to make sure data wasn't already submitted in some other way.
     // This shouldn't happen, but it could if a player switched devices mid-game and
     // left it open on another device or otherwise did something weird.
     var xhttp = new XMLHttpRequest();
