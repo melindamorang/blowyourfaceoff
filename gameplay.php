@@ -30,6 +30,13 @@ include("serverside/get-time-limit.php");
 	<!--The actual content!-->
 	<?php include("snippets/banner.html"); ?>
 	<p id="waitMessage" hidden>Please wait until the other players have finished the round.</p>
+	<div id="timeoutAlert" hidden>
+		<!--This zone is for a special message and confirmation button if the player's time runs out and they haven't entered anything.-->
+		<h2>Are you still here?</h2>
+		<p>We noticed that your time ran out, and you didn't enter anything. If you're no longer playing, please close this browser tab or 
+			<a href="index.php">return to the homepage</a>.</p>
+			<button onclick="imStillHere()">I'm still here!</button>
+	</div>
 	<div id="gameplayArea">
 		<!--This zone encompasses the entire gameplay area, both display and input.-->
 		<p>Round <?php echo $round; ?></p>
