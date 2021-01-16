@@ -11,7 +11,7 @@ include("serverside/open-database-connection.php");
 $gidQuery = mysqli_real_escape_string($link, $gid);
 $nameQuery = mysqli_real_escape_string($link, $name);
 // Get all player names for this game
-$result1 = mysqli_query($link, "SELECT DISTINCT Player FROM game_data WHERE GameID = '" . $gidQuery . "'");
+$result1 = mysqli_query($link, "SELECT DISTINCT Player FROM game_data WHERE GameID = '" . $gidQuery . "' ORDER BY Player");
 include("serverside/close-database-connection.php");
 ?>
 
