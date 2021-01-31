@@ -33,7 +33,7 @@ include("serverside/close-database-connection.php");
   <p>View another player's stack:</p>
   <ul><?php
       while ($row = mysqli_fetch_assoc($result1)) {
-        $url = "./endgame.php?gid=" . $gidQuery . "&name=" . $row["Player"];
+        $url = "./endgame.php?gid=" . $gidQuery . "&name=" . htmlspecialchars($row["Player"]);
         echo '<li><a href="' . $url . '">' . htmlspecialchars($row["Player"]) . "</a></li>";
       }
       ?>
