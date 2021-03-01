@@ -38,7 +38,7 @@ include("serverside/close-database-connection.php");
       }
       ?>
   </ul>
-	<p><a href="index.php">Start or join a new game</a></p>';
+	<p><a href="index.php">Start or join a new game</a></p>
 
   <p><?php echo "Game ID: " . $gidDisplay; ?></p>
 	
