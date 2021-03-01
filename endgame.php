@@ -38,6 +38,7 @@ include("serverside/close-database-connection.php");
       }
       ?>
   </ul>
+	<p><a href="index.php">Start or join a new game</a></p>';
 
   <p><?php echo "Game ID: " . $gidDisplay; ?></p>
 	
@@ -45,7 +46,8 @@ include("serverside/close-database-connection.php");
     <!-- Display your stack -->
     <?php include("serverside/retrieve-stack.php"); ?>
   </div><!-- end .endgameStacks -->
-  <p><a class="button" href="index.php">New Game</a></p>
+	
+	
 
   <?php include("snippets/footer.html"); ?>
 </body>
