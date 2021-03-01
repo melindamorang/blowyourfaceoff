@@ -1,7 +1,7 @@
 <?php
 include("serverside/player-limits.php");
 ?>
-<html class="theme-basic">
+<html class="theme-basic home">
 
 <head>
     <script src="modules/shared-functions.js"></script>
