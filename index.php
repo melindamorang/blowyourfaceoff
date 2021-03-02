@@ -37,7 +37,7 @@ include("serverside/player-limits.php");
             <button onclick="tryPriorGame()">Submit</button><br><br>
         </div>
         <p id="ErrorLine"></p>
-        <a onclick="setInitialState()">Cancel</a>
+        <a href="#" onclick="setInitialState()">Cancel</a>
     </div>
 
     <?php include("snippets/footer.html"); ?>

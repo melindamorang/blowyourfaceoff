@@ -27,6 +27,10 @@ include("serverside/get-time-limit.php");
 	<input type="number" id="numRounds" hidden value="<?php echo $numPlayers; ?>"></p>
 	<input type="number" id="timeoutSeconds" hidden value="<?php echo $timeLimit; ?>"></p>
 
+	<!--Determine if starting round-->
+	<?php if ($round==0) {$roundlabel="Start Here";} else {$roundlabel="Round " . $round;} ?>
+
+
 	<!--The actual content!-->
 	<?php include("snippets/banner.html"); ?>
 	<p id="waitMessage" hidden>Please wait until the other players have finished the round.</p>
@@ -39,7 +43,7 @@ include("serverside/get-time-limit.php");
 	</div>
 	<div id="gameplayArea">
 		<!--This zone encompasses the entire gameplay area, both display and input.-->
-		<p>Round <?php echo $round; ?></p>
+		<p><?php echo $roundlabel; ?></p>
 		<h2 id="instructions"></h2>
 		<!--The instructions are dynamically updated in the javascript-->
 		<div id="displayZone">
@@ -87,7 +91,7 @@ include("serverside/get-time-limit.php");
 					</div>
 
 					<div id="drawtools">
-						<div class="controlSet">
+						<div class="controlSet draw">
 						<input type="radio" name="tool" id="draw" onclick="changeTool('#000000')" checked="checked"></input>
 						<label for="draw">Draw</label>
 						</div>
@@ -97,8 +101,10 @@ include("serverside/get-time-limit.php");
 						<label for="erase">Erase</label>
 						</div>
 
-						<div class="controlSet">
-						<button onclick="clearInput()">Clear drawing</button>
+
+						<div class="controlSet eraseall">
+						<input type="radio" name="tool" id="erase" onclick="clearInput();"></input>
+						<label for="eraseall">Erase All</label>
 						</div>
 					</div>
 

@@ -27,20 +27,24 @@ include("serverside/close-database-connection.php");
 <body>
   <?php include("snippets/banner.html"); ?>
   <h1>Results</h1>
-  <p>Time to view the results and laugh a lot.</p>
+  <h3>Game ID: <?php echo $gidDisplay; ?></h3>
+  <p>Time to view the results and laugh a lot.<br>
+  View another player's stack:</p>
 
   <!--Links to view another player's stack-->
-  <p>View another player's stack:</p>
-  <ul><?php
+  <ul class="playerList"><?php
       while ($row = mysqli_fetch_assoc($result1)) {
-        $url = "./endgame.php?gid=" . $gidQuery . "&name=" . htmlspecialchars($row["Player"]);
-        echo '<li><a href="' . $url . '">' . htmlspecialchars($row["Player"]) . "</a></li>";
+		$playerListName = htmlspecialchars($row["Player"]);
+        $url = "./endgame.php?gid=" . $gidQuery . "&name=" . $playerListName;
+        echo '<li';
+		if ($playerListName == $nameDisplay) { echo ' class="currentPlayer"'; }
+		echo '><a href="' . $url . '">' . htmlspecialchars($row["Player"]) . "</a></li>";
       }
       ?>
   </ul>
-	<p><a href="index.php">Start or join a new game</a></p>
+  <!--<p><a href="index.php">Start or join a new game</a></p>-->
 
-  <p><?php echo "Game ID: " . $gidDisplay; ?></p>
+  
 	
   <div class="endgameStacks">
     <!-- Display your stack -->
