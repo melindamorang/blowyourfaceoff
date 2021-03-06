@@ -62,6 +62,7 @@ function enableScroll() {
 }
 
 function drawStart(mouseEvent) {
+	console.debug("drawStart. event type: " + mouseEvent.type)
 	//If we dragged the mouse out of the canvas, I want the drawing to resume when dragging back in.
 	//This if statement catches non-drags, and the case where mouse up happened out of frame 
 	if (mouseEvent.type == "mouseover" && !draggedOut) {
@@ -85,6 +86,7 @@ function drawStart(mouseEvent) {
 }
 
 function drawTick(mouseEvent) {
+	console.debug("drawTick. event type: " + mouseEvent.type)
 	//Only draw if we are in a drawing state
 	if (isDrawing) {
 
@@ -135,7 +137,8 @@ function drawEnd(mouseEvent) {
 	isDrawing = false;
 }
 
-function drawLeave() {
+function drawLeave(mouseEvent) {
+	console.debug("drawLeave. event type: " + mouseEvent.type)
 	//If we were drawing when we dragged out, we want that to continue when we drag back in
 	draggedOut = isDrawing;
 
