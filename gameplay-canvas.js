@@ -35,11 +35,11 @@ document.addEventListener('DOMContentLoaded', function () {
 function setDrawingEventListeners() {
 
 	//Desktop
-	canvas.addEventListener("mousedown", drawStart);
-	canvas.addEventListener("mouseout", drawLeave);
-	canvas.addEventListener("mouseover", drawStart);
-	canvas.addEventListener("mousemove", drawTick);
-	document.addEventListener("mouseup", drawEnd);
+	canvas.addEventListener("pointerdown", drawStart);
+	canvas.addEventListener("pointerout", drawLeave);
+	canvas.addEventListener("pointerover", drawStart);
+	canvas.addEventListener("pointermove", drawTick);
+	document.addEventListener("pointerup", drawEnd);
 
 	//Mobile
 	canvas.addEventListener("touchstart", drawStart);
@@ -64,7 +64,7 @@ function enableScroll() {
 function drawStart(mouseEvent) {
 	//If we dragged the mouse out of the canvas, I want the drawing to resume when dragging back in.
 	//This if statement catches non-drags, and the case where mouse up happened out of frame 
-	if (mouseEvent.type == "mouseover" && !draggedOut) {
+	if (mouseEvent.type == "pointerover" && !draggedOut) {
 		return;
 	}
 
@@ -115,7 +115,7 @@ function drawEnd(mouseEvent) {
 	//If the mouse is still on the canvas, make one last line
 	pos = getXYPos(mouseEvent);
 	if (pos.x > 0 && pos.x < canvas.width && pos.y > 0 && pos.y < canvas.height) {
-		canvasContext.lineTo(pos.x, pos.y);
+		if(isDrawing) canvasContext.lineTo(pos.x, pos.y);
 		canvasContext.stroke();
 	}
 
