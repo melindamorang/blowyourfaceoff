@@ -78,10 +78,16 @@ function drawStart(mouseEvent) {
 		return;
 	}
 
-	if (mouseEvent.type == "touchstart") {
+	if (mouseEvent.hasOwnProperty("touches")) {
+		console.debug("Event had 'touches' property.")
 		mouseEvent = mouseEvent.touches[0];
 		if (isIOS) disableScroll();
 	}
+
+	// if (mouseEvent.type == "touchstart") {
+	// 	mouseEvent = mouseEvent.touches[0];
+	// 	if (isIOS) disableScroll();
+	// }
 
 	//Move the "brush" to where the mouse was clicked
 	canvasContext.beginPath();
@@ -100,7 +106,11 @@ function drawTick(mouseEvent) {
 		console.debug("drawTick. mouseEvent type: " + mouseEvent.type)
 
 		//If this is a touchscreen event, use the primary touch for drawing
-		if (mouseEvent.type == "touchmove") {
+		// if (mouseEvent.type == "touchmove") {
+		// 	mouseEvent = mouseEvent.touches[0];
+		// }
+		if (mouseEvent.hasOwnProperty("touches")) {
+			console.debug("Event had 'touches' property.")
 			mouseEvent = mouseEvent.touches[0];
 		}
 
@@ -126,9 +136,14 @@ function drawEnd(mouseEvent) {
 	}
 
 	//If this is a touchscreen event, look at the primary touch
-	if (mouseEvent.type == "touchend" || mouseEvent.type == "touchcancel") {
+	// if (mouseEvent.type == "touchend" || mouseEvent.type == "touchcancel") {
+	// 	mouseEvent = mouseEvent.touches[0];
+	// 	if (isIOS) enableScroll();
+	// }
+	if (mouseEvent.hasOwnProperty("touches")) {
+		console.debug("Event had 'touches' property.")
 		mouseEvent = mouseEvent.touches[0];
-		if (isIOS) enableScroll();
+		if (isIOS) disableScroll();
 	}
 
 	//If the mouse is still on the canvas, make one last line
