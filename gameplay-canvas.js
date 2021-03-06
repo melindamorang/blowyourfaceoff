@@ -39,6 +39,7 @@ function setDrawingEventListeners() {
 	canvas.addEventListener("pointerout", drawLeave);
 	canvas.addEventListener("pointerover", drawStart);
 	canvas.addEventListener("pointermove", drawTick);
+	canvas.addEventListener("pointercancel", drawEnd);
 	document.addEventListener("pointerup", drawEnd);
 
 	// //Desktop
@@ -69,7 +70,7 @@ function enableScroll() {
 }
 
 function drawStart(mouseEvent) {
-	console.debug("drawStart. mouseEvent tyep: " + mouseEvent.type)
+	console.debug("drawStart. mouseEvent type: " + mouseEvent.type)
 	//If we dragged the mouse out of the canvas, I want the drawing to resume when dragging back in.
 	//This if statement catches non-drags, and the case where mouse up happened out of frame 
 	if (!draggedOut && (mouseEvent.type == "mouseover" || mouseEvent.type == "pointerover") ) {
@@ -96,7 +97,7 @@ function drawStart(mouseEvent) {
 function drawTick(mouseEvent) {
 	//Only draw if we are in a drawing state
 	if (isDrawing) {
-		console.debug("drawTick. mouseEvent tyep: " + mouseEvent.type)
+		console.debug("drawTick. mouseEvent type: " + mouseEvent.type)
 
 		//If this is a touchscreen event, use the primary touch for drawing
 		if (mouseEvent.type == "touchmove") {
@@ -116,7 +117,13 @@ function drawTick(mouseEvent) {
 }
 
 function drawEnd(mouseEvent) {
-	console.debug("drawEnd. mouseEvent tyep: " + mouseEvent.type)
+	console.debug("drawEnd. mouseEvent type: " + mouseEvent.type)
+
+	if (!isDrawing) {
+		console.debug("Skipping draw ending because we weren't actually drawing.");
+		draggedOut = false;
+		return;
+	}
 
 	//If this is a touchscreen event, look at the primary touch
 	if (mouseEvent.type == "touchend" || mouseEvent.type == "touchcancel") {
@@ -137,7 +144,7 @@ function drawEnd(mouseEvent) {
 }
 
 function drawLeave(mouseEvent) {
-	console.debug("drawLeave. mouseEvent tyep: " + mouseEvent.type)
+	console.debug("drawLeave. mouseEvent type: " + mouseEvent.type)
 
 	//If we were drawing when we dragged out, we want that to continue when we drag back in
 	draggedOut = isDrawing;
