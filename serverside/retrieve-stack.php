@@ -13,13 +13,15 @@ else {
         $data = htmlspecialchars($row["ImgRef"]);
         $round = htmlspecialchars($row["Round"]);
         $player = htmlspecialchars($row["Player"]);
+		$sizeClass = "";
         if(intval($round) != 0){
             echo '<p class="endgamePlayer">From ' . $player . ':</p>';
         } else {
             echo '<p class="endgamePlayer">Start:</p>';
         }
         if (intval($round) % 2 == 0) {
-            echo '<p class="endgameText">' . $data . '</p>';
+			if (strlen($data) > 180){ $sizeClass = " longtext"; }
+            echo '<div class="endgameTextCanvas"><p class="endgameText' . $sizeClass . '">' . $data . '</p></div>';
         } else {
             echo '<img class="endgameDrawing" src="' . $data . '" />';
         }

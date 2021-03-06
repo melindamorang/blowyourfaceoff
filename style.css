@@ -54,16 +54,9 @@ ul {
 li {
 	display: inline-block;
 }
-li a{
-	display: block;
-	margin: .5em;
-	color: white;
-	background-color: var(--byfo-1);
-	font-size: 1em;
-	min-height: 1.5em;
-	border: none;
-	border-radius: 1em;
-	padding: .5em 1em;
+h1, h2, h3 {
+    margin-block-start: 0;
+    margin-block-end: 0;
 }
 
 
@@ -148,7 +141,7 @@ button:hover {
 	background-color: var(--byfo-1);
 }
 button:hover, .button:hover {
-	background-color: #1873cc;
+	background-color: var(--byfo-1);
 }
 button:active, .button:active {
 	background-color: var(--byfo-3);
@@ -177,8 +170,6 @@ button:active, .button:active {
 #startGameForm label{
 	font-size: 1.2em;
 }
-
-
 #displayZone #textDisplay, .playerNameEnd {
 	max-width: 400px;
 	padding: 50px;
@@ -187,7 +178,6 @@ button:active, .button:active {
 	border-radius: 1em;
 	margin: 1em auto;
 }
-
 #controlSection {
 	margin: 2em auto 0 auto;
 	background-color: var(--byfo-lightened);
@@ -197,6 +187,12 @@ button:active, .button:active {
 #controlSection .controlSet{
 	margin: 1em .5em;
 	display: inline-block;
+}
+#controlSection .eraseall{
+	margin: 0 0 0 4em;
+}
+.controlSet, .controlSet input, .controlSet label {
+	cursor: pointer;
 }
 #drawtools {
 	border-top: 1px solid var(--byfo-2);
@@ -209,10 +205,43 @@ button:active, .button:active {
 	font-size: 2em;
 	margin: 0;
 }
+.longtext {
+	font-size: 1.5em;
+}
+.endgameTextCanvas {
+	height: 300px;
+	width: 460px;
+	padding: 20px;
+	border: none;
+	border-radius: 1em;
+	background-color: #fff;
+    display: table-cell;
+    vertical-align: middle;
+}
 .endgamePlayer {
 	margin-top: 5em;
 }
 .endgameStacks {
-	margin: 5em auto;
+	margin: 1em auto 5em auto;
 	max-width: 500px;
+}
+ul.playerList {
+	margin: 0 auto;
+}
+ul.playerList li {
+	margin: .5em;
+	background-color: var(--byfo-1);
+	border: none;
+	border-radius: 1em;
+}
+ul.playerList li.currentPlayer {
+	background-color: var(--byfo-4);
+}
+ul.playerList li a {
+    display: table-cell;
+    vertical-align: middle;
+	font-size: 1em;
+	min-height: 1.5em;
+	padding: .5em 1em;
+	color: white;
 }
