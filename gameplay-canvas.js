@@ -34,18 +34,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function setDrawingEventListeners() {
 
-	//Desktop
-	canvas.addEventListener("mousedown", drawStart);
-	canvas.addEventListener("mouseout", drawLeave);
-	canvas.addEventListener("mouseover", drawStart);
-	canvas.addEventListener("mousemove", drawTick);
-	document.addEventListener("mouseup", drawEnd);
+	//Pointer - for all platforms
+	canvas.addEventListener("pointerdown", drawStart);
+	canvas.addEventListener("pointerout", drawLeave);
+	canvas.addEventListener("pointerover", drawStart);
+	canvas.addEventListener("pointermove", drawTick);
+	document.addEventListener("pointerup", drawEnd);
 
-	//Mobile
-	canvas.addEventListener("touchstart", drawStart);
-	canvas.addEventListener("touchcancel", drawEnd);
-	canvas.addEventListener("touchmove", drawTick);
-	document.addEventListener("touchend", drawEnd);
+	// //Desktop
+	// canvas.addEventListener("mousedown", drawStart);
+	// canvas.addEventListener("mouseout", drawLeave);
+	// canvas.addEventListener("mouseover", drawStart);
+	// canvas.addEventListener("mousemove", drawTick);
+	// document.addEventListener("mouseup", drawEnd);
+
+	// //Mobile
+	// canvas.addEventListener("touchstart", drawStart);
+	// canvas.addEventListener("touchcancel", drawEnd);
+	// canvas.addEventListener("touchmove", drawTick);
+	// document.addEventListener("touchend", drawEnd);
 }
 
 // Functions taken from
@@ -62,9 +69,11 @@ function enableScroll() {
 }
 
 function drawStart(mouseEvent) {
+	console.debug("drawStart. mouseEvent tyep: " + mouseEvent.type)
 	//If we dragged the mouse out of the canvas, I want the drawing to resume when dragging back in.
 	//This if statement catches non-drags, and the case where mouse up happened out of frame 
-	if (mouseEvent.type == "mouseover" && !draggedOut) {
+	if (!draggedOut && (mouseEvent.type == "mouseover" || mouseEvent.type == "pointerover") ) {
+		console.debug("drawStart - canceled because mouse-up happened out of the frame")
 		return;
 	}
 
@@ -87,6 +96,7 @@ function drawStart(mouseEvent) {
 function drawTick(mouseEvent) {
 	//Only draw if we are in a drawing state
 	if (isDrawing) {
+		console.debug("drawTick. mouseEvent tyep: " + mouseEvent.type)
 
 		//If this is a touchscreen event, use the primary touch for drawing
 		if (mouseEvent.type == "touchmove") {
@@ -106,6 +116,8 @@ function drawTick(mouseEvent) {
 }
 
 function drawEnd(mouseEvent) {
+	console.debug("drawEnd. mouseEvent tyep: " + mouseEvent.type)
+
 	//If this is a touchscreen event, look at the primary touch
 	if (mouseEvent.type == "touchend" || mouseEvent.type == "touchcancel") {
 		mouseEvent = mouseEvent.touches[0];
@@ -124,12 +136,14 @@ function drawEnd(mouseEvent) {
 	isDrawing = false;
 }
 
-function drawLeave() {
+function drawLeave(mouseEvent) {
+	console.debug("drawLeave. mouseEvent tyep: " + mouseEvent.type)
+
 	//If we were drawing when we dragged out, we want that to continue when we drag back in
 	draggedOut = isDrawing;
 
 	//Finish our current line, then stop the drawing state
-	//canvasContext.stroke();
+	// canvasContext.stroke();
 	isDrawing = false;
 }
 
