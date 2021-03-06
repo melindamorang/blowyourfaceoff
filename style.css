@@ -141,7 +141,7 @@ button:hover {
 	background-color: var(--byfo-1);
 }
 button:hover, .button:hover {
-	background-color: #1873cc;
+	background-color: var(--byfo-1);
 }
 button:active, .button:active {
 	background-color: var(--byfo-3);
@@ -170,8 +170,6 @@ button:active, .button:active {
 #startGameForm label{
 	font-size: 1.2em;
 }
-
-
 #displayZone #textDisplay, .playerNameEnd {
 	max-width: 400px;
 	padding: 50px;
@@ -180,7 +178,6 @@ button:active, .button:active {
 	border-radius: 1em;
 	margin: 1em auto;
 }
-
 #controlSection {
 	margin: 2em auto 0 auto;
 	background-color: var(--byfo-lightened);
@@ -193,12 +190,10 @@ button:active, .button:active {
 }
 #controlSection .eraseall{
 	margin: 0 0 0 4em;
-	color: crimson;
 }
 .controlSet, .controlSet input, .controlSet label {
 	cursor: pointer;
 }
-
 #drawtools {
 	border-top: 1px solid var(--byfo-2);
 }

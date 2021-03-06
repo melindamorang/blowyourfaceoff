@@ -17,6 +17,7 @@ include("serverside/get-time-limit.php");
 	<script src="gameplay-canvas.js"></script>
 	<script src="gameplay.js"></script>
 	<meta name='viewport' content='width=device-width, initial-scale=.86, minimum-scale=.86, maximum-scale=2.0' />
+	<script src="https://kit.fontawesome.com/9e0e384b62.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -103,8 +104,7 @@ include("serverside/get-time-limit.php");
 
 
 						<div class="controlSet eraseall">
-						<input type="radio" name="tool" id="erase" onclick="clearInput();"></input>
-						<label for="eraseall">Erase All</label>
+							<button href="" onclick="clearInput();">Erase All</button>
 						</div>
 					</div>
 
