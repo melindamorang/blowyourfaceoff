@@ -26,5 +26,6 @@ else {
 
 // Create connection
 $link = mysqli_connect($servername, $username, $password, $database);
+mysqli_set_charset($link, "utf8mb4")
 
 ?>
