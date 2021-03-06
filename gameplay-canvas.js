@@ -106,6 +106,17 @@ function drawTick(mouseEvent) {
 }
 
 function drawEnd(mouseEvent) {
+	console.debug("drawEnd. event type: " + mouseEvent.type)
+
+	if (!isDrawing) {
+		// Weird case where they clicked outside the canvas, held the mouse button, dragged
+		// over the canvas, and then released the button. Don't add a random line in this case
+		// from the previous draw end location.
+		console.debug("Skipping draw ending because we weren't actually drawing.");
+		draggedOut = false;
+		return;
+	}
+
 	//If this is a touchscreen event, look at the primary touch
 	if (mouseEvent.type == "touchend" || mouseEvent.type == "touchcancel") {
 		mouseEvent = mouseEvent.touches[0];
