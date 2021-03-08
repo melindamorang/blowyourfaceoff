@@ -33,19 +33,11 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function setDrawingEventListeners() {
-
-	//Desktop
 	canvas.addEventListener("pointerdown", drawStart);
 	canvas.addEventListener("pointerout", drawLeave);
 	canvas.addEventListener("pointerover", drawStart);
 	canvas.addEventListener("pointermove", drawTick);
 	document.addEventListener("pointerup", drawEnd);
-
-	//Mobile
-	canvas.addEventListener("touchstart", drawStart);
-	canvas.addEventListener("touchcancel", drawEnd);
-	canvas.addEventListener("touchmove", drawTick);
-	document.addEventListener("touchend", drawEnd);
 }
 
 // Functions taken from
@@ -67,11 +59,8 @@ function drawStart(mouseEvent) {
 	if (mouseEvent.type == "pointerover" && !draggedOut) {
 		return;
 	}
-
-	if (mouseEvent.type == "touchstart") {
-		mouseEvent = mouseEvent.touches[0];
-		if (isIOS) disableScroll();
-	}
+	
+	if (isIOS) disableScroll();
 
 	//Move the "brush" to where the mouse was clicked
 	canvasContext.beginPath();
@@ -106,11 +95,7 @@ function drawTick(mouseEvent) {
 }
 
 function drawEnd(mouseEvent) {
-	//If this is a touchscreen event, look at the primary touch
-	if (mouseEvent.type == "touchend" || mouseEvent.type == "touchcancel") {
-		mouseEvent = mouseEvent.touches[0];
-		if (isIOS) enableScroll();
-	}
+	if (isIOS) enableScroll();
 
 	//If the mouse is still on the canvas, make one last line
 	pos = getXYPos(mouseEvent);
