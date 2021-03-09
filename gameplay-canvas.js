@@ -40,6 +40,8 @@ function setDrawingEventListeners() {
 	canvas.addEventListener("mouseover", drawStart);
 	canvas.addEventListener("mousemove", drawTick);
 	document.addEventListener("mouseup", drawEnd);
+	// If the canvas is accidentally selected and is getting dragged over itself, don't try to draw.
+	canvas.addEventListener("drag", drawEnd);
 
 	//Mobile
 	canvas.addEventListener("touchstart", drawStart);
@@ -65,6 +67,7 @@ function drawStart(mouseEvent) {
 	//If we dragged the mouse out of the canvas, I want the drawing to resume when dragging back in.
 	//This if statement catches non-drags, and the case where mouse up happened out of frame 
 	if (mouseEvent.type == "mouseover" && !draggedOut) {
+		console.debug("mouseover event without being in draggedOut state. Do not start drawing.")
 		return;
 	}
 
