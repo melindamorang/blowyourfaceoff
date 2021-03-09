@@ -68,6 +68,8 @@ function drawStart(mouseEvent) {
 		return;
 	}
 
+	console.debug("drawStart. mouseEvent: " + mouseEvent.type)
+
 	if (mouseEvent.type == "touchstart") {
 		mouseEvent = mouseEvent.touches[0];
 		if (isIOS) disableScroll();
@@ -87,6 +89,7 @@ function drawStart(mouseEvent) {
 function drawTick(mouseEvent) {
 	//Only draw if we are in a drawing state
 	if (isDrawing) {
+		console.debug("drawTick. mouseEvent: " + mouseEvent.type)
 
 		//If this is a touchscreen event, use the primary touch for drawing
 		if (mouseEvent.type == "touchmove") {
@@ -106,6 +109,7 @@ function drawTick(mouseEvent) {
 }
 
 function drawEnd(mouseEvent) {
+	console.debug("drawEnd. mouseEvent: " + mouseEvent.type)
 	//If this is a touchscreen event, look at the primary touch
 	if (mouseEvent.type == "touchend" || mouseEvent.type == "touchcancel") {
 		mouseEvent = mouseEvent.touches[0];
@@ -113,10 +117,12 @@ function drawEnd(mouseEvent) {
 	}
 
 	//If the mouse is still on the canvas, make one last line
-	pos = getXYPos(mouseEvent);
-	if (pos.x > 0 && pos.x < canvas.width && pos.y > 0 && pos.y < canvas.height) {
-		canvasContext.lineTo(pos.x, pos.y);
-		canvasContext.stroke();
+	if (isDrawing) {
+		pos = getXYPos(mouseEvent);
+		if (pos.x > 0 && pos.x < canvas.width && pos.y > 0 && pos.y < canvas.height) {
+			canvasContext.lineTo(pos.x, pos.y);
+			canvasContext.stroke();
+		}
 	}
 
 	//Completely stop all drawing states
@@ -124,7 +130,8 @@ function drawEnd(mouseEvent) {
 	isDrawing = false;
 }
 
-function drawLeave() {
+function drawLeave(mouseEvent) {
+	console.debug("drawLeave. mouseEvent: " + mouseEvent.type)
 	//If we were drawing when we dragged out, we want that to continue when we drag back in
 	draggedOut = isDrawing;
 
