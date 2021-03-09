@@ -113,10 +113,12 @@ function drawEnd(mouseEvent) {
 	}
 
 	//If the mouse is still on the canvas, make one last line
-	pos = getXYPos(mouseEvent);
-	if (pos.x > 0 && pos.x < canvas.width && pos.y > 0 && pos.y < canvas.height) {
-		canvasContext.lineTo(pos.x, pos.y);
-		canvasContext.stroke();
+	if (isDrawing) {
+		pos = getXYPos(mouseEvent);
+		if (pos.x > 0 && pos.x < canvas.width && pos.y > 0 && pos.y < canvas.height) {
+			canvasContext.lineTo(pos.x, pos.y);
+			canvasContext.stroke();
+		}
 	}
 
 	//Completely stop all drawing states
