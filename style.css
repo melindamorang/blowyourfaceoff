@@ -102,20 +102,20 @@ footer {
 
 
 
-/***** CANVASES CANVI? *****/
-canvas, img{
+/***** CANVAS *****/
+canvas, #drawingcanvas img {
 	border: none;
 	border-radius: 1em;
 	background-color: #fff;
 }
-#drawingCanvas{
+#drawingCanvas {
 	touch-action: none;
 }
 
 
 
 /***** BUTTONS *****/
-button, .button{
+button, .button {
 	color: white;
 	background-color: var(--byfo-1);
 	font-size: 1em;
@@ -128,6 +128,9 @@ button, .button{
 }
 button:hover {
 	cursor: pointer;
+}
+button:checked, button:focus {
+	outline:0 !important;
 }
 #submission button {
 	background-color: var(--byfo-1);
@@ -146,16 +149,9 @@ button:hover, .button:hover {
 button:active, .button:active {
 	background-color: var(--byfo-3);
 }
-.controlSet button {
-    background-color: var(--byfo-5);
-    min-height: auto;
-    min-width: auto;
-    padding: .5em;
-	margin-left: 3em;
-}
 
 
-/***** INPUT AND LABELS *****/
+/***** GAMEPLAY INPUT, BUTTON, AND LABELS *****/
 #startGameForm input, #inputZone #textInputBox{
 	width: 100%;
 	padding: 50px 25px;
@@ -184,18 +180,44 @@ button:active, .button:active {
 	max-width: 500px;
 	border-radius: 1em;
 }
+#controlSection input {
+	opacity: 0;
+	position: fixed;
+	width: 0;
+}
 #controlSection .controlSet{
-	margin: 1em .5em;
 	display: inline-block;
 }
-#controlSection .eraseall{
-	margin: 0 0 0 4em;
-}
-.controlSet, .controlSet input, .controlSet label {
+.controlSet input + label, .eraseall button {
 	cursor: pointer;
+	display: block;
+	padding: .5em 1em;
+    background-color: #ffffff;
+	color: #000000;
+	border: none;
+	border-radius: 1em;
+	margin: .5em 1em;
 }
 #drawtools {
 	border-top: 1px solid var(--byfo-2);
+}
+#drawtools input[type="radio"] + label {
+    background-color: var(--byfo-1);
+	color: white;
+}
+#drawtools button {
+    background-color: var(--byfo-5);
+	color: white;
+}
+#drawtools input[type="radio"]:checked + label i, #drawtools input[type="radio"]:focus + label i {
+	color: var(--byfo-3);
+}
+#drawtools input[type="radio"]:hover + label, #drawtools button:hover {
+	background-color: var(--byfo-2);
+}
+.draw, .eraser, .eraseall {
+    min-height: auto;
+    min-width: auto;
 }
 
 
