@@ -70,41 +70,41 @@ include("serverside/get-time-limit.php");
 				<canvas id="drawingCanvas" width="500" height="300"></canvas><br />
 				<div id="controlSection">
 					<div class="thicknesses">
-						<div class="controlSet">
+						<div class="controlSet"><!-- Fine -->
 						<input type="radio" name="thickness" id="fine" onclick="changeThickness('Fine')" checked="checked"></input>
-						<label for="fine">Fine</label>
+						<label for="fine"><img alt="thin line" title="Thin" src="images/thicknesses/squiggle-thin.png" /></label>
 						</div>
 
-						<div class="controlSet">
+						<div class="controlSet"><!-- Medium Fine -->
 						<input type="radio" name="thickness" id="mfine" onclick="changeThickness('Medium Fine')"></input>
-						<label for="mfine">Medium Fine</label>
+						<label for="mfine"><img alt="medium thin line" title="Medium Thin" src="images/thicknesses/squiggle-medthin.png" /></label>
 						</div>
 
-						<div class="controlSet">
+						<div class="controlSet"><!-- Medium Thick -->
 						<input type="radio" name="thickness" id="mthick" onclick="changeThickness('Medium Thick')"></input>
-						<label for="mthick">Medium Thick</label>
+						<label for="mthick"><img alt="medium thick line" title="Medium Thick" src="images/thicknesses/squiggle-medthick.png" /></label>
 						</div>
 
-						<div class="controlSet">
+						<div class="controlSet"><!-- Think -->
 						<input type="radio" name="thickness" id="thick" onclick="changeThickness('Thick')"></input>
-						<label for="thick">Thick</label>
+						<label for="thick"><img alt="thick line" title="Thick" src="images/thicknesses/squiggle-thick.png" /></label>
 						</div>
 					</div>
 
 					<div id="drawtools">
 						<div class="controlSet draw">
 						<input type="radio" name="tool" id="draw" onclick="changeTool('#000000')" checked="checked"></input>
-						<label for="draw">Draw</label>
+						<label for="draw"><i class="fas fa-pencil-alt"></i> Draw</label>
 						</div>
 
 						<div class="controlSet eraser">
 						<input type="radio" name="tool" id="erase" onclick="changeTool('#FFFFFF')"></input>
-						<label for="erase">Erase</label>
+						<label for="erase"><i class="fas fa-eraser"></i> Erase</label>
 						</div>
 
 
 						<div class="controlSet eraseall">
-							<button href="" onclick="clearInput();">Erase All</button>
+							<button href="" onclick="clearInput();"><i class="fas fa-trash-alt"></i> Erase All</button>
 						</div>
 					</div>
 

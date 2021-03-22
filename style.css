@@ -13,7 +13,9 @@ Authors: Jacob Griffin, Melinda Morang, Sarah Griffin
 	--byfo-3: #C0D904;
 	--byfo-4: #F2B705;
 	--byfo-5: #F28705;
-	--byfo-lightened: rgba(255,255,255,.4)
+	--byfo-lightened: rgba(255,255,255,.4);
+	--byfo-placeholder: rgba(255,255,255,0);
+	--byfo-selected: #8CC63F;
 }
 
 
@@ -24,7 +26,8 @@ Authors: Jacob Griffin, Melinda Morang, Sarah Griffin
 	--byfo-3: #C0D904;
 	--byfo-4: #F2B705;
 	--byfo-5: #F28705;
-	--byfo-lightened: rgba(255,255,255,.4)
+	--byfo-lightened: rgba(255,255,255,.4);
+	--byfo-placeholder: rgba(255,255,255,0);
 }
 
 
@@ -102,20 +105,20 @@ footer {
 
 
 
-/***** CANVASES CANVI? *****/
-canvas, img{
+/***** CANVAS *****/
+canvas, img {
 	border: none;
 	border-radius: 1em;
 	background-color: #fff;
 }
-#drawingCanvas{
+#drawingCanvas {
 	touch-action: none;
 }
 
 
 
 /***** BUTTONS *****/
-button, .button{
+button, .button {
 	color: white;
 	background-color: var(--byfo-1);
 	font-size: 1em;
@@ -126,13 +129,22 @@ button, .button{
 	margin: 5px;
 	padding: 2em;
 }
-button:hover {
+button:hover, .button:hover {
 	cursor: pointer;
+	background-color: var(--byfo-selected);
+}
+button:active, .button:active {
+	background-color: var(--byfo-3);
+}
+button:checked, button:focus {
+	outline:0 !important;
 }
 #submission button {
-	background-color: var(--byfo-1);
 	width: 100%;
 	max-width: 500px;
+}
+#submission button:hover {
+	background-color: var(--byfo-selected);
 }
 #initialEntry button:nth-child(1){
 	background-color: var(--byfo-5);
@@ -140,22 +152,17 @@ button:hover {
 #initialEntry button:nth-child(2){
 	background-color: var(--byfo-1);
 }
-button:hover, .button:hover {
-	background-color: var(--byfo-1);
-}
-button:active, .button:active {
-	background-color: var(--byfo-3);
-}
-.controlSet button {
-    background-color: var(--byfo-5);
-    min-height: auto;
-    min-width: auto;
-    padding: .5em;
-	margin-left: 3em;
-}
 
 
-/***** INPUT AND LABELS *****/
+/***** GAMEPLAY INPUT, BUTTON, AND LABELS
+
+.controlSet input[type="radio"]:checked + label i, .controlSet input[type="radio"]:focus + label i {
+	color: var(--byfo-3);
+}
+.controlSet li:hover, .controlSet button:hover {
+	background-color: var(--byfo-2);
+}
+*****/
 #startGameForm input, #inputZone #textInputBox{
 	width: 100%;
 	padding: 50px 25px;
@@ -180,22 +187,50 @@ button:active, .button:active {
 }
 #controlSection {
 	margin: 2em auto 0 auto;
+	padding: .5em 0;
 	background-color: var(--byfo-lightened);
 	max-width: 500px;
 	border-radius: 1em;
 }
+#controlSection input {
+	opacity: 0;
+	position: fixed;
+	width: 0;
+}
 #controlSection .controlSet{
-	margin: 1em .5em;
 	display: inline-block;
 }
-#controlSection .eraseall{
-	margin: 0 0 0 4em;
+#controlSection img {
+	border-radius: 0;
+	background-color: var(--byfo-placeholder);
 }
-.controlSet, .controlSet input, .controlSet label {
+#controlSection input + label, #controlSection .eraseall button {
 	cursor: pointer;
+	display: block;
+	padding: .5em 1em;
+	color: #ffffff;
+	border: 3px solid var(--byfo-placeholder);
+	border-radius: 1em;
+	margin: .5em 1em;
 }
-#drawtools {
-	border-top: 1px solid var(--byfo-2);
+#controlSection input:hover + label, #controlSection .eraseall button:hover {
+	background-color: var(--byfo-selected);
+}
+#controlSection input:checked + label, #controlSection input:focus + label {
+	border: 3px solid var(--byfo-selected);
+}
+#controlSection .eraseall button {
+    background-color: var(--byfo-5);
+}
+.thicknesses input + label {
+	background-color: #ffffff;
+}
+#drawtools input + label {
+	background-color: var(--byfo-1);
+}
+.draw, .eraser, .eraseall {
+    min-height: auto;
+    min-width: auto;
 }
 
 
@@ -234,8 +269,11 @@ ul.playerList li {
 	border: none;
 	border-radius: 1em;
 }
-ul.playerList li.currentPlayer {
+ul.playerList li:hover {
 	background-color: var(--byfo-4);
+}
+ul.playerList li.currentPlayer {
+	background-color: var(--byfo-selected);
 }
 ul.playerList li a {
     display: table-cell;
