@@ -131,7 +131,7 @@ button, .button {
 }
 button:hover, .button:hover {
 	cursor: pointer;
-	background-color: var(--byfo-2);
+	background-color: var(--byfo-selected);
 }
 button:active, .button:active {
 	background-color: var(--byfo-3);
@@ -214,7 +214,7 @@ button:checked, button:focus {
 	margin: .5em 1em;
 }
 #controlSection input:hover + label, #controlSection .eraseall button:hover {
-	background-color: var(--byfo-2);
+	background-color: var(--byfo-selected);
 }
 #controlSection input:checked + label, #controlSection input:focus + label {
 	border: 3px solid var(--byfo-selected);
