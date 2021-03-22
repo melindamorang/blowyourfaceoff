@@ -209,7 +209,6 @@ button:checked, button:focus {
 	display: block;
 	padding: .5em 1em;
 	color: #ffffff;
-	border: 3px solid var(--byfo-placeholder);
 	border-radius: 1em;
 	margin: .5em 1em;
 }
