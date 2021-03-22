@@ -76,6 +76,14 @@ h1, h2, h3 {
 
 
 
+/***** CONTENT LAYOUTS *****/
+.main-content {
+	width: 500px;
+	margin: 0 auto;
+}
+
+
+
 /***** HEADER *****/
 #logo {
 	margin: 0 auto;
@@ -154,15 +162,7 @@ button:checked, button:focus {
 }
 
 
-/***** GAMEPLAY INPUT, BUTTON, AND LABELS
-
-.controlSet input[type="radio"]:checked + label i, .controlSet input[type="radio"]:focus + label i {
-	color: var(--byfo-3);
-}
-.controlSet li:hover, .controlSet button:hover {
-	background-color: var(--byfo-2);
-}
-*****/
+/***** GAMEPLAY INPUT, BUTTON, AND LABELS *****/
 #startGameForm input, #inputZone #textInputBox{
 	width: 100%;
 	padding: 50px 25px;
@@ -209,7 +209,6 @@ button:checked, button:focus {
 	display: block;
 	padding: .5em 1em;
 	color: #ffffff;
-	border: 3px solid var(--byfo-placeholder);
 	border-radius: 1em;
 	margin: .5em 1em;
 }
@@ -258,7 +257,6 @@ button:checked, button:focus {
 }
 .endgameStacks {
 	margin: 1em auto 5em auto;
-	max-width: 500px;
 }
 ul.playerList {
 	margin: 0 auto;
