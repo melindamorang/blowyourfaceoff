@@ -48,7 +48,8 @@ document.addEventListener('DOMContentLoaded', function () {
     mode = "writing";
     if (isOdd(round)) {
         mode = "drawing";
-        instructionMsg.innerHTML = "Draw this description:";
+        //instructionMsg.innerHTML = "Draw this description:";
+        instructionMsg.innerHTML = "Round "+round+": Draw";
         showHideElement(textDisplay, true);
         showHideElement(drawingDisplay, false);
         showHideElement(textInput, false);
@@ -56,7 +57,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     else {
         if (roundInt == 0) instructionMsg.innerHTML = "Write a word, phrase, or sentence.";
-        else instructionMsg.innerHTML = "Describe this drawing:";
+        //else instructionMsg.innerHTML = "Describe this drawing:";
+        else instructionMsg.innerHTML = "Round "+round+": Write";
         showHideElement(textDisplay, false);
         showHideElement(drawingDisplay, true);
         showHideElement(textInput, true);
@@ -86,14 +88,14 @@ function submit() {
         data = textInputBox.value;
         if (data === "") {
             valid = false;
-            addError("You must write something.");
+            addError("<p>You must write something.</p>");
         }
     }
     else {
         data = canvas.toDataURL("image/png");
         if (isCanvasBlank()) {
             valid = false;
-            addError("You must draw something.");
+            addError("<p>You must draw something.</p>");
         }
     }
 
@@ -226,6 +228,17 @@ function displayLast(data) {
     }
 
 }
+
+// Change the appearance of the textarea - Sarah 2021-03-23
+function textSize() {
+	var ta = document.getElementById("textInputBox");
+	var gameStr = ta.value;
+	var lg = gameStr.length;
+	if (lg > 180) {
+		ta.style = "font-size:1.6em;";
+	}
+}
+
 
 function runTimer() {
     var endTime = new Date().getTime() + (1000 * timeLimitSeconds);
