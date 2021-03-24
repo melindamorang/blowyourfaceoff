@@ -30,6 +30,83 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	// Set drawing event listeners so you can interact with the canvas
 	setDrawingEventListeners();
+
+	// Initialize undo and redo buttons
+	let btnUndo = document.getElementById("undo");
+	let btnRedo = document.getElementById("redo");
+	btnUndo.disabled = true;
+	btnRedo.disabled = true;
+
+	// undo/redo stack - tracks 
+	undoHistory = {
+		states: [canvasContext.getImageData(0, 0, canvas.width, canvas.height)],
+		curIdx: 0,
+		maxLen: 10, // store a maximum of 10 states that we can undo/redo
+	};
+
+	// Undo the previous action
+	undoHistory.undo = function () {
+		console.debug("Attempting to undo action. States: " + this.states.length + "; Current index: " + this.curIdx);
+		if ((this.states.length < 1) || (this.curIdx < 1)) {
+			// can't undo any further
+			console.debug("Could not undo any further.")
+			return;
+		}
+		this.curIdx -= 1;
+		// Just grab the stored image of the previous state and put that back into the canvas.
+		canvasContext.putImageData(this.states[this.curIdx], 0, 0);
+		// Update button states
+		this.updateButtons();
+	}
+
+	// Redo the most recent undone action.
+	undoHistory.redo = function () {
+		console.debug("Attempting to redo action. States: " + this.states.length + "; Current index: " + this.curIdx);
+		if (this.curIdx >= this.states.length - 1) {
+			// can't redo into the future
+			console.debug("Could not redo any further.")
+			return;
+		}
+		this.curIdx += 1;
+		// Just grab the stored image of the next state and put it back into the canvas
+		canvasContext.putImageData(this.states[this.curIdx], 0, 0);
+		// Update button states
+		this.updateButtons();
+	}
+
+	// I drew something, so add it to the history
+	undoHistory.push = function () {
+		console.debug("Pushing canvas image to undo/redo stack.")
+		this.curIdx += 1;
+		this.states.length = this.curIdx; // truncate
+		// Add the current canvas state to the undo/redo stack so we can revisit it if necessary.
+		this.states.push(canvasContext.getImageData(0, 0, canvas.width, canvas.height));
+		if (this.states.length > this.maxLen) {
+			this.states.shift();  // drop oldest
+			this.curIdx -= 1;
+		}
+		// Update button states
+		this.updateButtons();
+	}
+
+	// Enable or disable Undo and Redo buttons depending on state of stack
+	undoHistory.updateButtons = function () {
+		// If the stack is empty, disable both Undo and Redo
+		if (this.states.length < 1) {
+			btnUndo.disabled = true;
+			btnRedo.disabled = true;
+		}
+		else {
+			// Enable both buttons
+			btnUndo.disabled = false;
+			btnRedo.disabled = false;
+			// If the current index is 0, we cannot undo any further, so disable the Undo button
+			if (this.curIdx < 1) btnUndo.disabled = true;
+			// If the current index is at its maximum value, we cannot redo any further, so disable the Redo button
+			if (this.curIdx >= this.states.length - 1) btnRedo.disabled = true;
+		}
+	}
+
 });
 
 function setDrawingEventListeners() {
@@ -54,13 +131,13 @@ function setDrawingEventListeners() {
 // https://stackoverflow.com/questions/9975352/javascript-html5-canvas-drawing-instead-of-dragging-scrolling-on-mobile-devic
 // To prevent awkward scrolling on ios.
 function preventDefault(e) {
-    e.preventDefault();
+	e.preventDefault();
 }
 function disableScroll() {
-    document.body.addEventListener('touchmove', preventDefault, { passive: false });
+	document.body.addEventListener('touchmove', preventDefault, { passive: false });
 }
 function enableScroll() {
-    document.body.removeEventListener('touchmove', preventDefault);
+	document.body.removeEventListener('touchmove', preventDefault);
 }
 
 function drawStart(mouseEvent) {
@@ -126,6 +203,9 @@ function drawEnd(mouseEvent) {
 			canvasContext.lineTo(pos.x, pos.y);
 			canvasContext.stroke();
 		}
+
+		// Add current canvas state to the undo/redo stack
+		undoHistory.push();
 	}
 
 	//Completely stop all drawing states
@@ -189,20 +269,23 @@ function changeTool(color) {
 // Borrowed from https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes
 function drawHappyFace() {
 	canvasContext.beginPath();
-    canvasContext.arc(75, 75, 50, 0, Math.PI * 2, true); // Outer circle
-    canvasContext.moveTo(110, 75);
-    canvasContext.arc(75, 75, 35, 0, Math.PI, false);  // Mouth (clockwise)
-    canvasContext.moveTo(65, 65);
-    canvasContext.arc(60, 65, 5, 0, Math.PI * 2, true);  // Left eye
-    canvasContext.moveTo(95, 65);
-    canvasContext.arc(90, 65, 5, 0, Math.PI * 2, true);  // Right eye
+	canvasContext.arc(75, 75, 50, 0, Math.PI * 2, true); // Outer circle
+	canvasContext.moveTo(110, 75);
+	canvasContext.arc(75, 75, 35, 0, Math.PI, false);  // Mouth (clockwise)
+	canvasContext.moveTo(65, 65);
+	canvasContext.arc(60, 65, 5, 0, Math.PI * 2, true);  // Left eye
+	canvasContext.moveTo(95, 65);
+	canvasContext.arc(90, 65, 5, 0, Math.PI * 2, true);  // Right eye
 	canvasContext.stroke();
 	canvasEdited = true;
 }
 
 function clearCanvas() {
+	console.debug("Cleared canvas.")
 	// Clear canvas
 	canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+	// Add current canvas state to the undo/redo stack
+	undoHistory.push();
 	// Reset canvas editing tracker.
 	canvasEdited = false;
 }

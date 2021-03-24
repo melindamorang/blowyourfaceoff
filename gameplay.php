@@ -102,6 +102,11 @@ include("serverside/get-time-limit.php");
 						<label for="erase"><i class="fas fa-eraser"></i> Erase</label>
 						</div>
 
+						<div class="undoredo">
+						<button href="" name="undo" id="undo" onclick="undoHistory.undo();">Undo</button>
+						<button href="" name="redo" id="redo" onclick="undoHistory.redo();">Redo</button>
+						</div>
+
 
 						<div class="controlSet eraseall">
 							<button href="" onclick="clearInput();"><i class="fas fa-trash-alt"></i> Erase All</button>
