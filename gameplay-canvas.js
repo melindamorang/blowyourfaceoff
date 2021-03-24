@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	undoHistory = {
 		states: [canvasContext.getImageData(0, 0, canvas.width, canvas.height)],
 		curIdx: 0,
-		maxLen: 10, // store a maximum of 10 states that we can undo/redo
+		maxLen: 20, // store a maximum number of states that we can undo/redo
 	};
 
 	// Undo the previous action
