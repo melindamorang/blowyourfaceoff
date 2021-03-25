@@ -43,6 +43,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if (roundInt == 0) showHideElement(displayZone, false);
     else showHideElement(displayZone, true);
 
+    // For the first round only, change the text input area's placeholder text
+    if (roundInt == 0) textInputBox.placeholder = "Type your word, phrase, or sentence here."
+
     // Even-numbered rounds are text input and drawing display.
     // Odd rounds are drawing input and text display.
     mode = "writing";
