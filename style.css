@@ -32,10 +32,7 @@ Authors: Jacob Griffin, Melinda Morang, Sarah Griffin
 
 
 
-/* CLEAR BUTTON CHANGES TEMP PASTE */
-
-
-
+/***** BASIC ELEMENTS *****/
 html, body {
 	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
 	text-align: center;
@@ -163,8 +160,7 @@ button:checked, button:focus {
 
 
 /***** GAMEPLAY INPUT, BUTTON, AND LABELS *****/
-#startGameForm input, #inputZone #textInputBox{
-	width: 100%;
+#startGameForm input {
 	padding: 50px 25px;
 	border: none;
 	border-radius: 1em;
@@ -172,7 +168,21 @@ button:checked, button:focus {
 	font-weight: bold;
 	font-size: 2em;
 	text-align: center;
-	max-width: 450px;
+	width: 500px;
+}
+#inputZone #textInputBox {
+	width: 100%;
+	height: 300px;
+	padding: 1.5em;
+	border: none;
+	border-radius: 1em;
+	margin: 1em 0 0 0;
+	font-size: 2em;
+	text-align: center;
+	color: #000000;
+}
+#inputZone #textInputBox:focus {
+	color: #000000;
 }
 #startGameForm label{
 	font-size: 1.2em;
@@ -204,7 +214,7 @@ button:checked, button:focus {
 	border-radius: 0;
 	background-color: var(--byfo-placeholder);
 }
-#controlSection input + label, #controlSection .eraseall button {
+#controlSection input + label, #controlSection .eraseall button, #ErrorLine p {
 	cursor: pointer;
 	display: block;
 	padding: .5em 1em;
@@ -218,7 +228,7 @@ button:checked, button:focus {
 #controlSection input:checked + label, #controlSection input:focus + label {
 	border: 3px solid var(--byfo-selected);
 }
-#controlSection .eraseall button {
+#controlSection .eraseall button, #ErrorLine p {
     background-color: var(--byfo-5);
 }
 .thicknesses input + label {

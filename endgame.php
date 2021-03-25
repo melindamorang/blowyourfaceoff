@@ -29,8 +29,8 @@ include("serverside/close-database-connection.php");
 	<div class="main-content">
 		<h1>Results</h1>
 		<h3>Game ID: <?php echo $gidDisplay; ?></h3>
-		<p>Time to view the results and laugh a lot.<br>
-		View another player's stack:</p>
+		<!-- <p>Time to view the results and laugh a lot.<br>
+		View another player's stack:</p>-->
 
 		<!--Links to view another player's stack-->
 		<ul class="playerList"><?php
@@ -44,8 +44,6 @@ include("serverside/close-database-connection.php");
 			?>
 		</ul>
 		<!--<p><a href="index.php">Start or join a new game</a></p>-->
-
-
 
 		<div class="endgameStacks">
 		<!-- Display your stack -->
