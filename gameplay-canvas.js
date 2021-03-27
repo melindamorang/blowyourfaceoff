@@ -192,7 +192,8 @@ function drawEnd(mouseEvent) {
 	console.debug("drawEnd. mouseEvent: " + mouseEvent.type)
 	//If this is a touchscreen event, look at the primary touch
 	if (mouseEvent.type == "touchend" || mouseEvent.type == "touchcancel") {
-		mouseEvent = mouseEvent.touches[0];
+		updatedMouseEvent = mouseEvent.touches[0];
+		if (updatedMouseEvent !== undefined) mouseEvent = updatedMouseEvent;
 		if (isIOS) enableScroll();
 	}
 
