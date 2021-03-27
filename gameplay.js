@@ -238,7 +238,10 @@ function textSize() {
 	var gameStr = ta.value;
 	var lg = gameStr.length;
 	if (lg > 180) {
-		ta.style = "font-size:1.6em;";
+		ta.className = "lgClass";
+	}
+	else if (lg <= 180) {
+		ta.className = "startClass";
 	}
 }
 
