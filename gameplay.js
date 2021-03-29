@@ -237,11 +237,12 @@ function textSize() {
 	var ta = document.getElementById("textInputBox");
 	var gameStr = ta.value;
 	var lg = gameStr.length;
-	if (lg > 180) {
-		ta.className = "lgClass";
+	var limit = ta.getAttribute("maxlength");
+	if (lg > limit/2) {
+		ta.className = "txt-sm";
 	}
-	else if (lg <= 180) {
-		ta.className = "startClass";
+	else {
+		ta.className = "txt-reg";
 	}
 }
 

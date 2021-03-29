@@ -61,7 +61,7 @@ include("serverside/get-time-limit.php");
 				<p id="timer"></p>
 				<div id="textInput">
 					<!--Inputs for the writing phase-->
-					<textarea placeholder="Type a description of the image here." oninput="textSize();" contenteditable="true" autocomplete="off" spellcheck="true" id="textInputBox" class="startclass" maxlength=<?php echo '"' . $maxTextInputLength . '"'; ?> ></textarea>
+					<textarea placeholder="Type a description of the image here." oninput="textSize();" contenteditable="true" autocomplete="off" spellcheck="true" id="textInputBox" class="txt-reg" maxlength=<?php echo '"' . $maxTextInputLength . '"'; ?> ></textarea>
 				</div>
 
 				<div id="drawingInput">

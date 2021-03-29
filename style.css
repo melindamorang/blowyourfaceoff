@@ -172,11 +172,11 @@ button:checked, button:focus {
 	text-align: center;
 	color: #000000;
 }
-#textInputBox.lgClass {
+#textInputBox.txt-sm {
 	font-size: 1.6em;
 }
 
-#textInputBox.startClass {
+#textInputBox.txt-reg {
 	font-size: 2em;
 }
 #inputZone #textInputBox:focus {
