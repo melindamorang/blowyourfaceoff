@@ -128,7 +128,6 @@ button, .button {
 	background-color: var(--byfo-1);
 	font-size: 1em;
 	min-height: 2em;
-	min-width: 6em;
 	border: none;
 	border-radius: 1em;
 	margin: 5px;
@@ -144,13 +143,6 @@ button:active, .button:active {
 button:checked, button:focus {
 	outline:0 !important;
 }
-#submission button {
-	width: 100%;
-	max-width: 500px;
-}
-#submission button:hover {
-	background-color: var(--byfo-selected);
-}
 #initialEntry button:nth-child(1){
 	background-color: var(--byfo-5);
 }
@@ -159,7 +151,7 @@ button:checked, button:focus {
 }
 
 
-/***** GAMEPLAY INPUT, BUTTON, AND LABELS *****/
+/***** GAMEPLAY INPUT, CONTROLS, AND LABELS *****/
 #startGameForm input {
 	padding: 50px 25px;
 	border: none;
@@ -220,15 +212,15 @@ button:checked, button:focus {
 	border-radius: 0;
 	background-color: var(--byfo-placeholder);
 }
-#controlSection input + label, #controlSection .eraseall button, #ErrorLine p {
+#controlSection input + label, .undo button, .redo button, .eraseall button, #ErrorLine p {
 	cursor: pointer;
 	display: block;
-	padding: .5em 1em;
+	padding: 1.2em;
 	color: #ffffff;
 	border-radius: 1em;
-	margin: .5em 1em;
+	margin: .5em;
 }
-#controlSection input:hover + label, #controlSection .eraseall button:hover {
+#controlSection input:hover + label, #controlSection button:hover {
 	background-color: var(--byfo-selected);
 }
 #controlSection input:checked + label, #controlSection input:focus + label {
@@ -246,6 +238,13 @@ button:checked, button:focus {
 .draw, .eraser, .eraseall {
     min-height: auto;
     min-width: auto;
+}
+#submission button {
+	width: 100%;
+	max-width: 500px;
+}
+#submission button:hover {
+	background-color: var(--byfo-selected);
 }
 
 
