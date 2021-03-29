@@ -16,20 +16,23 @@ Authors: Jacob Griffin, Melinda Morang, Sarah Griffin
 	--byfo-lightened: rgba(255,255,255,.4);
 	--byfo-placeholder: rgba(255,255,255,0);
 	--byfo-selected: #8CC63F;
+	--logo: url(images/byfo-logo.png) no-repeat;
+	--bkgd: url(images/basic-bkgd.jpg) no-repeat;
 }
 
 
 /* THEME CANDY VOMIT -- From background artwork */
 .theme-candy-vomit {
-	--byfo-1: #000;
-	--byfo-2: #6DCCF2;
-	--byfo-3: #C0D904;
-	--byfo-4: #F2B705;
-	--byfo-5: #F28705;
+	--byfo-1: #2BABE2;
+	--byfo-2: #0000DB;
+	--byfo-3: #6ED431;
+	--byfo-4: #8A43DB;
+	--byfo-5: #F42F65;
 	--byfo-lightened: rgba(255,255,255,.4);
 	--byfo-placeholder: rgba(255,255,255,0);
+	--logo: url(images/byfo-logo2.png) no-repeat;
+	--bkgd: url(images/candyCarnival-bkgd.jpg) no-repeat;
 }
-
 
 
 /***** BASIC ELEMENTS *****/
@@ -84,15 +87,18 @@ h1, h2, h3 {
 /***** HEADER *****/
 #logo {
 	margin: 0 auto;
+	display: block;
+	background: var(--logo);
 }
-#logo img {
-	background: none;
-	max-height: 100px;
+.home #logo {
+	width: 500px;
+	height: 450px;
 }
-.home #logo img {
-	max-height: 400px;	
+.home body {
+  background: var(--bkgd);
+  background-attachment: fixed;
+  background-size: cover;
 }
-
 
 
 /***** FOOTER *****/
