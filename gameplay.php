@@ -79,17 +79,24 @@ include("serverside/get-time-limit.php");
 						<div id="drawtools">
 							<div class="controlSet draw">
 							<input type="radio" name="tool" id="draw" onclick="changeTool('#000000')" checked="checked"></input>
-							<label for="draw"><i class="fas fa-pencil-alt"></i> Draw</label>
+							<label for="draw" title="Draw" ><i class="fas fa-pencil-alt"></i></label>
 							</div>
 
 							<div class="controlSet eraser">
 							<input type="radio" name="tool" id="erase" onclick="changeTool('#FFFFFF')"></input>
-							<label for="erase"><i class="fas fa-eraser"></i> Erase</label>
+							<label for="erase" title="Erase" ><i class="fas fa-eraser"></i></label>
 							</div>
 
+							<div class="controlSet undo">
+							<button name="undo" id="undo" onclick="undoHistory.undo();" title="Undo"><i class="fas fa-undo-alt"></i></button>
+							</div>	
+
+							<div class="controlSet redo">
+							<button name="redo" id="redo" onclick="undoHistory.redo();" title="Redo"><i class="fas fa-redo-alt"></i></button>
+							</div>
 
 							<div class="controlSet eraseall">
-								<button href="" onclick="clearInput();"><i class="fas fa-trash-alt"></i> Erase All</button>
+								<button onclick="clearInput();" title="Clear All"><i class="fas fa-trash-alt"></i></button>
 							</div><!-- controlSet eraseall -->
 						</div><!-- drawtools -->
 					</div><!-- controlSection -->
