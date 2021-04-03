@@ -6,42 +6,27 @@ include("serverside/player-limits.php");
 include("serverside/get-player-lineup.php");
 include("serverside/get-time-limit.php");
 ?>
+<?php $pagename = "Gameplay" ?>
+<?php include("header.php"); ?>
 
-<html class="theme-basic">
 
-<head>
-	<title>Blow your face off!</title>
-	<link rel="stylesheet" href="style.css" />
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script src="modules/shared-functions.js"></script>
-	<script src="gameplay-canvas.js"></script>
-	<script src="gameplay.js"></script>
-	<meta name='viewport' content='width=device-width, initial-scale=.86, minimum-scale=.86, maximum-scale=2.0' />
-	<script src="https://kit.fontawesome.com/9e0e384b62.js" crossorigin="anonymous"></script>
-</head>
-
-<body>
 	<!--Hidden controls to hold variables that need to be passed around-->
-	<input type="text" id="gid" hidden value="<?php echo $gid; ?>"></p>
-	<input type="number" id="round" hidden value="<?php echo $round; ?>"></p>
-	<input type="text" id="name" hidden value="<?php echo $name; ?>"></p>
-	<input type="number" id="numRounds" hidden value="<?php echo $numPlayers; ?>"></p>
-	<input type="number" id="timeoutSeconds" hidden value="<?php echo $timeLimit; ?>"></p>
+	<input type="text" id="gid" hidden value="<?php echo $gid; ?>">
+	<input type="number" id="round" hidden value="<?php echo $round; ?>">
+	<input type="text" id="name" hidden value="<?php echo $name; ?>">
+	<input type="number" id="numRounds" hidden value="<?php echo $numPlayers; ?>">
+	<input type="number" id="timeoutSeconds" hidden value="<?php echo $timeLimit; ?>">
 
 	<!--Determine if starting round-->
 	<?php if ($round==0) {$roundlabel="Start Here";} ?>
-
-	
-	<?php include("snippets/banner.html"); ?>
 	
 	<div class="main-content">
 		<p id="waitMessage" hidden>Please wait until the other players have finished the round.</p>
 		<div id="timeoutAlert" hidden>
 			<!--This zone is for a special message and confirmation button if the player's time runs out and they haven't entered anything.-->
 			<h2>Are you still here?</h2>
-			<p>We noticed that your time ran out, and you didn't enter anything. If you're no longer playing or have switched to a different browser tab
-				or device, please close this browser tab or <a href="index.php">return to the homepage</a>.</p>
-				<button onclick="imStillHere()">I'm still here!</button>
+			<p>We noticed that your time ran out, and you didn't enter anything. If you're no longer playing or have switched to a different browser tab or device, please close this browser tab or <a href="index.php">return to the homepage</a>.</p>
+			<button onclick="imStillHere()">I'm still here!</button>
 		</div>
 		<div id="gameplayArea">
 			<!--This zone encompasses the entire gameplay area, both display and input.-->
@@ -63,7 +48,6 @@ include("serverside/get-time-limit.php");
 					<!--Inputs for the writing phase-->
 					<textarea placeholder="Type a description of the image here." oninput="textSize();" contenteditable="true" autocomplete="off" spellcheck="true" id="textInputBox" class="txt-reg" maxlength=<?php echo '"' . $maxTextInputLength . '"'; ?> ></textarea>
 				</div>
-
 				<div id="drawingInput">
 					<!--Inputs for the drawing phase-->
 					<!--The internet says you should explicitly define the canvas height and width here
@@ -110,15 +94,17 @@ include("serverside/get-time-limit.php");
 						</div><!-- drawtools -->
 					</div><!-- controlSection -->
 				</div><!-- drawingInput -->
+
+
 				<div id="submission">
 					<span id="ErrorLine"></span>
 					<p>Sending to <?php echo $nextPlayer; ?></p>
 					<button onclick="submit()">Submit</button>
 				</div>
+
+
 			</div><!-- inputZone-->
 		</div><!-- gameplayArea -->
 	</div><!-- main-content -->
-	<?php include("snippets/footer.html"); ?>
-</body>
 
-</html>
+<?php include("footer.php"); ?>

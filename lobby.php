@@ -7,7 +7,7 @@ $isHost = htmlspecialchars($_GET["isHost"]);
 
 <head>
 	<script src="modules/shared-functions.js"></script>
-	<script src="lobby.js"></script>
+	<script src="js/lobby.js"></script>
 	<link rel="stylesheet" href="style.css" />
 </head>
 
@@ -26,7 +26,7 @@ $isHost = htmlspecialchars($_GET["isHost"]);
 	<p id="ErrorLine"></p>
 	<h3>Current players:</h3>
 	<div id="nameList"></div>
-	<script src="lobby-pulse.js"></script>
+	<script src="js/lobby-pulse.js"></script>
 
 	<?php include("snippets/footer.html"); ?>
 </body>
