@@ -1,7 +1,7 @@
 <?php include("load.php"); ?>
 
 <!doctype html>
-<html lang="en" class="theme-basic <?= $pagename ?>">
+<html lang="en" class="theme-basic">
 	
 <head>
 	<meta charset="UTF-8">
@@ -13,14 +13,16 @@
 	<title><?= $sitetitle ?></title>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="modules/shared-functions.js"></script>
+	<script src="js/themes.js"></script>
 	<?= $headscripts ?>
 	<script src="https://kit.fontawesome.com/9e0e384b62.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="style.css" />
 </head>
 
-<body>
+<body class="<?= $pagename ?>">
 	<div class="layout-wrapper"><!-- LAYOUT-WRAPPER ENDS IN FOOTER -->
 		<div id="header">
+        	<button id="switch" onclick="toggleTheme()">Switch Theme</button>
 			<a href="index.php"><div id="logo"></div></a>
 		</div>
 		

@@ -105,6 +105,9 @@ h1, h2, h3 {
 .Welcome #logo {
 	min-height: 300px;
 }
+#switch {
+	float: right;
+}
 
 
 
