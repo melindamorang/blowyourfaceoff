@@ -13,7 +13,7 @@ Authors: Jacob Griffin, Melinda Morang, Sarah Griffin
 	--byfo-3: #C0D904;
 	--byfo-4: #F2B705;
 	--byfo-5: #F28705;
-	--byfo-lightened: rgba(255,255,255,.4);
+	--byfo-lightened: rgba(255,255,255,.6);
 	--byfo-placeholder: rgba(255,255,255,0);
 	--byfo-selected: #8CC63F;
 	--logo: url(images/byfo-logo.png) no-repeat;
@@ -92,7 +92,8 @@ h1, h2, h3 {
 
 /***** HEADER *****/
 #header {
-    margin: 0 auto 2em auto;
+    margin: 2em auto;
+	width: 100%;
 }
 #logo {
 	background: var(--logo);
@@ -102,7 +103,6 @@ h1, h2, h3 {
     min-width: 150px;
 }
 .Welcome #logo {
-	width: 470px;
 	min-height: 300px;
 }
 
@@ -112,10 +112,15 @@ h1, h2, h3 {
 footer {
 	display: block;
 	margin: 2em 0 0 0;
+	color: #fff;
+}
+footer a {
+	color: #fff;
+	text-decoration: underline;
 }
 .layout-wrapper > footer {
 	padding: 1em 0;
-	background-color: var(--byfo-lightened);
+	background-color: var(--byfo-1);
 }
 *.copyright {
 	font-size: .7em;
@@ -199,16 +204,14 @@ button:checked, button:focus {
 	font-size: 1.2em;
 }
 #displayZone #textDisplay {
-	padding: 50px;
+	padding: 20px 0 50px 0;
 	font-size: 2em;
-	background-color: var(--byfo-lightened);
 	border-radius: 1em;
 	margin: 10px 0;
 }
 #controlSection {
-	margin: 2em auto 0 auto;
+	margin: 0 auto;
 	padding: .5em 0;
-	background-color: var(--byfo-lightened);
 	max-width: 500px;
 	border-radius: 1em;
 }

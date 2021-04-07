@@ -13,9 +13,7 @@
 	<title><?= $sitetitle ?></title>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="modules/shared-functions.js"></script>
-	<script src="js/gameplay-canvas.js"></script>
-	<script src="js/gameplay.js"></script>
-	<script src="js/pregame.js"></script>
+	<?= $headscripts ?>
 	<script src="https://kit.fontawesome.com/9e0e384b62.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="style.css" />
 </head>
@@ -23,6 +21,6 @@
 <body>
 	<div class="layout-wrapper"><!-- LAYOUT-WRAPPER ENDS IN FOOTER -->
 		<div id="header">
-			<div id="logo"><a href="index.php"></a></div>
+			<a href="index.php"><div id="logo"></div></a>
 		</div>
 		

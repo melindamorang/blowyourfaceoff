@@ -3,13 +3,8 @@ $gid = htmlspecialchars($_GET["gid"]);
 $isHost = htmlspecialchars($_GET["isHost"]);
 ?>
 
-<html class="theme-basic">
-
-<head>
-	<script src="modules/shared-functions.js"></script>
-	<script src="js/lobby.js"></script>
-	<link rel="stylesheet" href="style.css" />
-</head>
+<?php $pagename = "Lobby" ?>
+<?php include("header.php"); ?>
 
 <body>
 	<?php include("snippets/banner.html"); ?>
@@ -28,7 +23,4 @@ $isHost = htmlspecialchars($_GET["isHost"]);
 	<div id="nameList"></div>
 	<script src="js/lobby-pulse.js"></script>
 
-	<?php include("snippets/footer.html"); ?>
-</body>
-
-</html>
+<?php include("footer.php"); ?>
