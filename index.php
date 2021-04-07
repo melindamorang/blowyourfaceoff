@@ -1,16 +1,6 @@
-<?php
-include("serverside/player-limits.php");
-?>
-<html class="theme-basic home">
+<?php $pagename = "Welcome" ?>
+<?php include("header.php"); ?>
 
-<head>
-    <script src="modules/shared-functions.js"></script>
-    <script src="pregame.js"></script>
-	<link rel="stylesheet" href="style.css" />
-</head>
-
-<body>
-    <?php include("snippets/banner.html"); ?>
     <div id="initialEntry">
         <button onclick="showPlayerEntry()">Join a Game</button>
         <button onclick="showHostEntry()">Host a Game</button><br>
@@ -40,7 +30,4 @@ include("serverside/player-limits.php");
         <a href="#" onclick="setInitialState()">Cancel</a>
     </div>
 
-    <?php include("snippets/footer.html"); ?>
-</body>
-
-</html>
+<?php include("footer.php"); ?>

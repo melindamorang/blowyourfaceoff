@@ -14,3 +14,4 @@ function showHideElement(element, shouldShow) {
 
 // Return 1 if the number is odd or 0 if even
 function isOdd(num) { return num % 2; }
+

@@ -14,18 +14,10 @@ $nameQuery = mysqli_real_escape_string($link, $name);
 $result1 = mysqli_query($link, "SELECT DISTINCT Player FROM game_data WHERE GameID = '" . $gidQuery . "' ORDER BY Player");
 include("serverside/close-database-connection.php");
 ?>
+<?php $pagename = "Results" ?>
+<?php include("header.php"); ?>
 
-<html class="theme-basic">
 
-<head>
-	<title>Results</title>
-	<link rel="stylesheet" href="style.css" />
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<meta name='viewport' content='width=device-width, initial-scale=.86, minimum-scale=.86, maximum-scale=2.0' />
-</head>
-
-<body>
-	<?php include("snippets/banner.html"); ?>
 	<div class="main-content">
 		<h1>Results</h1>
 		<h3>Game ID: <?php echo $gidDisplay; ?></h3>
@@ -49,12 +41,13 @@ include("serverside/close-database-connection.php");
 		<!-- Display your stack -->
 		<?php include("serverside/retrieve-stack.php"); ?>
 		</div><!-- end .endgameStacks -->
-
-		<button onclick="window.scrollTo(0,0)">Return to top</button>
-		<a class="button" href="index.php">New Game</a>
+		
+		<div class="endStackMenu">
+			<button onclick="window.scrollTo(0,0)">Return to top</button>
+			<a class="button" href="index.php">New Game</a>
+		</div>
 
 	</div><!-- end .main-content -->
-	<?php include("snippets/footer.html"); ?>
-</body>
 
-</html>
+
+<?php include("footer.php"); ?>

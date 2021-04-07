@@ -16,9 +16,9 @@ else {
 		$sizeClass = "";
         if(intval($round) != 0){
             echo '<p class="endgamePlayer">From ' . $player . ':</p>';
-        } else {
+        } /* else {
             echo '<p class="endgamePlayer">Start:</p>';
-        }
+        } */
         if (intval($round) % 2 == 0) {
 			if (strlen($data) > 180){ $sizeClass = " longtext"; }
             echo '<div class="endgameTextCanvas"><p class="endgameText' . $sizeClass . '">' . $data . '</p></div>';
