@@ -21,7 +21,7 @@ else {
         } */
         if (intval($round) % 2 == 0) {
 			if (strlen($data) > 180){ $sizeClass = " longtext"; }
-            echo '<div class="endgameTextCanvas"><p class="endgameText' . $sizeClass . '">' . $data . '</p></div>';
+            echo '<div class="textCanvasContainer"><div class="endgameTextCanvas"><p class="endgameText' . $sizeClass . '">' . $data . '</p></div></div>';
         } else {
             echo '<img class="endgameDrawing" src="' . $data . '" />';
         }
