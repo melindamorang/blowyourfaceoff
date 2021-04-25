@@ -25,4 +25,6 @@
         	<button id="switch" onclick="toggleTheme()">Switch Theme</button>
 			<a href="index.php"><div id="logo"></div></a>
 		</div>
-		
+
+		<p id="specialAnnouncement">This site will be under maintenance from 8:30 p.m. to 9:30 p.m. April 24, 2021, US Pacific time. <br />
+		Games may be interrupted or the site may be unavailable.</p>
