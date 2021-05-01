@@ -58,7 +58,7 @@ function showPriorGameEntry() {
 }
 
 function validateName(name) {
-	badChars = ["&", "=", "?", "/", "%", "#", ">", "<"];
+	badChars = ["&", "=", "?", "/", "%", "#", ">", "<", "+"];
 	if (name === "") {
 		addError("Enter a valid name.");
 		return false;
