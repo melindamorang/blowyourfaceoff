@@ -4,6 +4,17 @@
 // Canvas-specific control logic is in gameplay-canvas.js.
 // HTML file must import shared-functions.js for this file to work.
 
+// Show an alert if the user tries to leave, reload, or close the page during gameplay.
+// The pop-up gives the browser's default message with a continue or cancel button.
+// According to the internet, there is no way to customize the message in modern browsers.
+// Chrome says "Leave site? The changes you made might not be saved." Better than nothing
+// and probably suffient to prevent people from accidentally ruining the game even if it
+// doesn't explicitly say "Leaving this page will ruin the game."
+window.addEventListener('beforeunload', function (e) {
+    e.preventDefault();
+    e.returnValue = '';
+});
+
 // When the page first loads, show and hide content depending on round
 document.addEventListener('DOMContentLoaded', function () {
     // Retrieve page elements and store them as global variables
