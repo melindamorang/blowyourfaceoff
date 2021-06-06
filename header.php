@@ -23,6 +23,6 @@
 	<div class="layout-wrapper"><!-- LAYOUT-WRAPPER ENDS IN FOOTER -->
 		<div id="header">
         	<button id="switch" onclick="toggleTheme()">Switch Theme</button>
-			<a href="index.php"><div id="logo"></div></a>
+			<div id="logo"></div>
 		</div>
 		
