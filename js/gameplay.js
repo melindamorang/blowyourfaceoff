@@ -10,10 +10,11 @@
 // Chrome says "Leave site? The changes you made might not be saved." Better than nothing
 // and probably suffient to prevent people from accidentally ruining the game even if it
 // doesn't explicitly say "Leaving this page will ruin the game."
-window.addEventListener('beforeunload', function (e) {
-    e.preventDefault();
-    e.returnValue = '';
-});
+// We are dumb and shouldn't have done this. Leave this here until we find a better way.
+// window.addEventListener('beforeunload', function (e) {
+//     e.preventDefault();
+//     e.returnValue = '';
+// });
 
 // When the page first loads, show and hide content depending on round
 document.addEventListener('DOMContentLoaded', function () {
