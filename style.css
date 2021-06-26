@@ -212,6 +212,11 @@ button:checked, button:focus {
 	text-align: center;
 	width: 400px;
 }
+#inputZone {
+	-webkit-user-select: none; /* Safari */
+	-ms-user-select: none; /* IE 10 and IE 11 */
+	user-select: none; /* Standard syntax */
+}
 #inputZone #textInputBox {
 	width: 460px;
 	height: 260px;
