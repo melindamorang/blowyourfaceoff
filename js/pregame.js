@@ -74,7 +74,7 @@ function validateName(name) {
 
 // Get the player name from the input control
 function getPlayerName() {
-	var name = nameEdit.value;
+	var name = nameEdit.value.trim();
 	if (validateName(name)) return name;
 	else return false;
 }
