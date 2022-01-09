@@ -92,7 +92,6 @@ h1, h2, h3 {
 /***** CONTENT LAYOUTS *****/
 .main-content {
 	padding: 20px;
-	min-width: 300px;
 	max-width: 600px;
 	margin: 0 auto;
 	background: var(--byfo-lightened);
@@ -117,7 +116,7 @@ h1, h2, h3 {
 .Welcome #logo {
 	min-height: 500px;
 }
-#switch {
+#switch button {
 	float: right;
 	padding: .5em 1em;
 	margin: .5em 0;
@@ -281,7 +280,7 @@ button:checked, button:focus {
 #controlSection .eraseall button, #ErrorLine p {
     background-color: var(--byfo-5);
 }
-.thicknesses input + label {
+#controlSection .thicknesses input + label {
 	background-color: #ffffff;
 }
 #drawtools input + label {
@@ -311,7 +310,7 @@ button:checked, button:focus {
 }
 .textCanvasContainer {
 	margin: 0 auto;
-	width: 500px;
+	max-width: 500px;
 }
 .endgameTextCanvas {
 	height: 260px;
@@ -329,8 +328,6 @@ button:checked, button:focus {
 .playerNameEnd {
 	margin: 1.5em 0 1em;
 	font-size: 1.5em;
-}
-ul.playerList {
 }
 ul.playerList li {
 	margin: .5em;
@@ -352,6 +349,63 @@ ul.playerList li a {
 	padding: .5em 1em;
 	color: white;
 }
-.endStackMenu {
+ul.endStackMenu {
 	margin: 2em 0;
 }
+ul.endStackMenu li {
+	display: inline-block;
+	min-width: 40%;
+	margin: .5em;
+	background-color: var(--byfo-1);
+	border: none;
+	border-radius: 1em;
+	vertical-align: middle;
+}
+ul.endStackMenu li:hover {
+	background-color: var(--byfo-4);
+}
+ul.endStackMenu li a {
+	display: block;
+	min-height: 0;
+}
+
+
+/***
+MOBILE 
+For screens smaller than the standard play area of 540px
+***/
+@media only screen and (max-width: 539px) {
+	
+	.main-content {
+		padding: 5%;
+		max-width: 90%;
+	}
+	
+	#switch {
+		display: block;
+		width: 100%;
+		min-height: 2em;
+	}
+
+	#controlSection .thicknesses input + label {
+		padding: .7em;
+	}
+
+	#textInputBox.txt-sm, .longtext {
+		font-size: .8em;
+	}
+	#textInputBox.txt-reg, .endgameText {
+		font-size: 1.2em;
+	}
+	
+	img {
+		width: 100%;
+	}
+	
+	ul.endStackMenu li {
+		display: block;
+		width: 100%;
+		margin: .5em 0;
+	}
+}
+/*** END MOBILE ***/
