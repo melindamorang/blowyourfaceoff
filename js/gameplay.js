@@ -45,6 +45,8 @@ document.addEventListener('DOMContentLoaded', function () {
     timeoutAlert = document.getElementById("timeoutAlert");
     instructionMsg = document.getElementById("instructions");
     timer = document.getElementById("timer");
+	// Retrieve browser window width for resizing elements
+	var viewWidth = window.innerWidth;
 
     // Always hide the waitMessage and timeoutAlert when the page first loads
     showHideElement(waitMessage, false);
@@ -70,7 +72,6 @@ document.addEventListener('DOMContentLoaded', function () {
         showHideElement(textInput, false);
         showHideElement(drawingInput, true);
 		//Adjust canvas size for mobile - SCG 2022-01-08
-		var viewWidth = window.innerWidth;
 		if (viewWidth <= 550) {
 			canvasWidth = viewWidth - 40;
 			canvasHeight = canvasWidth * .6;
