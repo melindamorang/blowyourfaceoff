@@ -42,12 +42,14 @@ include("serverside/close-database-connection.php");
 		<?php include("serverside/retrieve-stack.php"); ?>
 		</div><!-- end .endgameStacks -->
 		
-		<div class="endStackMenu">
-			<button onclick="window.scrollTo(0,0)">Return to top</button>
-			<a class="button" href="index.php">New Game</a>
-		</div>
+		<ul class="endStackMenu">
+			<li><a class="button" onclick="window.scrollTo(0,0)">Return to top</a></li>
+			<li><a class="button" href="index.php">New Game</a></li>
+		</ul>
 
 	</div><!-- end .main-content -->
+
+
 
 
 <?php include("footer.php"); ?>

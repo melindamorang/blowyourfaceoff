@@ -22,7 +22,7 @@
 <body class="<?= $pagename ?>">
 	<div class="layout-wrapper"><!-- LAYOUT-WRAPPER ENDS IN FOOTER -->
 		<div id="header">
-        	<button id="switch" onclick="toggleTheme()">Switch Theme</button>
+        	<div id="switch"><button onclick="toggleTheme()">Switch Theme</button></div>
 			<div id="logo"></div>
 		</div>
 		

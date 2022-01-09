@@ -69,6 +69,15 @@ document.addEventListener('DOMContentLoaded', function () {
         showHideElement(drawingDisplay, false);
         showHideElement(textInput, false);
         showHideElement(drawingInput, true);
+		//Adjust canvas size for mobile - SCG 2022-01-08
+		var viewWidth = window.innerWidth;
+		if (viewWidth <= 550) {
+			canvasWidth = viewWidth - 40;
+			canvasHeight = canvasWidth * .6;
+			canvas.width = canvasWidth;
+			canvas.height = canvasHeight;
+			drawingDisplay.width = canvasWidth;
+		}
     }
     else {
         if (roundInt == 0) instructionMsg.innerHTML = "Write a word, phrase, or sentence.";
@@ -78,6 +87,13 @@ document.addEventListener('DOMContentLoaded', function () {
         showHideElement(drawingDisplay, true);
         showHideElement(textInput, true);
         showHideElement(drawingInput, false);
+		//Adjust canvas size for mobile - SCG 2022-01-08
+		if (viewWidth <= 550) {
+			textInputWidth = viewWidth - 80;
+			textInputHeight = textInputWidth * .6;
+			textInputBox.style.width = textInputWidth+'px';
+			textInputBox.style.height = textInputHeight+'px';
+		}
     }
 
     // Fetch the last round's data and display it in the display area
@@ -118,6 +134,18 @@ function submit() {
         // Hide the gameplay area and show the wait message
         showHideElement(waitMessage, true);
         showHideElement(gameplayArea, false);
+		
+		//Resize the image - SCG 2022-01-09
+		if (mode == "drawing" && canvas.width != 500) {
+			var resizedCanvas = document.createElement("canvas");
+			var resizedContext = resizedCanvas.getContext("2d");
+
+			resizedCanvas.width = "500";
+			resizedCanvas.height = "300";
+
+			resizedContext.drawImage(canvas, 0, 0, 500, 300);
+			data = resizedCanvas.toDataURL();
+		}
 
         // Submit the data
         sendData(data);
