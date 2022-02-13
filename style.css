@@ -161,6 +161,7 @@ canvas, img {
 	border: none;
 	border-radius: 1em;
 	background-color: #fff;
+	cursor: url("images/cursors/taco.png") 10 32, auto;
 }
 #drawingCanvas {
 	touch-action: none;
