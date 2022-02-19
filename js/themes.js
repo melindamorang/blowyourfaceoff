@@ -1,22 +1,28 @@
 // JavaScript Document
+/*
+There are three files related to using themes: style.css, modules/themesmenu.html, and this one.
+To add a new theme:
+-Create a new theme class in style.css
+-Add the theme option to themesmenu.html: toggleTheme('cssclassname')
+*/
 
-// function to set a given theme/color-scheme
+
+//Saves theme name to local storage
 function setTheme(themeName) {
     localStorage.setItem('theme', themeName);
     document.documentElement.className = themeName;
 }
-// function to toggle between light and dark theme
-function toggleTheme() {
-   if (localStorage.getItem('theme') === 'theme-candy-vomit'){
-       setTheme('theme-basic');
-   } else {
-       setTheme('theme-candy-vomit');
-   }
+
+//Apply selectd theme
+function toggleTheme(themeName) {
+	setTheme(themeName);
 }
-// Immediately invoked function to set the theme on initial load
+
+//Sets default theme if no theme is saved in local storage
 (function () {
-   if (localStorage.getItem('theme') === 'theme-candy-vomit') {
-       setTheme('theme-candy-vomit');
+	var currentTheme = localStorage.getItem('theme');
+	if (currentTheme != null) {
+       setTheme(currentTheme);
    } else {
        setTheme('theme-basic');
    }

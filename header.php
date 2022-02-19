@@ -22,7 +22,15 @@
 <body class="<?= $pagename ?>">
 	<div class="layout-wrapper"><!-- LAYOUT-WRAPPER ENDS IN FOOTER -->
 		<div id="header">
-        	<div id="switch"><button onclick="toggleTheme()">Switch Theme</button></div>
+			<div id="mainmenu">
+				<ul>
+					<li><a href="index.php">New Game</a></li>
+					<li class="dropdown"><a>Themes</a>
+						<ul class="dropdown-content">
+							<?php include("modules/themesmenu.html"); ?>
+						</ul>
+					</li>
+				</ul>
+			</div>
 			<div id="logo"></div>
 		</div>
-		
