@@ -21,7 +21,6 @@ Authors: Jacob Griffin, Melinda Morang, Sarah Griffin
 	--error: #F28705;
 }
 
-
 /* THEME CANDY VOMIT -- From background artwork */
 .theme-candy-vomit {
 	--byfo-1: #F42F65;
@@ -37,11 +36,25 @@ Authors: Jacob Griffin, Melinda Morang, Sarah Griffin
 	--error: #F42F65;
 }
 
+/* THEME GRAYSCALE */
+.grayscale {
+	--byfo-1: #333;
+	--byfo-2: #111;
+	--byfo-3: #999;
+	--byfo-4: #ccc;
+	--byfo-5: #666;
+	--byfo-lightened: rgba(255,255,255,.8);
+	--byfo-placeholder: rgba(255,255,255,0);
+	--byfo-selected: #666;
+	--logo: url(images/byfo-logo-gray.png) no-repeat;
+	--bkgd: url(images/basic-bkgd-gray.jpg) no-repeat;
+	--error: #F42F65;
+}
+
 
 /***** BASIC ELEMENTS *****/
-html, body {
+body {
 	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
-	font-size: 100%;
 	text-align: center;
 	min-height: 100vh;
 	width: 100%;
@@ -51,6 +64,7 @@ html, body {
 	background: var(--bkgd);
 	background-attachment: fixed;
 	background-size: cover;
+	background-position: center;
 }
 a {
 	text-decoration: none;
@@ -105,6 +119,55 @@ h1, h2, h3 {
 #header {
     margin: 0 auto;
 	width: 100%;
+}
+#mainmenu {
+	padding: .3em;
+	background-color: #000;
+	color: #fff;
+}
+#mainmenu a {
+	color: #fff;
+}
+#mainmenu a:hover {
+	color: var(--byfo-3);
+}
+#mainmenu ul {
+	margin: 0 auto;
+}
+#mainmenu ul li {
+	display: inline-block;
+	vertical-align: middle;
+	cursor: pointer;
+}
+#mainmenu ul li a {
+	display: block;
+	min-height: 0;
+	border: none;
+	padding: .5em 1em;
+}
+li.dropdown {
+  position: relative;
+}
+li.dropdown:hover .dropdown-content {
+  display: block;
+}
+ul.dropdown-content {
+	width: max-content;
+	display: none;
+	position: absolute;
+	z-index: 1;
+	background-color: var(--byfo-1);
+}
+#mainmenu ul.dropdown-content li {
+	border-bottom: 1px solid #fff;
+	margin: 0 20%;
+	width: 60%;
+}
+#mainmenu ul.dropdown-content li a {
+	padding: 1em 0;
+}
+#mainmenu ul.dropdown-content li:last-child {
+	border-bottom: none;
 }
 #logo {
 	background: var(--logo);
