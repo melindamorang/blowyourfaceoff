@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	initialButtons = document.getElementById("initialEntry");
 	newGameArea = document.getElementById("newGameEntry");
 	priorGameArea = document.getElementById("priorGameEntry");
+	stackSearchEntry = document.getElementById("stackSearchEntry");
 	nameEntryForm = document.getElementById("startGameForm");
 	hostEntry = document.getElementById("forHost");
 	playerEntry = document.getElementById("forPlayer");
@@ -11,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	gidEdit = document.getElementById("gid");
 	timeLimitEdit = document.getElementById("timeLimit");
 	priorGameEdit = document.getElementById("gid2");
+	searchStringEdit = document.getElementById("searchText");
 	setInitialState();
 });
 
@@ -20,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function setInitialState() {
 	showHideElement(newGameArea, false);
 	showHideElement(priorGameArea, false);
+	showHideElement(stackSearchEntry, false);
 	showHideElement(initialButtons, true);
 	showHideElement(nameEntryForm, false);
 	showHideElement(hostEntry, false);
@@ -55,6 +58,12 @@ function showNameEntry() {
 function showPriorGameEntry() {
 	showNameEntry();
 	showHideElement(priorGameArea, true);
+}
+
+// Show the stack search entry form
+function showSearchStackEntry() {
+	showNameEntry();
+	showHideElement(stackSearchEntry, true);
 }
 
 function validateName(name) {
@@ -195,4 +204,14 @@ function tryPriorGame() {
 	xhttp.open("POST", "serverside/get-game-status.php?gid=" + gid, true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhttp.send();
+}
+
+// Search prior game stacks for the designated keyword
+function searchStackText() {
+	var searchText = searchStringEdit.value;
+	if (searchText === "") {
+		addError("Enter a valid search string.");
+		return;
+	}
+	window.location.replace("searchText.php?searchText=" + searchText);
 }

@@ -6,6 +6,7 @@
 			<button onclick="showPlayerEntry()">Join a Game</button><br>
 			<button onclick="showHostEntry()">Host a Game</button><br>
 			<button onclick="showPriorGameEntry()">See results of a completed game</button>
+			<button onclick="showSearchStackEntry()">Search prior games</button>
 		</div>
 		<div id="startGameForm">
 			<div id="newGameEntry">
@@ -26,6 +27,11 @@
 				<label for="gid2">Enter ID of completed game:</label><br />
 				<input type="text" id="gid2"><br>
 				<button onclick="tryPriorGame()">Submit</button><br><br>
+			</div>
+			<div id="stackSearchEntry">
+				<label for="searchText">Enter stack text search keyword:</label><br />
+				<input type="text" id="searchText"><br>
+				<button onclick="searchStackText()">Submit</button><br><br>
 			</div>
 			<p id="ErrorLine"></p>
 			<a href="#" onclick="setInitialState()">Cancel</a>
