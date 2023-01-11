@@ -9,7 +9,10 @@ isGameStarted();
 function isGameStarted() {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
+		console.debug(this.readyState);
+		console.debug(this.status);
 		if (this.readyState == 4 && this.status == 200) {
+			console.debug("Checking valid response text.");
 			console.debug(xhttp.responseText);
 			if (xhttp.responseText === null) {
 				addError("Error getting game status from server.");
