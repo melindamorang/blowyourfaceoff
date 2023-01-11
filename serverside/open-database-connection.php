@@ -1,5 +1,9 @@
 <?php
 
+header("Cache-Control: no-store, no-cache, must-revalidate"); // HTTP/1.1
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache"); // HTTP/1.0
+
 // These variables must be defined with valid values for your database
 // in order for the program to run. You can change the values here if
 // desired. However, a better option is to add a file in the serverside
