@@ -14,8 +14,6 @@ if($gameStatus == 1){
     echo "playing";
 } elseif ($gameStatus == 0) {
 
-    echo "Checking waiting players again.";
-
     // Get waiting players using shared code snippet
     include("open-database-connection.php");
     include("get-waiting-players.php");
@@ -24,7 +22,6 @@ if($gameStatus == 1){
     // fetch all results into an array and convert to json
     $nameList = array();
     while($row = mysqli_fetch_assoc($result)) $nameList[] = $row;
-    echo $nameList;
     $jsonData = json_encode($nameList); 
 
     echo $jsonData;
