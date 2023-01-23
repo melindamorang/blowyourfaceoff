@@ -1,26 +1,17 @@
 <?php
-// $searchTextDisplay = htmlspecialchars($_GET["searchText"]);
+$searchTextDisplay = htmlspecialchars($_GET["searchText"]);
 // include("serverside/search-stack-text.php");
-include("open-database-connection.php");
-$searchText = mysqli_real_escape_string($link, $_GET["searchText"]);
+include("serverside/open-database-connection.php");
+$searchText = mysqli_real_escape_string($link, $searchTextDisplay);
 // There doesn't seem to be a good way to return only distinct GameID/StackOwner combinations.
 // Can't use DISTINCT because we only want it to apply to GameID/StackOwner and not ImgRef.
 // DISTINCT ON (GameID, StackOwner) is not supported on our flavor of SQL.
 // Just grab them all and deal with it in post-processing.
 $result = mysqli_query($link, "SELECT GameID, StackOwner, ImgRef FROM game_data WHERE ImgRef LIKE '%" . $searchText . "%' ORDER BY GameID, StackOwner");
-include("close-database-connection.php");
+include("serverside/close-database-connection.php");
 ?>
 
 
-<?php
-// Forbid caching so the database queries don't inadvertently neglect
-// to check the database for updated values and return a 304 code.
-// Caching was causing the site to fail to populate the lobby or
-// trigger the rounds to move forward.
-// header("Cache-Control: no-store, no-cache, max-age=0, must-revalidate, proxy-revalidate"); // HTTP/1.1
-// header("Cache-Control: post-check=0, pre-check=0", false);
-// header("Pragma: no-cache"); // HTTP/1.0
-?>
 
 <?php $pagename = "Search Stacks" ?>
 <?php include("header.php"); ?>
@@ -75,7 +66,6 @@ include("close-database-connection.php");
 					echo "</ul>";
 				}
 			?>
-			<!-- <?php include("serverside/search-stack-text.php"); ?> -->
 		</div>
 
 		<ul class="endStackMenu">
