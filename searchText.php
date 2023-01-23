@@ -22,12 +22,14 @@ include("serverside/search-stack-text.php");
 		<h2>Showing results for: <span id="searchText"><?php echo $searchTextDisplay; ?></span></h2>
 
 		<div id="searchResults">
+			<p>Search results should be below here</p>
 
 			<?php 
 
 				if(mysqli_num_rows($result)==0){
 					echo "<p>No results found.<p>";
 				} else {
+					echo "<p>Apparently there were some rows.  Where are they?</p>";
 
 					// For each result, construct a URL to its associated stack and create an li with the stack text
 					$liStrings = array();
