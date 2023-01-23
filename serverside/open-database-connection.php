@@ -4,8 +4,9 @@
 // to check the database for updated values and return a 304 code.
 // Caching was causing the site to fail to populate the lobby or
 // trigger the rounds to move forward.
-header("Cache-Control: no-store, no-cache, max-age=0, must-revalidate, proxy-revalidate"); // HTTP/1.1
-header("Cache-Control: post-check=0, pre-check=0", false);
+header("Cache-Control: no-store"); // HTTP/1.1
+// header("Cache-Control: no-store, no-cache, max-age=0, must-revalidate, proxy-revalidate"); // HTTP/1.1
+//header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache"); // HTTP/1.0
 
 // These variables must be defined with valid values for your database
