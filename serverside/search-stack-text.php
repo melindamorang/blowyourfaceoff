@@ -15,41 +15,41 @@ if ($result) {
     }
     else {
         echo "<p>Got the to part where I should be retrieving results.</p>";
-        // // For each result, construct a URL to its associated stack and create an li with the stack text
-        // $liStrings = array();
-        // $currentGameID = "";
-        // $currentStackOwner = "";
-        // while($row = mysqli_fetch_assoc($result)){
-        //     $data = htmlspecialchars($row["ImgRef"]);
-        //     $gid = htmlspecialchars($row["GameID"]);
-        //     $owner = htmlspecialchars($row["StackOwner"]);
-        //     if ($gid == $currentGameID && $owner == $currentStackOwner) {
-        //         // Don't print this line because it's from the same stack as the last retrieved result
-        //         continue;
-        //     }
-        //     if (str_starts_with($data, "data:image/png;base64")) {
-        //         // Weed out erroneous results from the text strings defining drawings
-        //         continue;
-        //     }
-        //     $url = "./endgame.php?gid=" . $gid . "&name=" . $owner;
-        //     $liStrings[] = '<li><a href="' . $url . '" target="_blank" rel="noopener">' . $data . ' (Game ID ' . $gid . ', ' . $owner . '\'s stack)</a></li>';
-        //     $currentGameID = $gid;
-        //     $currentStackOwner = $owner;
-        // }
+        // For each result, construct a URL to its associated stack and create an li with the stack text
+        $liStrings = array();
+        $currentGameID = "";
+        $currentStackOwner = "";
+        while($row = mysqli_fetch_assoc($result)){
+            $data = htmlspecialchars($row["ImgRef"]);
+            $gid = htmlspecialchars($row["GameID"]);
+            $owner = htmlspecialchars($row["StackOwner"]);
+            if ($gid == $currentGameID && $owner == $currentStackOwner) {
+                // Don't print this line because it's from the same stack as the last retrieved result
+                continue;
+            }
+            if (str_starts_with($data, "data:image/png;base64")) {
+                // Weed out erroneous results from the text strings defining drawings
+                continue;
+            }
+            $url = "./endgame.php?gid=" . $gid . "&name=" . $owner;
+            $liStrings[] = '<li><a href="' . $url . '" target="_blank" rel="noopener">' . $data . ' (Game ID ' . $gid . ', ' . $owner . '\'s stack)</a></li>';
+            $currentGameID = $gid;
+            $currentStackOwner = $owner;
+        }
 
-        // $numResults = count($liStrings);
-        // if ($numResults == 1){
-        //     echo "<p>" . $numResults . " result found.<p>";
-        // } else {
-        //     echo "<p>" . $numResults . " results found.<p>";
-        // }
+        $numResults = count($liStrings);
+        if ($numResults == 1){
+            echo "<p>" . $numResults . " result found.<p>";
+        } else {
+            echo "<p>" . $numResults . " results found.<p>";
+        }
 
-        // // Create a ul and print links to the stacks
-        // echo "<ul>";
-        // foreach ($liStrings as $li) {
-        //     echo $li;
-        // }
-        // echo "</ul>";
+        // Create a ul and print links to the stacks
+        echo "<ul>";
+        foreach ($liStrings as $li) {
+            echo $li;
+        }
+        echo "</ul>";
     }
 }
 else {
