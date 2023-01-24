@@ -17,12 +17,17 @@ document.addEventListener('DOMContentLoaded', function () {
 function searchByText() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            // Display the results in the display area
-            searchResultsDisplay.innerHTML = xhttp.responseText;
+        if (this.readyState == 4) {
+            if (this.status == 200) {
+                // Display the results in the display area
+                searchResultsDisplay.innerHTML = xhttp.responseText;
+            }
+            else {
+                searchResultsDisplay.innerHTML = "<p>Error retrieving search results from game database.</p>";
+            }
         }
         else {
-            searchResultsDisplay.innerHTML = "<p>Error retrieving search results from game database.</p>";
+            searchResultsDisplay.innerHTML = "<p>Searching game database...</p>";
         }
     };
     xhttp.open("GET", "serverside/search-stack-text.php?searchText=" + searchText, true);
