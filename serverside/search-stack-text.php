@@ -14,7 +14,6 @@ if ($result) {
         echo "<p>No results found for \"" . $searchText . "\".<p>";
     }
     else {
-        echo "<p>Got the to part where I should be retrieving results.</p>";
         // For each result, construct a URL to its associated stack and create an li with the stack text
         $liStrings = array();
         $currentGameID = "";
