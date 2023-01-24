@@ -23,6 +23,9 @@ if ($pagename) {
 	else if ($pagename == "Lobby") {
 		$headscripts = '<script src="js/lobby.js"></script>';
 	}
+	else if ($pagename == "Search Stacks") {
+		$headscripts = '<script src="js/search-games.js"></script>';
+	}
 	else $headscripts = '';
 }
 ?>
