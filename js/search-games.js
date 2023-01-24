@@ -25,7 +25,7 @@ function searchByText() {
             searchResultsDisplay.innerHTML = "<p>Error retrieving search results from game database.</p>";
         }
     };
-    xhttp.open("POST", "serverside/search-stack-text.php?searchText=" + searchText, true);
+    xhttp.open("GET", "serverside/search-stack-text.php?searchText=" + searchText, true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.send();
 };
