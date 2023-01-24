@@ -9,7 +9,7 @@ $result = mysqli_query($link, "SELECT GameID, StackOwner, ImgRef FROM game_data 
 include("close-database-connection.php");
 
 if(mysqli_num_rows($result)==0){
-    echo "<p>No results found.<p>";
+    echo "<p>No results found for \"" . $searchText . "\".<p>";
 } else {
 
     // For each result, construct a URL to its associated stack and create an li with the stack text
