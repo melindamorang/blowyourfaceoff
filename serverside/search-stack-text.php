@@ -6,7 +6,7 @@ $searchText = mysqli_real_escape_string($link, $_GET["searchText"]);
 // DISTINCT ON (GameID, StackOwner) is not supported on our flavor of SQL.
 // Just grab them all and deal with it in post-processing.
 //$result = mysqli_query($link, "SELECT GameID, StackOwner, ImgRef FROM game_data WHERE ImgRef LIKE '%" . $searchText . "%' ORDER BY GameID, StackOwner");
-$result = mysqli_query($link, "SELECT GameID, StackOwner, ImgRef FROM game_data WHERE MATCH(ImgRef) AGAINST ('" . $searchText . "' IN NATURAL LANGUAGE MODE)");
+$result = mysqli_query($link, "SELECT GameID, StackOwner, ImgRef FROM game_data WHERE (Round % 2) = 0 AND MATCH(ImgRef) AGAINST ('" . $searchText . "' IN NATURAL LANGUAGE MODE)");
 
 if ($result) {
     if(mysqli_num_rows($result)==0){
