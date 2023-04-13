@@ -18,6 +18,7 @@ Authors: Jacob Griffin, Melinda Morang, Sarah Griffin
 	--byfo-selected: #8CC63F;
 	--logo: url(images/byfo-logo.png) no-repeat;
 	--bkgd: url(images/basic-bkgd.jpg) no-repeat;
+	--cursor: url("images/cursors/taco.png") 10 32, auto;
 	--error: #F28705;
 }
 
@@ -34,6 +35,7 @@ Authors: Jacob Griffin, Melinda Morang, Sarah Griffin
 	--byfo-selected: #8A43DB;
 	--logo: url(images/byfo-logo2.png) no-repeat;
 	--bkgd: url(images/candyCarnival-bkgd.jpg) no-repeat;
+	--cursor: url("images/cursors/flipcat2.png") 2 13, auto;
 	--error: #F42F65;
 }
 
@@ -161,6 +163,7 @@ canvas, img {
 	border: none;
 	border-radius: 1em;
 	background-color: #fff;
+	cursor: var(--cursor);
 }
 #drawingCanvas {
 	touch-action: none;
