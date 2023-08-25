@@ -201,7 +201,8 @@ function drawEnd(mouseEvent) {
 	if (isDrawing) {
 		pos = getXYPos(mouseEvent);
 		if (pos.x > 0 && pos.x < canvas.width && pos.y > 0 && pos.y < canvas.height) {
-			canvasContext.lineTo(pos.x, pos.y);
+			// Include a tiny offset so we can successfully make dots
+			canvasContext.lineTo(pos.x + 0.01, pos.y + 0.01);
 			canvasContext.stroke();
 		}
 
